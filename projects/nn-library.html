@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Project Title — Your Name</title>  <!-- EDIT -->
+  <title>Neural Network Library — Rowan Leonard</title>  <!-- EDIT -->
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../style.css" />  <!-- note the ../ to go up one folder -->
 </head>
@@ -12,7 +12,7 @@
   <!-- ── NAV ── -->
   <nav>
     <div class="container">
-      <span class="nav-logo">yourname.github.io</span>  <!-- EDIT -->
+      <span class="nav-logo">GreenBlueFish.github.io</span>  <!-- EDIT -->
       <ul class="nav-links">
         <li><a href="../index.html#about">about</a></li>
         <li><a href="../index.html#projects">projects</a></li>
@@ -30,45 +30,81 @@
       <!-- ── PROJECT HEADER ── -->
       <div class="project-header">
         <div class="project-tags">
-          <span class="tag">C++</span>        <!-- EDIT: your tags -->
-          <span class="tag">from scratch</span>
+          <span class="tag">C++</span>
+          <span class="tag">ML</span>
+          <span class="tag">RNN</span>
+          <span class="tag">LSTM</span>
         </div>
-        <h1>Neural Network Library</h1>       <!-- EDIT: project title -->
+        <h1>Neural Network Librarys</h1>       <!-- EDIT: project title -->
         <p class="project-subtitle">
           A fully custom neural network library built without any ML frameworks,
           used as the foundation for all my subsequent network experiments.
         </p>  <!-- EDIT: one sentence summary -->
-        <a class="github-link" href="https://github.com/yourusername/repo" target="_blank">
-          View on GitHub ↗
-        </a>  <!-- EDIT -->
+        <a class="github-link" href="https://github.com/GreenBlueFish/Neural-Network-V3.4" target="_blank">
+          Neural Network 1 View on GitHub ↗
+        </a>
+        <a class="github-link" href="https://github.com/GreenBlueFish/Neurobloom" target="_blank">
+          Neural Network 2 View on GitHub ↗
+        </a>
       </div>
 
       <!-- ── MOTIVATION ── -->
       <div class="content-section">
         <p class="section-label">Motivation</p>
         <h2>Why I built this</h2>
+        <h1>Neural Network 1</h1>
         <p>
-          I wanted to understand how backpropagation actually works at the level of
-          individual weight updates, not just use a framework as a black box. Building
-          the library from scratch forced me to understand every operation.
+          I wanted to understand how neural networks work from first principles.
+          I decided (foolishly so) to make my own neural network library so I could
+          implement forward and back propagation by hand as well as all other functions
+          needed to implement a neural network. I did not use any generative AI for this 
+          project. All programming, debugging and design was done by me.
         </p>
-        <!-- EDIT: explain your reason for the project -->
+        <h1>Neural Network 2</h1>
+        <p>
+          My second neural network was a do-over of the whole project. I thought
+          the programming could be improved (from the lessons I learnt in my university programming class)
+          and the whole architecture could be modified so that I could implement a
+          few ideas I had that at the time seemed unique.
+        </p>
       </div>
 
       <!-- ── APPROACH ── -->
       <div class="content-section">
         <p class="section-label">Approach</p>
         <h2>How I built it</h2>
+        <h1>Neural Network 1</h1>
         <p>
-          The library is structured around a <code>Layer</code> base class with
-          <code>forward()</code> and <code>backward()</code> methods. Each layer type
-          (dense, conv, activation) inherits from it, making it easy to stack layers
-          into a network.
+          The library was built around a central <code>Neural_Network</code> class, which provided the core interface for creating, training, and modifying neural network architectures. The framework included a broad set of built-in features such as:
+        </p>
+
+        <ul>
+          <li>Dynamic Layer Creation and Removal</li>
+          <li>Dynamic Node Creation and Removal</li>
+          <li>Forward Propagation and Backpropagation</li>
+          <li>Custom Activation Functions and Softmax Support</li>
+          <li>Discrete Number Processing Functionality</li>
+          <li>Binary Serialization and Deserialization (<code>.ppm</code> image support)</li>
+          <li>Text-Based Save and Load Features</li>
+          <li>Network Visualization and Print Utilities</li>
+        </ul>
+        <p>
+          Beyond the core framework, I developed several experimental tools focused on neural architecture optimization and automated testing.
         </p>
         <p>
-          Gradients are computed analytically and accumulated via the chain rule during
-          the backward pass, then applied by a configurable optimizer (SGD or Adam).
+          One utility could evaluate permutations of activation functions across nodes and layers, allowing different activation strategies to be benchmarked against a given architecture and dataset.
         </p>
+        <p>
+          I also created an automated architecture generation system that began with a minimal network structure and iteratively modified hidden layers and activation functions to minimize cost while working within fixed training and testing dataset constraints.
+        </p>
+        <p>
+          Additional tooling included:
+        </p>
+        <ul>
+          <li>Training and testing dataset generation from arbitrary mathematical functions</li>
+          <li>2D binary map classification systems for coordinate-based learning problems</li>
+          <li>Automated network experimentation and evaluation utilities</li>
+        </ul>
         <!-- EDIT: describe your technical approach -->
 
         <!-- Code snippet — delete this block if you don't want one -->
