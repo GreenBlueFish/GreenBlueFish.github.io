@@ -84,7 +84,7 @@
           <li>Dynamic Layer Creation and Removal</li>
           <li>Dynamic Node Creation and Removal</li>
           <li>Forward Propagation and Backpropagation</li>
-          <li>Custom Activation Functions and Softmax Support</li>
+          <li>Custom Activation Functions and Softmax Support Per Layer</li>
           <li>Discrete Number Processing Functionality</li>
           <li>Binary Serialization and Deserialization (<code>.ppm</code> image support)</li>
           <li>Text-Based Save and Load Features</li>
@@ -117,20 +117,39 @@
 
         <h3>Neural Network 2</h3>
         <p>
-          After gaining a strong foundation in neural networks I decided to build
-          a more capable library that would allow me to experiement with many different
-          NN architectures that I came up with (as it turned out none of these were origional)
-          I wanted to be able to have a lot more control over individual nodes. Allowing
-          me to edit their individual activation function (not just as a layer like in my first NN)
-          and to edit where they connect. I wanted to allow weighted (or unweighted) residual
-          learning, allow multple networks to connect, allow for variable activation functions 
-          (which I am very interested in), and to allow for anynode to have it's own cost function
-          (I know this seems weired but the idea was that I could make the neurons function more
-          like a neuron if I could evaluate them to some constant value and cause disturbances to learn,
-          I still need to research more into that). 
-
-          FINISH!!!!
+          After developing a strong foundation in neural network design through my first library, 
+          I began building a more advanced framework focused on experimentation with custom neural 
+          network architectures and non-standard learning approaches.
         </p>
+        <p>
+          The primary goal of this second library was to provide significantly greater control over 
+          individual neurons and network connectivity. Unlike my original implementation, where activation 
+          functions were applied at the layer level, this framework allowed each node to define its own 
+          activation function and connection topology independently.
+        </p>
+        <p>
+          The architecture was designed to support advanced experimentation, including weighted and 
+          unweighted residual learning, inter-network communication, variable activation functions, 
+          and custom cost functions assigned at the individual node level. One area of interest was 
+          exploring neuron-like behavior by constraining nodes toward target equilibrium states and 
+          introducing controlled disturbances during learning. While still an ongoing area of research, 
+          the framework was built to support these forms of experimentation directly.
+        </p>
+        <p>
+          The library ultimately evolved into a highly modular research-oriented neural network framework 
+          with the following functionality:
+        </p>
+        <ul>
+          <li>RNN and LSTM functionality</li>
+          <li>Dynamic layer creation and removal</li>
+          <li>Dynamic node creation and removal</li>
+          <li>Forward propagation and backpropagation</li>
+          <li>Custom activation functions and Softmax support for individual nodes</li>
+          <li>Weighted and unweighted residual learning within and between networks</li>
+          <li>Independent/disconnected network structures for experimental memory retention systems</li>
+          <li>Text-based save and load functionality</li>
+          <li>Network visualization and debugging utilities</li>
+        </ul>
       </div>
 
       <!-- ── RESULTS ── -->
