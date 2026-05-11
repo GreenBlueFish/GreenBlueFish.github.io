@@ -52,7 +52,7 @@
       <div class="content-section">
         <p class="section-label">Motivation</p>
         <h2>Why I built this</h2>
-        <h1>Neural Network 1</h1>
+        <h3>Neural Network 1</h3>
         <p>
           I wanted to understand how neural networks work from first principles.
           I decided (foolishly so) to make my own neural network library so I could
@@ -60,7 +60,7 @@
           needed to implement a neural network. I did not use any generative AI for this 
           project. All programming, debugging and design was done by me.
         </p>
-        <h1>Neural Network 2</h1>
+        <h3>Neural Network 2</h3>
         <p>
           My second neural network was a do-over of the whole project. I thought
           the programming could be improved (from the lessons I learnt in my university programming class)
@@ -73,11 +73,13 @@
       <div class="content-section">
         <p class="section-label">Approach</p>
         <h2>How I built it</h2>
-        <h1>Neural Network 1</h1>
+        <h3>Neural Network 1</h3>
         <p>
-          The library was built around a central <code>Neural_Network</code> class, which provided the core interface for creating, training, and modifying neural network architectures. The framework included a broad set of built-in features such as:
+          The library was built around a central Neural_Network class, 
+          which provided the core interface for creating, training, and 
+          modifying neural network architectures. The framework included 
+          a broad set of built-in features such as:
         </p>
-
         <ul>
           <li>Dynamic Layer Creation and Removal</li>
           <li>Dynamic Node Creation and Removal</li>
@@ -89,13 +91,20 @@
           <li>Network Visualization and Print Utilities</li>
         </ul>
         <p>
-          Beyond the core framework, I developed several experimental tools focused on neural architecture optimization and automated testing.
+          Beyond the core framework, I developed several experimental 
+          tools focused on neural architecture optimization and automated 
+          testing.
         </p>
         <p>
-          One utility could evaluate permutations of activation functions across nodes and layers, allowing different activation strategies to be benchmarked against a given architecture and dataset.
+          One utility could evaluate permutations of activation functions 
+          across nodes and layers, allowing different activation strategies
+           to be benchmarked against a given architecture and dataset.
         </p>
         <p>
-          I also created an automated architecture generation system that began with a minimal network structure and iteratively modified hidden layers and activation functions to minimize cost while working within fixed training and testing dataset constraints.
+          I also created an automated architecture generation system that 
+          began with a minimal network structure and iteratively modified 
+          hidden layers and activation functions to minimize cost while 
+          working within fixed training and testing dataset constraints.
         </p>
         <p>
           Additional tooling included:
@@ -105,14 +114,23 @@
           <li>2D binary map classification systems for coordinate-based learning problems</li>
           <li>Automated network experimentation and evaluation utilities</li>
         </ul>
-        <!-- EDIT: describe your technical approach -->
 
-        <!-- Code snippet — delete this block if you don't want one -->
-        <pre><code>// Example: forward pass through a dense layer
-Matrix DenseLayer::forward(const Matrix&amp; input) {
-    this->input = input;
-    return activate(weights * input + bias);
-}</code></pre>
+        <h3>Neural Network 2</h3>
+        <p>
+          After graining a strong foundation in neural networks I decided to build
+          a more capable library that would allow me to experiement with many different
+          NN architectures that I came up with (as it turned out none of these were origional)
+          I wanted to be able to have a lot more control over individual nodes. Allowing
+          me to edit their individual activation function (not just as a layer like in my first NN)
+          and to edit where they connect. I wanted to allow weighted (or unweighted) residual
+          learning, allow multple networks to connect, allow for variable activation functions 
+          (which I am very interested in), and to allow for anynode to have it's own cost function
+          (I know this seems weired but the idea was that I could make the neurons function more
+          like a neuron if I could evaluate them to some constant value and cause disturbances to learn,
+          I still need to research more into that). 
+
+          FINISH!!!!
+        </p>
       </div>
 
       <!-- ── RESULTS ── -->
