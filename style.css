@@ -450,3 +450,19 @@ p code {
 .page li {
   margin-bottom: 0.4rem;
 }
+
+/* Images on project pages */
+.page img {
+  width: 100%;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  margin: 1.25rem 0;
+}
+
+.page figcaption {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--muted);
+  text-align: center;
+  margin-top: -0.75rem;
+}
