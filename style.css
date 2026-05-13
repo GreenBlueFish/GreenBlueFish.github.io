@@ -31,7 +31,7 @@ a:hover { text-decoration: underline; }
 
 /* ── Layout ── */
 .container {
-  max-width: 780px;
+  /*max-width: 780px;*/
   margin: 0 auto;
   padding: 0 1.5rem;
 }
@@ -234,7 +234,7 @@ h2 {
 }
 *//*New Project list update*/
 .projects-list {
-  display: grid;
+  display: grid;                           /*Old: 320px*/
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 1.5rem;
 }
