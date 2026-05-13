@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project Title — Your Name</title>  <!-- EDIT -->
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../style.css" />  <!-- note the ../ to go up one folder -->
+</head>
+<body>
+
+  <!-- ── NAV ── -->
+  <nav>
+    <div class="container">
+      <span class="nav-logo">yourname.github.io</span>  <!-- EDIT -->
+      <ul class="nav-links">
+        <li><a href="../index.html#about">about</a></li>
+        <li><a href="../index.html#projects">projects</a></li>
+        <li><a href="../index.html#contact">contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="page">
+    <div class="container">
+
+      <!-- Back link -->
+      <a class="back-link" href="../index.html">← back to projects</a>
+
+      <!-- ── PROJECT HEADER ── -->
+      <div class="project-header">
+        <div class="project-tags">
+          <span class="tag">C++</span>        <!-- EDIT: your tags -->
+          <span class="tag">from scratch</span>
+        </div>
+        <h1>Neural Network Library</h1>       <!-- EDIT: project title -->
+        <p class="project-subtitle">
+          A fully custom neural network library built without any ML frameworks,
+          used as the foundation for all my subsequent network experiments.
+        </p>  <!-- EDIT: one sentence summary -->
+        <a class="github-link" href="https://github.com/yourusername/repo" target="_blank">
+          View on GitHub ↗
+        </a>  <!-- EDIT -->
+      </div>
+
+      <!-- ── MOTIVATION ── -->
+      <div class="content-section">
+        <p class="section-label">Motivation</p>
+        <h2>Why I built this</h2>
+        <p>
+          I wanted to understand how backpropagation actually works at the level of
+          individual weight updates, not just use a framework as a black box. Building
+          the library from scratch forced me to understand every operation.
+        </p>
+        <!-- EDIT: explain your reason for the project -->
+      </div>
+
+      <!-- ── APPROACH ── -->
+      <div class="content-section">
+        <p class="section-label">Approach</p>
+        <h2>How I built it</h2>
+        <p>
+          The library is structured around a <code>Layer</code> base class with
+          <code>forward()</code> and <code>backward()</code> methods. Each layer type
+          (dense, conv, activation) inherits from it, making it easy to stack layers
+          into a network.
+        </p>
+        <p>
+          Gradients are computed analytically and accumulated via the chain rule during
+          the backward pass, then applied by a configurable optimizer (SGD or Adam).
+        </p>
+        <!-- EDIT: describe your technical approach -->
+
+        <!-- Code snippet — delete this block if you don't want one -->
+        <pre><code>// Example: forward pass through a dense layer
+Matrix DenseLayer::forward(const Matrix&amp; input) {
+    this->input = input;
+    return activate(weights * input + bias);
+}</code></pre>
+      </div>
+
+      <!-- ── RESULTS ── -->
+      <div class="content-section">
+        <p class="section-label">Results</p>
+        <h2>Outcomes</h2>
+
+        <!-- Stat boxes — delete or add boxes as needed -->
+        <div class="results-grid">
+          <div class="result-box">
+            <span class="result-value">94%</span>
+            <span class="result-label">test accuracy on MNIST</span>
+          </div>
+          <div class="result-box">
+            <span class="result-value">2</span>
+            <span class="result-label">library versions built</span>
+          </div>
+        </div>  <!-- EDIT or delete -->
+
+        <p>
+          The library successfully trained on several benchmark datasets and served as
+          the base for the map classifier and architecture search projects.
+        </p>
+        <!-- EDIT: what did you achieve / measure -->
+      </div>
+
+      <!-- ── WHAT I LEARNED ── -->
+      <div class="content-section">
+        <p class="section-label">Reflection</p>
+        <h2>What I learned</h2>
+        <p>
+          Implementing the backward pass manually made the chain rule click in a way
+          that reading about it never did. I also gained a much better intuition for
+          why vanishing gradients happen in deep networks with sigmoid activations.
+        </p>
+        <!-- EDIT: what was the key insight or takeaway -->
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="container">
+      Built with HTML/CSS · hosted on GitHub Pages
+    </div>
+  </footer>
+
+</body>
+</html>
