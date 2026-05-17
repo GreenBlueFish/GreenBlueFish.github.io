@@ -48,7 +48,7 @@
   </div>
 
   <div class="card-grid">
-    <a class="card neuron" href="lif.html">
+    <a class="card neuron" href="neuro-reference/lif.html">
       <div class="card-num neuron">MODEL 01</div>
       <h3>Leaky Integrate-and-Fire</h3>
       <p>The canonical workhorse. Integrates current with a passive leak; fires when threshold is crossed. Analytically tractable and computationally trivial.</p>
@@ -59,7 +59,7 @@
       </div>
     </a>
 
-    <a class="card neuron" href="eif.html">
+    <a class="card neuron" href="neuro-reference/eif.html">
       <div class="card-num neuron">MODEL 02</div>
       <h3>Exponential Integrate-and-Fire</h3>
       <p>Adds an exponential term near threshold to model realistic Na⁺ channel activation dynamics. Produces sharper, more biologically accurate spike initiation.</p>
@@ -70,7 +70,7 @@
       </div>
     </a>
 
-    <a class="card neuron" href="adex.html">
+    <a class="card neuron" href="neuro-reference/adex.html">
       <div class="card-num neuron">MODEL 03</div>
       <h3>Adaptive Exponential IF</h3>
       <p>AdEx adds a slow adaptation current to EIF. A single model reproduces regular spiking, bursting, fast spiking, and chattering patterns by tuning four parameters.</p>
@@ -81,7 +81,7 @@
       </div>
     </a>
 
-    <a class="card neuron" href="izhikevich.html">
+    <a class="card neuron" href="neuro-reference/izhikevich.html">
       <div class="card-num neuron">MODEL 04</div>
       <h3>Izhikevich Model</h3>
       <p>Two coupled equations reproducing ~20 distinct cortical firing patterns. The sweet spot of biological richness and computational efficiency — the most widely used model in SNN research.</p>
@@ -92,7 +92,7 @@
       </div>
     </a>
 
-    <a class="card neuron" href="hh.html">
+    <a class="card neuron" href="neuro-reference/hh.html">
       <div class="card-num neuron">MODEL 05</div>
       <h3>Hodgkin-Huxley</h3>
       <p>The gold standard. Four coupled ODEs derived from squid axon voltage-clamp data. Full ionic channel dynamics, realistic spike shape, and natural refractoriness.</p>
@@ -103,7 +103,7 @@
       </div>
     </a>
 
-    <a class="card neuron" href="fhn.html">
+    <a class="card neuron" href="neuro-reference/fhn.html">
       <div class="card-num neuron">MODEL 06</div>
       <h3>FitzHugh-Nagumo</h3>
       <p>A 2D reduction of Hodgkin-Huxley capturing excitability and refractoriness with a cubic nullcline. Analytically tractable; ideal for phase-plane and coupled oscillator analysis.</p>
@@ -114,7 +114,7 @@
       </div>
     </a>
 
-    <a class="card neuron" href="morris-lecar.html">
+    <a class="card neuron" href="neuro-reference/morris-lecar.html">
       <div class="card-num neuron">MODEL 07</div>
       <h3>Morris-Lecar</h3>
       <p>Conductance-based model with Ca²⁺ and K⁺ currents. Class I or Class II excitability from parameter choice. Particularly relevant when calcium dynamics matter for STDP.</p>
@@ -125,7 +125,7 @@
       </div>
     </a>
 
-    <a class="card neuron" href="srm.html">
+    <a class="card neuron" href="neuro-reference/srm.html">
       <div class="card-num neuron">MODEL 08</div>
       <h3>Spike Response Model</h3>
       <p>Kernel-based formulation — voltage is a convolution of past spikes with response kernels. No ODE integration required. Natural framework for theoretical STDP analysis.</p>
@@ -136,7 +136,7 @@
       </div>
     </a>
 
-    <a class="card neuron" href="multicompartment.html">
+    <a class="card neuron" href="neuro-reference/multicompartment.html">
       <div class="card-num neuron">MODEL 09</div>
       <h3>Multi-Compartment</h3>
       <p>Spatially extended neurons with dendritic structure. Captures backpropagating action potentials, local calcium spikes, and the location-dependent STDP rules that emerge from dendritic cable properties.</p>
@@ -147,7 +147,7 @@
       </div>
     </a>
 
-    <a class="card neuron" href="stochastic.html">
+    <a class="card neuron" href="neuro-reference/stochastic.html">
       <div class="card-num neuron">MODEL 10</div>
       <h3>Stochastic IF</h3>
       <p>Adds noise to the LIF model via additive white noise or an escape-rate hazard function. Captures trial-to-trial variability, channel noise, and connects STDP to Bayesian inference.</p>
@@ -166,7 +166,7 @@
   </div>
 
   <div class="card-grid">
-    <a class="card stdp" href="stdp-classical.html">
+    <a class="card stdp" href="neuro-reference/stdp-classical.html">
       <div class="card-num stdp">STDP 01</div>
       <h3>Classical Additive STDP</h3>
       <p>The foundational rule. Exponential LTP/LTD windows depending on whether pre fires before or after post. Biologically confirmed by Bi & Poo (1998).</p>
@@ -177,7 +177,7 @@
       </div>
     </a>
 
-    <a class="card stdp" href="stdp-multiplicative.html">
+    <a class="card stdp" href="neuro-reference/stdp-multiplicative.html">
       <div class="card-num stdp">STDP 02</div>
       <h3>Multiplicative STDP</h3>
       <p>Weight-dependent updates with soft bounds. Strong synapses resist further potentiation; weak synapses resist depression. Produces stable unimodal weight distributions.</p>
@@ -188,7 +188,7 @@
       </div>
     </a>
 
-    <a class="card stdp" href="stdp-triplet.html">
+    <a class="card stdp" href="neuro-reference/stdp-triplet.html">
       <div class="card-num stdp">STDP 03</div>
       <h3>Triplet STDP</h3>
       <p>Pfister-Gerstner rule extending beyond spike pairs to triplets. Recovers BCM-like behavior and fits visual cortex data far better than the classical pair rule.</p>
@@ -199,7 +199,7 @@
       </div>
     </a>
 
-    <a class="card stdp" href="stdp-voltage.html">
+    <a class="card stdp" href="neuro-reference/stdp-voltage.html">
       <div class="card-num stdp">STDP 04</div>
       <h3>Voltage-Dependent STDP</h3>
       <p>Clopath rule: plasticity gated by postsynaptic membrane voltage rather than spikes alone. More biologically realistic — NMDA receptors are voltage-gated coincidence detectors.</p>
@@ -210,7 +210,7 @@
       </div>
     </a>
 
-    <a class="card stdp" href="stdp-anti.html">
+    <a class="card stdp" href="neuro-reference/stdp-anti.html">
       <div class="card-num stdp">STDP 05</div>
       <h3>Anti-STDP</h3>
       <p>The sign of the learning window is flipped. Pre-before-post causes LTD; post-before-pre causes LTP. Implements predictive suppression — found in electric fish electrosensory systems.</p>
@@ -221,7 +221,7 @@
       </div>
     </a>
 
-    <a class="card stdp" href="stdp-symmetric.html">
+    <a class="card stdp" href="neuro-reference/stdp-symmetric.html">
       <div class="card-num stdp">STDP 06</div>
       <h3>Symmetric STDP</h3>
       <p>Both orderings of pre/post spikes produce LTP when closely timed, LTD when distant. Detects synchrony regardless of causal order. Found in cerebellar circuits.</p>
@@ -232,7 +232,7 @@
       </div>
     </a>
 
-    <a class="card stdp" href="stdp-reward.html">
+    <a class="card stdp" href="neuro-reference/stdp-reward.html">
       <div class="card-num stdp">STDP 07</div>
       <h3>Reward-Modulated STDP</h3>
       <p>Three-factor rule: local STDP eligibility traces gated by a global dopamine-like reward signal. Bridges unsupervised Hebbian plasticity and reinforcement learning.</p>
@@ -243,7 +243,7 @@
       </div>
     </a>
 
-    <a class="card stdp" href="stdp-pairing.html">
+    <a class="card stdp" href="neuro-reference/stdp-pairing.html">
       <div class="card-num stdp">STDP 08</div>
       <h3>Nearest-Neighbor vs All-to-All</h3>
       <p>Two strategies for selecting which spike pairs to count. All-to-all sums over every combination; nearest-neighbor uses only the most recent spikes. Critical for stability under high firing rates.</p>
@@ -254,7 +254,7 @@
       </div>
     </a>
 
-    <a class="card stdp" href="stdp-bcm.html">
+    <a class="card stdp" href="neuro-reference/stdp-bcm.html">
       <div class="card-num stdp">STDP 09</div>
       <h3>BCM Rule</h3>
       <p>Bienenstock-Cooper-Munro: a rate-based rule with a sliding modification threshold. Recoverable as the high-rate limit of triplet STDP. Underlies ocular dominance column formation.</p>
@@ -265,7 +265,7 @@
       </div>
     </a>
 
-    <a class="card stdp" href="stdp-surrogate.html">
+    <a class="card stdp" href="neuro-reference/stdp-surrogate.html">
       <div class="card-num stdp">STDP 10</div>
       <h3>Surrogate Gradient</h3>
       <p>Enables backpropagation through non-differentiable spike functions using smooth surrogate derivatives. State-of-the-art for training deep SNNs on complex benchmarks.</p>
