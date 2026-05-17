@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FitzHugh-Nagumo — Neuro Reference</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">⬡ NEURO REF</a>
+  <div class="nav-links">
+    <a class="neuron" href="lif.html">LIF</a>
+    <a class="neuron" href="eif.html">EIF</a>
+    <a class="neuron" href="adex.html">AdEx</a>
+    <a class="neuron" href="izhikevich.html">Izhikevich</a>
+    <a class="neuron" href="hh.html">H-H</a>
+    <a class="neuron" href="fhn.html">FHN</a>
+    <a class="neuron" href="morris-lecar.html">ML</a>
+    <a class="neuron" href="srm.html">SRM</a>
+    <a class="neuron" href="multicompartment.html">Multi-C</a>
+    <a class="neuron" href="stochastic.html">Stoch.</a>
+    <a class="stdp" href="stdp-classical.html">Classical</a>
+    <a class="stdp" href="stdp-multiplicative.html">Mult.</a>
+    <a class="stdp" href="stdp-triplet.html">Triplet</a>
+    <a class="stdp" href="stdp-voltage.html">Voltage</a>
+    <a class="stdp" href="stdp-anti.html">Anti</a>
+    <a class="stdp" href="stdp-symmetric.html">Sym.</a>
+    <a class="stdp" href="stdp-reward.html">R-STDP</a>
+    <a class="stdp" href="stdp-pairing.html">Pairing</a>
+    <a class="stdp" href="stdp-bcm.html">BCM</a>
+    <a class="stdp" href="stdp-surrogate.html">Surrogate</a>
+  </div>
+</nav>
+<main>
+<div class="page-header">
+  <div class="breadcrumb"><a href="index.html">Index</a> › MODEL 06</div>
+  <h1><span class="neuron">MODEL 06</span><br>FitzHugh-Nagumo Model</h1>
+  <p class="subtitle">A 2D phase-plane reduction of Hodgkin-Huxley capturing the essential topology of excitability — a cubic nullcline for the fast variable and a linear nullcline for the slow recovery variable. Analytically tractable and ideal for theoretical STDP studies, phase-plane visualization, and coupled oscillator dynamics.</p>
+  <div class="metric-row"><div class="metric"><span class="metric-label">ODEs</span><span class="metric-value ">2</span></div><div class="metric"><span class="metric-label">Spike Precision</span><span class="metric-value medium">Moderate</span></div><div class="metric"><span class="metric-label">Dendritic Effects</span><span class="metric-value none">None</span></div><div class="metric"><span class="metric-label">Computational Cost</span><span class="metric-value high">Very Low</span></div><div class="metric"><span class="metric-label">Use Case</span><span class="metric-value medium">Theoretical</span></div></div>
+</div><div class="content-section"><h2 class="">Governing Equations</h2><div class="formula-block "><span class="label">Fast & Slow Variables</span><div class="eq">dv/dt = v − v³/3 − w + I<sub>ext</sub></div>
+<div class="eq">dw/dt = (1/τ) · (v + a − b·w)</div></div><table class="var-table"><thead><tr><th>Symbol</th><th>Description</th><th>Typical</th></tr></thead><tbody><tr><td class="var-name ">v</td><td class="var-desc">Fast excitation variable — analogue of membrane voltage (dimensionless)</td><td class="var-val">—</td></tr><tr><td class="var-name ">w</td><td class="var-desc">Slow recovery variable — analogue of combined HH gating variables</td><td class="var-val">—</td></tr><tr><td class="var-name ">τ</td><td class="var-desc">Timescale separation parameter — large τ = slow recovery = bursting tendency</td><td class="var-val">12.5</td></tr><tr><td class="var-name ">a</td><td class="var-desc">Shape parameter — controls equilibrium position of w-nullcline</td><td class="var-val">0.7</td></tr><tr><td class="var-name ">b</td><td class="var-desc">Shape parameter — slope of w-nullcline</td><td class="var-val">0.8</td></tr><tr><td class="var-name ">I<sub>ext</sub></td><td class="var-desc">External drive — controls excitability regime</td><td class="var-val">—</td></tr></tbody></table></div><div class="content-section"><h2 class="">Reset Mechanism</h2><p>There is no explicit reset. Spikes emerge as large excursions in the (v, w) phase plane when I<sub>ext</sub> pushes the system past the unstable branch of the cubic v-nullcline:</p><div class="info-box "><strong>Phase-plane excitability:</strong><br>
+• If I<sub>ext</sub> is below threshold → stable fixed point (quiescence)<br>
+• If I<sub>ext</sub> crosses threshold → the fixed point loses stability → limit cycle (repetitive spiking)<br>
+• The cubic v-nullcline (v − v³/3) creates the characteristic N-shape that allows Type II excitability</div></div><div class="content-section"><h2 class="">Why It Matters for STDP Theory</h2><p>The FHN model makes STDP analysis tractable because spikes are smooth trajectories with well-defined timing. This allows:</p><table class="comp-table"><thead><tr><th>Application</th><th>Benefit</th></tr></thead><tbody><tr><td>Phase response curves (PRC)</td><td>Smooth spikes → differentiable PRC → STDP as phase modulation</td></tr><tr><td>Coupled oscillator STDP</td><td>Entire network analyzed with Kuramoto-style phase equations</td></tr><tr><td>Noise analysis</td><td>Adding ξ(t) to dv/dt gives analytically tractable stochastic STDP</td></tr><tr><td>Bifurcation of plasticity</td><td>Parameter sweeps across a, b, τ reveal when STDP stabilizes vs. destabilizes</td></tr></tbody></table><div class="pro-con"><div class="pro-con-box pros"><h4><span class="pulse"></span>Advantages</h4><ul><li>Phase-plane geometry is transparent — dynamics are visible</li><li>Analytically tractable — many closed-form STDP results possible</li><li>Captures essential HH topology at essentially zero cost</li><li>Natural for studying synchrony and oscillatory STDP</li></ul></div><div class="pro-con-box cons"><h4><span class="pulse" style="background:var(--red)"></span>Limitations</h4><ul><li>Dimensionless — no direct mapping to mV, ms, pA without rescaling</li><li>Smooth spikes — timing is less precise than threshold-based models</li><li>Does not reproduce the diversity of firing patterns (LIF beats it here)</li></ul></div></div></div>
+<div class="page-nav"><a href="hh.html">← <span>Hodgkin-Huxley</span></a><a href="morris-lecar.html" style="text-align:right"><span>Morris-Lecar</span> →</a></div>
+</main>
+<footer>NEURO REFERENCE · <a href="index.html" style="color:var(--text3);text-decoration:none">← Back to Index</a></footer>
+</body>
+</html>

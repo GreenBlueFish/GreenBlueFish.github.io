@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Classical STDP — Neuro Reference</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">⬡ NEURO REF</a>
+  <div class="nav-links">
+    <a class="neuron" href="lif.html">LIF</a>
+    <a class="neuron" href="eif.html">EIF</a>
+    <a class="neuron" href="adex.html">AdEx</a>
+    <a class="neuron" href="izhikevich.html">Izhikevich</a>
+    <a class="neuron" href="hh.html">H-H</a>
+    <a class="neuron" href="fhn.html">FHN</a>
+    <a class="neuron" href="morris-lecar.html">ML</a>
+    <a class="neuron" href="srm.html">SRM</a>
+    <a class="neuron" href="multicompartment.html">Multi-C</a>
+    <a class="neuron" href="stochastic.html">Stoch.</a>
+    <a class="stdp" href="stdp-classical.html">Classical</a>
+    <a class="stdp" href="stdp-multiplicative.html">Mult.</a>
+    <a class="stdp" href="stdp-triplet.html">Triplet</a>
+    <a class="stdp" href="stdp-voltage.html">Voltage</a>
+    <a class="stdp" href="stdp-anti.html">Anti</a>
+    <a class="stdp" href="stdp-symmetric.html">Sym.</a>
+    <a class="stdp" href="stdp-reward.html">R-STDP</a>
+    <a class="stdp" href="stdp-pairing.html">Pairing</a>
+    <a class="stdp" href="stdp-bcm.html">BCM</a>
+    <a class="stdp" href="stdp-surrogate.html">Surrogate</a>
+  </div>
+</nav>
+<main>
+<div class="page-header">
+  <div class="breadcrumb"><a href="index.html">Index</a> › STDP 01</div>
+  <h1><span class="stdp">STDP 01</span><br>Classical Additive STDP</h1>
+  <p class="subtitle">The foundational spike-timing-dependent plasticity rule, experimentally confirmed by Bi and Poo (1998) in cultured hippocampal neurons. Synaptic strength increases when the presynaptic neuron fires before the postsynaptic neuron (LTP) and decreases in the reverse order (LTD), with the magnitude decaying exponentially with the inter-spike interval.</p>
+  <div class="metric-row"><div class="metric"><span class="metric-label">Type</span><span class="metric-value ">Unsupervised</span></div><div class="metric"><span class="metric-label">Traces</span><span class="metric-value ">2</span></div><div class="metric"><span class="metric-label">Cost</span><span class="metric-value high">Very Low</span></div><div class="metric"><span class="metric-label">Stability</span><span class="metric-value low">Poor</span></div><div class="metric"><span class="metric-label">Bio. Plausibility</span><span class="metric-value high">High</span></div></div>
+</div><div class="content-section"><h2 class="purple">Learning Rule</h2><div class="formula-block "><span class="label">STDP Window</span><div class="eq">Δt = t<sub>post</sub> − t<sub>pre</sub></div>
+<div class="eq">Δw = A₊ · exp(−Δt/τ₊)    if Δt > 0   [pre before post → LTP]</div>
+<div class="eq">Δw = −A₋ · exp(Δt/τ₋)    if Δt < 0   [post before pre → LTD]</div></div><table class="var-table"><thead><tr><th>Symbol</th><th>Description</th><th>Typical</th></tr></thead><tbody><tr><td class="var-name purple">Δt</td><td class="var-desc">Inter-spike interval (t_post − t_pre). Positive = pre fires first</td><td class="var-val">ms</td></tr><tr><td class="var-name purple">Δw</td><td class="var-desc">Synaptic weight change</td><td class="var-val">—</td></tr><tr><td class="var-name purple">A₊</td><td class="var-desc">Maximum LTP amplitude</td><td class="var-val">0.01–0.1</td></tr><tr><td class="var-name purple">A₋</td><td class="var-desc">Maximum LTD amplitude. Usually slightly > A₊ for stability</td><td class="var-val">0.01–0.12</td></tr><tr><td class="var-name purple">τ₊</td><td class="var-desc">LTP time constant</td><td class="var-val">20 ms</td></tr><tr><td class="var-name purple">τ₋</td><td class="var-desc">LTD time constant</td><td class="var-val">20–40 ms</td></tr></tbody></table></div><div class="content-section"><h2 class="">Online Trace Implementation</h2><div class="formula-block "><span class="label">Eligibility Traces</span><div class="eq">dx/dt = −x/τ₊    → x ← x + 1   at each pre-spike</div>
+<div class="eq">dy/dt = −y/τ₋    → y ← y + 1   at each post-spike</div>
+<div class="eq">At post-spike:   w ← w + A₊ · x</div>
+<div class="eq">At pre-spike:    w ← w − A₋ · y</div></div><div class="info-box purple"><strong>Local implementation:</strong> Each synapse maintains two numbers: x (pre trace) and y (post trace). No global information needed. This is why STDP is attractive for neuromorphic hardware — O(1) memory and computation per synapse per spike.</div></div><div class="content-section"><h2 class="">Causal Interpretation</h2><p>If pre fires at t=0 and post fires at t=+5ms, the pre trace x is still elevated when the post spike arrives → weight increases. If post fires first (t=0) and pre fires later (t=+5ms), the post trace y is elevated when the pre spike arrives → weight decreases. STDP thus reinforces causal connections.</p><div class="pro-con"><div class="pro-con-box pros"><h4><span class="pulse"></span>Advantages</h4><ul><li>Fully local — only pre and post spike times required</li><li>Biologically confirmed in multiple brain regions and species</li><li>Naturally learns causal temporal sequences</li><li>Analytically tractable — closed-form solutions for Poisson inputs</li></ul></div><div class="pro-con-box cons"><h4><span class="pulse" style="background:var(--red)"></span>Limitations</h4><ul><li>Additive updates → bimodal weight distributions (all-high or all-low)</li><li>Unstable under high firing rates without normalization</li><li>Pair-based — ignores burst interactions captured by triplet rule</li><li>No credit assignment across multiple layers</li></ul></div></div></div><div class="content-section"><h2 class="">Stability Analysis</h2><p>For Poisson presynaptic inputs with rate r<sub>pre</sub>, the mean weight change per unit time is:</p><div class="formula-block "><span class="label">Expected Weight Change</span><div class="eq">dw/dt ∝ A₊·τ₊·r<sub>pre</sub>·r<sub>post</sub> − A₋·τ₋·r<sub>pre</sub>·r<sub>post</sub></div>
+<div class="eq">     = r<sub>pre</sub>·r<sub>post</sub>·(A₊·τ₊ − A₋·τ₋)</div></div><p>Stability requires A₋·τ₋ > A₊·τ₊ (net LTD dominance). In practice this means A₋ > A₊ when τ₊ ≈ τ₋, or τ₋ > τ₊ when A₊ ≈ A₋.</p></div>
+<div class="page-nav"><a href="stochastic.html">← <span>Stochastic IF</span></a><a href="stdp-multiplicative.html" style="text-align:right"><span>Multiplicative STDP</span> →</a></div>
+</main>
+<footer>NEURO REFERENCE · <a href="index.html" style="color:var(--text3);text-decoration:none">← Back to Index</a></footer>
+</body>
+</html>

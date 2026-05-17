@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Multiplicative STDP — Neuro Reference</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">⬡ NEURO REF</a>
+  <div class="nav-links">
+    <a class="neuron" href="lif.html">LIF</a>
+    <a class="neuron" href="eif.html">EIF</a>
+    <a class="neuron" href="adex.html">AdEx</a>
+    <a class="neuron" href="izhikevich.html">Izhikevich</a>
+    <a class="neuron" href="hh.html">H-H</a>
+    <a class="neuron" href="fhn.html">FHN</a>
+    <a class="neuron" href="morris-lecar.html">ML</a>
+    <a class="neuron" href="srm.html">SRM</a>
+    <a class="neuron" href="multicompartment.html">Multi-C</a>
+    <a class="neuron" href="stochastic.html">Stoch.</a>
+    <a class="stdp" href="stdp-classical.html">Classical</a>
+    <a class="stdp" href="stdp-multiplicative.html">Mult.</a>
+    <a class="stdp" href="stdp-triplet.html">Triplet</a>
+    <a class="stdp" href="stdp-voltage.html">Voltage</a>
+    <a class="stdp" href="stdp-anti.html">Anti</a>
+    <a class="stdp" href="stdp-symmetric.html">Sym.</a>
+    <a class="stdp" href="stdp-reward.html">R-STDP</a>
+    <a class="stdp" href="stdp-pairing.html">Pairing</a>
+    <a class="stdp" href="stdp-bcm.html">BCM</a>
+    <a class="stdp" href="stdp-surrogate.html">Surrogate</a>
+  </div>
+</nav>
+<main>
+<div class="page-header">
+  <div class="breadcrumb"><a href="index.html">Index</a> › STDP 02</div>
+  <h1><span class="stdp">STDP 02</span><br>Multiplicative (Weight-Dependent) STDP</h1>
+  <p class="subtitle">A modification of classical STDP where the update magnitude scales with the distance from the weight bounds. Strong synapses are harder to potentiate and easier to depress; weak synapses the reverse. This produces stable, unimodal weight distributions without external normalization.</p>
+  <div class="metric-row"><div class="metric"><span class="metric-label">Type</span><span class="metric-value ">Unsupervised</span></div><div class="metric"><span class="metric-label">Traces</span><span class="metric-value ">2</span></div><div class="metric"><span class="metric-label">Cost</span><span class="metric-value high">Very Low</span></div><div class="metric"><span class="metric-label">Stability</span><span class="metric-value high">Good</span></div><div class="metric"><span class="metric-label">Bio. Plausibility</span><span class="metric-value high">High</span></div></div>
+</div><div class="content-section"><h2 class="purple">Learning Rule</h2><div class="formula-block "><span class="label">Soft-Bound Updates</span><div class="eq">Δw⁺ = A₊ · (w<sub>max</sub> − w) · exp(−Δt/τ₊)    if Δt > 0</div>
+<div class="eq">Δw⁻ = −A₋ · (w − w<sub>min</sub>) · exp(Δt/τ₋)    if Δt < 0</div></div><table class="var-table"><thead><tr><th>Symbol</th><th>Description</th><th>Typical</th></tr></thead><tbody><tr><td class="var-name purple">w<sub>max</sub></td><td class="var-desc">Maximum allowed synaptic weight</td><td class="var-val">1.0</td></tr><tr><td class="var-name purple">w<sub>min</sub></td><td class="var-desc">Minimum allowed synaptic weight</td><td class="var-val">0.0</td></tr><tr><td class="var-name purple">(w<sub>max</sub>−w)</td><td class="var-desc">Soft upper bound factor — potentiation shrinks as w approaches max</td><td class="var-val">0–1</td></tr><tr><td class="var-name purple">(w−w<sub>min</sub>)</td><td class="var-desc">Soft lower bound factor — depression shrinks as w approaches min</td><td class="var-val">0–1</td></tr><tr><td class="var-name purple">All other params</td><td class="var-desc">A₊, A₋, τ₊, τ₋ as in classical STDP</td><td class="var-val">—</td></tr></tbody></table></div><div class="content-section"><h2 class="">Why Soft Bounds Stabilize</h2><div class="info-box purple"><strong>Stability mechanism:</strong><br>
+In additive STDP, every LTP update has the same amplitude A₊, regardless of how strong the synapse already is — runaway growth is possible.<br><br>
+In multiplicative STDP, when w = w<sub>max</sub>: Δw⁺ = A₊ · (w<sub>max</sub> − w<sub>max</sub>) = 0 — potentiation stops automatically.<br>
+When w = w<sub>min</sub>: Δw⁻ = −A₋ · (w<sub>min</sub> − w<sub>min</sub>) = 0 — depression stops automatically.<br><br>
+The weight distribution converges to a unimodal distribution centered between the bounds, not bimodal like additive STDP.</div><table class="comp-table"><thead><tr><th>Property</th><th>Additive STDP</th><th>Multiplicative STDP</th></tr></thead><tbody><tr><td>Weight distribution</td><td>Bimodal (all-high or all-low)</td><td>Unimodal (smooth bell)</td></tr><tr><td>Stability</td><td>Poor — needs external normalization</td><td>Good — intrinsic via soft bounds</td></tr><tr><td>Competition strength</td><td>Strong (winner-take-all)</td><td>Weaker (cooperative)</td></tr><tr><td>Precision of temporal code</td><td>Higher</td><td>Slightly reduced</td></tr><tr><td>Biological evidence</td><td>Strong</td><td>Moderate</td></tr></tbody></table></div><div class="pro-con"><div class="pro-con-box pros"><h4><span class="pulse"></span>Advantages</h4><ul><li>Stable unimodal weight distributions without normalization</li><li>Implicit competition — strong synapses resist further growth</li><li>Same computational cost as classical STDP</li><li>Prevents weight saturation naturally</li></ul></div><div class="pro-con-box cons"><h4><span class="pulse" style="background:var(--red)"></span>Limitations</h4><ul><li>Softer competition — less selectivity than additive rule</li><li>Harder to analyze theoretically (nonlinear weight dependence)</li><li>Reduced sensitivity of strong synapses — may limit learning speed</li><li>Biological evidence for the specific soft-bound form is limited</li></ul></div></div>
+<div class="page-nav"><a href="stdp-classical.html">← <span>Classical STDP</span></a><a href="stdp-triplet.html" style="text-align:right"><span>Triplet STDP</span> →</a></div>
+</main>
+<footer>NEURO REFERENCE · <a href="index.html" style="color:var(--text3);text-decoration:none">← Back to Index</a></footer>
+</body>
+</html>

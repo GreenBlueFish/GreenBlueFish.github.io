@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Triplet STDP — Neuro Reference</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">⬡ NEURO REF</a>
+  <div class="nav-links">
+    <a class="neuron" href="lif.html">LIF</a>
+    <a class="neuron" href="eif.html">EIF</a>
+    <a class="neuron" href="adex.html">AdEx</a>
+    <a class="neuron" href="izhikevich.html">Izhikevich</a>
+    <a class="neuron" href="hh.html">H-H</a>
+    <a class="neuron" href="fhn.html">FHN</a>
+    <a class="neuron" href="morris-lecar.html">ML</a>
+    <a class="neuron" href="srm.html">SRM</a>
+    <a class="neuron" href="multicompartment.html">Multi-C</a>
+    <a class="neuron" href="stochastic.html">Stoch.</a>
+    <a class="stdp" href="stdp-classical.html">Classical</a>
+    <a class="stdp" href="stdp-multiplicative.html">Mult.</a>
+    <a class="stdp" href="stdp-triplet.html">Triplet</a>
+    <a class="stdp" href="stdp-voltage.html">Voltage</a>
+    <a class="stdp" href="stdp-anti.html">Anti</a>
+    <a class="stdp" href="stdp-symmetric.html">Sym.</a>
+    <a class="stdp" href="stdp-reward.html">R-STDP</a>
+    <a class="stdp" href="stdp-pairing.html">Pairing</a>
+    <a class="stdp" href="stdp-bcm.html">BCM</a>
+    <a class="stdp" href="stdp-surrogate.html">Surrogate</a>
+  </div>
+</nav>
+<main>
+<div class="page-header">
+  <div class="breadcrumb"><a href="index.html">Index</a> › STDP 03</div>
+  <h1><span class="stdp">STDP 03</span><br>Triplet STDP (Pfister-Gerstner Rule)</h1>
+  <p class="subtitle">Extends STDP beyond spike pairs to triplets (pre-post-pre or post-pre-post). Four exponential traces — two fast and two slow — capture interactions between three spikes. Reproduces visual cortex plasticity data far better than the pair rule and recovers BCM-like sliding threshold behavior.</p>
+  <div class="metric-row"><div class="metric"><span class="metric-label">Type</span><span class="metric-value ">Unsupervised</span></div><div class="metric"><span class="metric-label">Traces</span><span class="metric-value ">4</span></div><div class="metric"><span class="metric-label">Cost</span><span class="metric-value high">Low</span></div><div class="metric"><span class="metric-label">Stability</span><span class="metric-value medium">Moderate</span></div><div class="metric"><span class="metric-label">Bio. Plausibility</span><span class="metric-value high">High</span></div></div>
+</div><div class="content-section"><h2 class="purple">Learning Rule</h2><div class="formula-block "><span class="label">Triplet Weight Updates</span><div class="eq">At post-spike:   Δw⁺ = A₂⁺·x₁ + A₃⁺·x₁·y₂</div>
+<div class="eq">At pre-spike:    Δw⁻ = A₂⁻·y₁ + A₃⁻·y₁·x₂</div></div><div class="formula-block "><span class="label">Trace ODEs</span><div class="eq">dx₁/dt = −x₁/τ_{x1}    → x₁ ← x₁+1 at pre-spike</div>
+<div class="eq">dx₂/dt = −x₂/τ_{x2}    → x₂ ← x₂+1 at pre-spike</div>
+<div class="eq">dy₁/dt = −y₁/τ_{y1}    → y₁ ← y₁+1 at post-spike</div>
+<div class="eq">dy₂/dt = −y₂/τ_{y2}    → y₂ ← y₂+1 at post-spike</div></div><table class="var-table"><thead><tr><th>Symbol</th><th>Description</th><th>Typical</th></tr></thead><tbody><tr><td class="var-name purple">x₁</td><td class="var-desc">Fast pre-synaptic trace — pairs with nearest post-spike (like classical STDP)</td><td class="var-val">—</td></tr><tr><td class="var-name purple">x₂</td><td class="var-desc">Slow pre-synaptic trace — integrates recent pre-spike history over longer window</td><td class="var-val">—</td></tr><tr><td class="var-name purple">y₁</td><td class="var-desc">Fast post-synaptic trace — pairs with nearest pre-spike</td><td class="var-val">—</td></tr><tr><td class="var-name purple">y₂</td><td class="var-desc">Slow post-synaptic trace — encodes recent mean post-synaptic activity (≈ BCM θ_M)</td><td class="var-val">—</td></tr><tr><td class="var-name purple">A₂⁺, A₂⁻</td><td class="var-desc">Pair-interaction amplitudes — equivalent to A₊, A₋ in classical STDP</td><td class="var-val">~0.006</td></tr><tr><td class="var-name purple">A₃⁺, A₃⁻</td><td class="var-desc">Triplet amplitudes — often 10× larger than pair terms</td><td class="var-val">~0.06</td></tr><tr><td class="var-name purple">τ_{x1}, τ_{y1}</td><td class="var-desc">Fast trace time constants</td><td class="var-val">~17, 19 ms</td></tr><tr><td class="var-name purple">τ_{x2}, τ_{y2}</td><td class="var-desc">Slow trace time constants</td><td class="var-val">~114, 40 ms</td></tr></tbody></table></div><div class="content-section"><h2 class="">Why Triplets Matter</h2><div class="info-box purple"><strong>Post-before-pre-before-post (triplet):</strong><br>
+In classical STDP, post-before-pre → LTD. But if there's another post spike right after the pre, this reverses to LTP (the pre-post pair dominates). The triplet rule captures this via the x₁·y₂ term: y₂ is high (recent post activity) and x₁ is high (recent pre spike), creating strong LTP.<br><br>
+<strong>BCM connection:</strong> y₂ acts like the BCM sliding threshold θ_M — when post activity is high (y₂ large), the A₃⁺ term boosts LTP, equivalent to LTP for firing above θ_M. When post activity is low (y₂ small), the pair term A₂⁻ dominates, giving LTD — equivalent to below-threshold BCM depression.</div><div class="pro-con"><div class="pro-con-box pros"><h4><span class="pulse"></span>Advantages</h4><ul><li>Reproduces visual cortex LTP/LTD data (Sjöström et al.) far better than pair rule</li><li>Recovers BCM sliding threshold behavior without extra assumptions</li><li>Correctly handles burst interactions — burst pre + single post → strong LTP</li><li>Still fully local — only four traces per synapse</li></ul></div><div class="pro-con-box cons"><h4><span class="pulse" style="background:var(--red)"></span>Limitations</h4><ul><li>Six free parameters — difficult to fit without detailed experimental data</li><li>Still additive — weight distributions can become unstable</li><li>Computationally 2× heavier than classical STDP (four traces vs two)</li><li>Higher-order terms beyond triplets (quadruplets) sometimes matter</li></ul></div></div></div>
+<div class="page-nav"><a href="stdp-multiplicative.html">← <span>Multiplicative STDP</span></a><a href="stdp-voltage.html" style="text-align:right"><span>Voltage-Dependent STDP</span> →</a></div>
+</main>
+<footer>NEURO REFERENCE · <a href="index.html" style="color:var(--text3);text-decoration:none">← Back to Index</a></footer>
+</body>
+</html>

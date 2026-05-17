@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Multi-Compartment — Neuro Reference</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">⬡ NEURO REF</a>
+  <div class="nav-links">
+    <a class="neuron" href="lif.html">LIF</a>
+    <a class="neuron" href="eif.html">EIF</a>
+    <a class="neuron" href="adex.html">AdEx</a>
+    <a class="neuron" href="izhikevich.html">Izhikevich</a>
+    <a class="neuron" href="hh.html">H-H</a>
+    <a class="neuron" href="fhn.html">FHN</a>
+    <a class="neuron" href="morris-lecar.html">ML</a>
+    <a class="neuron" href="srm.html">SRM</a>
+    <a class="neuron" href="multicompartment.html">Multi-C</a>
+    <a class="neuron" href="stochastic.html">Stoch.</a>
+    <a class="stdp" href="stdp-classical.html">Classical</a>
+    <a class="stdp" href="stdp-multiplicative.html">Mult.</a>
+    <a class="stdp" href="stdp-triplet.html">Triplet</a>
+    <a class="stdp" href="stdp-voltage.html">Voltage</a>
+    <a class="stdp" href="stdp-anti.html">Anti</a>
+    <a class="stdp" href="stdp-symmetric.html">Sym.</a>
+    <a class="stdp" href="stdp-reward.html">R-STDP</a>
+    <a class="stdp" href="stdp-pairing.html">Pairing</a>
+    <a class="stdp" href="stdp-bcm.html">BCM</a>
+    <a class="stdp" href="stdp-surrogate.html">Surrogate</a>
+  </div>
+</nav>
+<main>
+<div class="page-header">
+  <div class="breadcrumb"><a href="index.html">Index</a> › MODEL 09</div>
+  <h1><span class="neuron">MODEL 09</span><br>Multi-Compartment Models</h1>
+  <p class="subtitle">Spatially extended neurons modeled as chains or trees of electrically coupled compartments. Each compartment has its own ionic currents and synaptic inputs. The backpropagating action potential (bAP) and local dendritic calcium spikes emerge naturally, enabling location-dependent STDP rules invisible to point-neuron models.</p>
+  <div class="metric-row"><div class="metric"><span class="metric-label">ODEs</span><span class="metric-value ">N×4+</span></div><div class="metric"><span class="metric-label">Spike Precision</span><span class="metric-value high">Realistic</span></div><div class="metric"><span class="metric-label">Dendritic Effects</span><span class="metric-value high">Full</span></div><div class="metric"><span class="metric-label">Computational Cost</span><span class="metric-value low">Very High</span></div><div class="metric"><span class="metric-label">Biological Fidelity</span><span class="metric-value high">Very High</span></div></div>
+</div><div class="content-section"><h2 class="">Governing Equations</h2><div class="formula-block "><span class="label">Per-Compartment Equation</span><div class="eq">C<sub>m</sub> · dV<sub>i</sub>/dt = −I<sub>ion,i</sub>(V<sub>i</sub>) + Σⱼ[g<sub>ij</sub>·(Vⱼ−V<sub>i</sub>)] + I<sub>syn,i</sub>(t)</div></div><table class="var-table"><thead><tr><th>Symbol</th><th>Description</th><th>Typical</th></tr></thead><tbody><tr><td class="var-name ">V<sub>i</sub></td><td class="var-desc">Membrane potential of compartment i</td><td class="var-val">mV</td></tr><tr><td class="var-name ">I<sub>ion,i</sub></td><td class="var-desc">Sum of all active ionic currents in compartment i (HH-style)</td><td class="var-val">pA</td></tr><tr><td class="var-name ">g<sub>ij</sub></td><td class="var-desc">Axial (inter-compartment) coupling conductance between i and j</td><td class="var-val">nS</td></tr><tr><td class="var-name ">I<sub>syn,i</sub></td><td class="var-desc">Total synaptic current arriving at compartment i</td><td class="var-val">pA</td></tr></tbody></table></div><div class="content-section"><h2 class="">Backpropagating Action Potential</h2><div class="formula-block "><span class="label">bAP Attenuation</span><div class="eq">V<sub>bAP</sub>(d) ≈ V<sub>soma</sub> · exp(−d / λ)</div></div><table class="var-table"><thead><tr><th>Symbol</th><th>Description</th><th>Typical</th></tr></thead><tbody><tr><td class="var-name ">d</td><td class="var-desc">Electrotonic distance from soma to the synapse</td><td class="var-val">μm</td></tr><tr><td class="var-name ">λ</td><td class="var-desc">Space constant — depends on compartment diameter and axial/membrane resistivity</td><td class="var-val">μm</td></tr><tr><td class="var-name ">V<sub>bAP</sub>(d)</td><td class="var-desc">bAP amplitude at distance d — determines NMDA unblocking</td><td class="var-val">mV</td></tr></tbody></table><div class="info-box "><strong>Why bAP matters:</strong> Biological STDP requires the postsynaptic bAP to coincide with the presynaptic EPSP at the synapse. In distal dendrites the bAP is smaller and delayed — meaning the effective STDP time window is location-dependent. A synapse at 300 μm sees a weaker, later bAP and thus has a shifted LTP zone.</div></div><div class="content-section"><h2 class="">Location-Dependent STDP</h2><table class="comp-table"><thead><tr><th>Synapse Location</th><th>bAP Amplitude</th><th>STDP LTP Window</th><th>Plasticity Rule</th></tr></thead><tbody><tr><td>Proximal (< 50 μm)</td><td>Large (~80% somatic)</td><td>Wide, standard</td><td>Classical exponential STDP</td></tr><tr><td>Mid-apical (50–200 μm)</td><td>Moderate (~40%)</td><td>Narrower, shifted</td><td>Reduced LTP; more LTD</td></tr><tr><td>Distal (> 200 μm)</td><td>Small (<20%) or zero</td><td>Requires local Ca²⁺ spike</td><td>Anti-Hebbian or no plasticity</td></tr></tbody></table><div class="pro-con"><div class="pro-con-box pros"><h4><span class="pulse"></span>Advantages</h4><ul><li>Full dendritic computation — local calcium spikes, branch-specific plasticity</li><li>Location-dependent STDP emerges naturally from cable properties</li><li>bAP dynamics are explicit — enables mechanistic STDP studies</li><li>Validates against detailed morphological reconstructions (NeuroMorpho)</li></ul></div><div class="pro-con-box cons"><h4><span class="pulse" style="background:var(--red)"></span>Limitations</h4><ul><li>Extremely expensive — a realistic pyramidal cell may have 200+ compartments</li><li>Requires dt ≈ 0.01 ms; numerical stability is demanding</li><li>Parameter fitting requires extensive experimental data</li><li>Large-scale network simulations essentially infeasible</li></ul></div></div></div>
+<div class="page-nav"><a href="srm.html">← <span>Spike Response Model</span></a><a href="stochastic.html" style="text-align:right"><span>Stochastic IF</span> →</a></div>
+</main>
+<footer>NEURO REFERENCE · <a href="index.html" style="color:var(--text3);text-decoration:none">← Back to Index</a></footer>
+</body>
+</html>

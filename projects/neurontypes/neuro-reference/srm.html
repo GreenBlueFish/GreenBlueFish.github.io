@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spike Response Model — Neuro Reference</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">⬡ NEURO REF</a>
+  <div class="nav-links">
+    <a class="neuron" href="lif.html">LIF</a>
+    <a class="neuron" href="eif.html">EIF</a>
+    <a class="neuron" href="adex.html">AdEx</a>
+    <a class="neuron" href="izhikevich.html">Izhikevich</a>
+    <a class="neuron" href="hh.html">H-H</a>
+    <a class="neuron" href="fhn.html">FHN</a>
+    <a class="neuron" href="morris-lecar.html">ML</a>
+    <a class="neuron" href="srm.html">SRM</a>
+    <a class="neuron" href="multicompartment.html">Multi-C</a>
+    <a class="neuron" href="stochastic.html">Stoch.</a>
+    <a class="stdp" href="stdp-classical.html">Classical</a>
+    <a class="stdp" href="stdp-multiplicative.html">Mult.</a>
+    <a class="stdp" href="stdp-triplet.html">Triplet</a>
+    <a class="stdp" href="stdp-voltage.html">Voltage</a>
+    <a class="stdp" href="stdp-anti.html">Anti</a>
+    <a class="stdp" href="stdp-symmetric.html">Sym.</a>
+    <a class="stdp" href="stdp-reward.html">R-STDP</a>
+    <a class="stdp" href="stdp-pairing.html">Pairing</a>
+    <a class="stdp" href="stdp-bcm.html">BCM</a>
+    <a class="stdp" href="stdp-surrogate.html">Surrogate</a>
+  </div>
+</nav>
+<main>
+<div class="page-header">
+  <div class="breadcrumb"><a href="index.html">Index</a> › MODEL 08</div>
+  <h1><span class="neuron">MODEL 08</span><br>Spike Response Model (SRM)</h1>
+  <p class="subtitle">A kernel-based formulation where membrane voltage is expressed as a superposition of response kernels convolved with past spike times — no ODE integration required. Spikes are events; the membrane trajectory between spikes is deterministic. Natural framework for theoretical STDP analysis and population density methods.</p>
+  <div class="metric-row"><div class="metric"><span class="metric-label">Integration</span><span class="metric-value ">Kernel Conv.</span></div><div class="metric"><span class="metric-label">Spike Precision</span><span class="metric-value high">High</span></div><div class="metric"><span class="metric-label">Dendritic Effects</span><span class="metric-value none">None</span></div><div class="metric"><span class="metric-label">Computational Cost</span><span class="metric-value high">Low</span></div><div class="metric"><span class="metric-label">Analytical Power</span><span class="metric-value high">High</span></div></div>
+</div><div class="content-section"><h2 class="">Voltage Equation</h2><div class="formula-block "><span class="label">Kernel Superposition</span><div class="eq">V(t) = η(t − t̂) + Σⱼ Σ_f [ wⱼ · ε(t − tⱼ⁽ᶠ⁾) ] + V<sub>rest</sub></div></div><table class="var-table"><thead><tr><th>Symbol</th><th>Description</th><th>Typical</th></tr></thead><tbody><tr><td class="var-name ">η(t − t̂)</td><td class="var-desc">Spike afterpotential kernel — encodes reset, AHP, and refractory effect following last spike at t̂</td><td class="var-val">mV</td></tr><tr><td class="var-name ">ε(t − tⱼ⁽ᶠ⁾)</td><td class="var-desc">Postsynaptic potential kernel — voltage contribution from spike f of presynaptic neuron j</td><td class="var-val">mV</td></tr><tr><td class="var-name ">wⱼ</td><td class="var-desc">Synaptic weight for input j</td><td class="var-val">—</td></tr><tr><td class="var-name ">tⱼ⁽ᶠ⁾</td><td class="var-desc">Time of spike f from presynaptic neuron j</td><td class="var-val">ms</td></tr><tr><td class="var-name ">t̂</td><td class="var-desc">Time of last postsynaptic spike</td><td class="var-val">ms</td></tr><tr><td class="var-name ">V<sub>rest</sub></td><td class="var-desc">Baseline membrane potential</td><td class="var-val">mV</td></tr></tbody></table></div><div class="content-section"><h2 class="">Kernel Definitions</h2><div class="formula-block "><span class="label">Standard Kernel Forms</span><div class="eq">η(s) = −V<sub>thresh</sub> · exp(−s/τ<sub>ref</sub>)   for s > 0   [afterpotential]</div>
+<div class="eq">ε(s) = (τ<sub>m</sub>/C) · exp(−s/τ<sub>m</sub>)    for s > 0   [alpha-function PSP]</div></div><p>Kernels can be fitted to match any neuron type. The α-function ε approximates a biexponential EPSP. More complex kernels with multiple exponentials can match dendritic filtering.</p></div><div class="content-section"><h2 class="">Reset Mechanism</h2><p>Reset is encoded in the η kernel — no discontinuous jump is needed. Immediately after a spike (small s), η(s) is strongly negative, holding V below rest. As s grows, η decays back to zero, recovering excitability:</p><div class="info-box "><strong>Key insight:</strong> The refractory period is not a hard rule but a continuous effect of η. Absolute refractoriness (η → −∞) and relative refractoriness (η slowly recovering) are both captured by the kernel shape. This makes STDP analysis elegant — the full post-spike voltage trajectory is in closed form.</div></div><div class="content-section"><h2 class="">STDP in the SRM Framework</h2><p>Because V(t) is a linear superposition of kernels, STDP weight updates can be written in closed form. The Hebbian trace is directly the ε kernel:</p><div class="formula-block "><span class="label">STDP Weight Update (SRM)</span><div class="eq">Δwⱼ = A₊ · Σ_f ε(t<sub>post</sub> − tⱼ⁽ᶠ⁾) evaluated at post-spike</div>
+<div class="eq">Δwⱼ = −A₋ · Σ_g η(tⱼ<sup>(g)</sup> − t̂) evaluated at pre-spike</div></div><div class="pro-con"><div class="pro-con-box pros"><h4><span class="pulse"></span>Advantages</h4><ul><li>No ODE integration — analytically exact between spikes</li><li>STDP weight changes have closed-form expressions</li><li>Natural basis for Bayesian and information-theoretic STDP analysis</li><li>Population density methods are directly applicable</li></ul></div><div class="pro-con-box cons"><h4><span class="pulse" style="background:var(--red)"></span>Limitations</h4><ul><li>Kernels must be specified a priori — less mechanistic than HH</li><li>Cannot model nonlinear dendritic computation</li><li>Stochastic extension (SRM₀) requires escape rate functions</li></ul></div></div></div>
+<div class="page-nav"><a href="morris-lecar.html">← <span>Morris-Lecar</span></a><a href="multicompartment.html" style="text-align:right"><span>Multi-Compartment</span> →</a></div>
+</main>
+<footer>NEURO REFERENCE · <a href="index.html" style="color:var(--text3);text-decoration:none">← Back to Index</a></footer>
+</body>
+</html>

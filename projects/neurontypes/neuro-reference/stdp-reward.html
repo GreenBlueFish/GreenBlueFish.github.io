@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reward-Modulated STDP — Neuro Reference</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">⬡ NEURO REF</a>
+  <div class="nav-links">
+    <a class="neuron" href="lif.html">LIF</a>
+    <a class="neuron" href="eif.html">EIF</a>
+    <a class="neuron" href="adex.html">AdEx</a>
+    <a class="neuron" href="izhikevich.html">Izhikevich</a>
+    <a class="neuron" href="hh.html">H-H</a>
+    <a class="neuron" href="fhn.html">FHN</a>
+    <a class="neuron" href="morris-lecar.html">ML</a>
+    <a class="neuron" href="srm.html">SRM</a>
+    <a class="neuron" href="multicompartment.html">Multi-C</a>
+    <a class="neuron" href="stochastic.html">Stoch.</a>
+    <a class="stdp" href="stdp-classical.html">Classical</a>
+    <a class="stdp" href="stdp-multiplicative.html">Mult.</a>
+    <a class="stdp" href="stdp-triplet.html">Triplet</a>
+    <a class="stdp" href="stdp-voltage.html">Voltage</a>
+    <a class="stdp" href="stdp-anti.html">Anti</a>
+    <a class="stdp" href="stdp-symmetric.html">Sym.</a>
+    <a class="stdp" href="stdp-reward.html">R-STDP</a>
+    <a class="stdp" href="stdp-pairing.html">Pairing</a>
+    <a class="stdp" href="stdp-bcm.html">BCM</a>
+    <a class="stdp" href="stdp-surrogate.html">Surrogate</a>
+  </div>
+</nav>
+<main>
+<div class="page-header">
+  <div class="breadcrumb"><a href="index.html">Index</a> › STDP 07</div>
+  <h1><span class="stdp">STDP 07</span><br>Reward-Modulated STDP (R-STDP)</h1>
+  <p class="subtitle">A three-factor plasticity rule where local STDP-based eligibility traces are gated by a global reward signal — modelling the role of dopamine in corticostriatal plasticity. Bridges unsupervised Hebbian STDP and reinforcement learning, enabling a SNN to learn goal-directed behavior from delayed rewards.</p>
+  <div class="metric-row"><div class="metric"><span class="metric-label">Type</span><span class="metric-value ">Reinforcement</span></div><div class="metric"><span class="metric-label">Factors</span><span class="metric-value ">3</span></div><div class="metric"><span class="metric-label">Cost</span><span class="metric-value high">Low</span></div><div class="metric"><span class="metric-label">Stability</span><span class="metric-value high">Good</span></div><div class="metric"><span class="metric-label">Bio. Plausibility</span><span class="metric-value high">High</span></div></div>
+</div><div class="content-section"><h2 class="purple">Learning Rule</h2><div class="formula-block "><span class="label">Three-Factor Rule</span><div class="eq">de/dt = −e/τₑ + STDP_kernel(Δt)</div>
+<div class="eq">dw/dt = η · r(t) · e(t)</div></div><table class="var-table"><thead><tr><th>Symbol</th><th>Description</th><th>Typical</th></tr></thead><tbody><tr><td class="var-name purple">e(t)</td><td class="var-desc">Eligibility trace — decays with τₑ; records recent STDP-qualified events</td><td class="var-val">—</td></tr><tr><td class="var-name purple">τₑ</td><td class="var-desc">Eligibility trace time constant — must bridge action-reward delay</td><td class="var-val">0.1–5 s</td></tr><tr><td class="var-name purple">r(t)</td><td class="var-desc">Reward signal (scalar) — positive = reward, negative = punishment</td><td class="var-val">—</td></tr><tr><td class="var-name purple">η</td><td class="var-desc">Learning rate</td><td class="var-val">—</td></tr><tr><td class="var-name purple">STDP_kernel(Δt)</td><td class="var-desc">Classical STDP Δw, used to update eligibility trace not weight directly</td><td class="var-val">—</td></tr></tbody></table></div><div class="content-section"><h2 class="">Three-Factor Interpretation</h2><div class="info-box purple"><strong>The three factors:</strong><br>
+1. <strong>Presynaptic activity</strong> — encoded in the pre trace x (as in classical STDP)<br>
+2. <strong>Postsynaptic activity</strong> — encoded in the post trace y (as in classical STDP)<br>
+3. <strong>Global reward signal r(t)</strong> — dopamine release or its absence<br><br>
+Without reward (r=0), synapses don't change even if eligible. When reward arrives, all recently eligible synapses undergo weight changes proportional to their eligibility. This solves the temporal credit assignment problem: the eligibility trace acts as a memory of which synapses contributed to the behavior that earned the reward.</div></div><div class="content-section"><h2 class="">Biological Mapping</h2><table class="comp-table"><thead><tr><th>R-STDP Component</th><th>Biological Analog</th><th>Brain Region</th></tr></thead><tbody><tr><td>Pre × post eligibility</td><td>STDP at corticostriatal synapses</td><td>Striatum</td></tr><tr><td>Eligibility trace e(t)</td><td>CaMKII / endocannabinoid signaling</td><td>Synapse</td></tr><tr><td>Reward signal r(t)</td><td>Phasic dopamine release</td><td>VTA/SNc → striatum</td></tr><tr><td>Learning rate η</td><td>Dopamine receptor sensitivity (D1/D2)</td><td>Striatum</td></tr></tbody></table><div class="pro-con"><div class="pro-con-box pros"><h4><span class="pulse"></span>Advantages</h4><ul><li>Bridges Hebbian STDP and reinforcement learning — both local and global signals</li><li>Biologically grounded in dopamine modulation of basal ganglia</li><li>Eligibility trace solves temporal credit assignment within one synapse</li><li>Enables sequence learning from delayed reward without backpropagation</li></ul></div><div class="pro-con-box cons"><h4><span class="pulse" style="background:var(--red)"></span>Limitations</h4><ul><li>Global reward signal means all synapses update together — not layer-specific</li><li>Credit assignment across many layers remains unsolved</li><li>Eligibility trace τₑ must match reward delay, which varies across tasks</li><li>Requires external reward structure — not purely self-organized</li></ul></div></div></div>
+<div class="page-nav"><a href="stdp-symmetric.html">← <span>Symmetric STDP</span></a><a href="stdp-pairing.html" style="text-align:right"><span>Pairing Schemes</span> →</a></div>
+</main>
+<footer>NEURO REFERENCE · <a href="index.html" style="color:var(--text3);text-decoration:none">← Back to Index</a></footer>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BCM Rule — Neuro Reference</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">⬡ NEURO REF</a>
+  <div class="nav-links">
+    <a class="neuron" href="lif.html">LIF</a>
+    <a class="neuron" href="eif.html">EIF</a>
+    <a class="neuron" href="adex.html">AdEx</a>
+    <a class="neuron" href="izhikevich.html">Izhikevich</a>
+    <a class="neuron" href="hh.html">H-H</a>
+    <a class="neuron" href="fhn.html">FHN</a>
+    <a class="neuron" href="morris-lecar.html">ML</a>
+    <a class="neuron" href="srm.html">SRM</a>
+    <a class="neuron" href="multicompartment.html">Multi-C</a>
+    <a class="neuron" href="stochastic.html">Stoch.</a>
+    <a class="stdp" href="stdp-classical.html">Classical</a>
+    <a class="stdp" href="stdp-multiplicative.html">Mult.</a>
+    <a class="stdp" href="stdp-triplet.html">Triplet</a>
+    <a class="stdp" href="stdp-voltage.html">Voltage</a>
+    <a class="stdp" href="stdp-anti.html">Anti</a>
+    <a class="stdp" href="stdp-symmetric.html">Sym.</a>
+    <a class="stdp" href="stdp-reward.html">R-STDP</a>
+    <a class="stdp" href="stdp-pairing.html">Pairing</a>
+    <a class="stdp" href="stdp-bcm.html">BCM</a>
+    <a class="stdp" href="stdp-surrogate.html">Surrogate</a>
+  </div>
+</nav>
+<main>
+<div class="page-header">
+  <div class="breadcrumb"><a href="index.html">Index</a> › STDP 09</div>
+  <h1><span class="stdp">STDP 09</span><br>BCM Rule (Bienenstock-Cooper-Munro)</h1>
+  <p class="subtitle">A rate-based plasticity rule with a sliding modification threshold θ_M that separates the LTP and LTD regimes. Firing above θ_M strengthens synapses; below weakens them. θ_M itself adapts to the neuron's recent activity. Underlies ocular dominance column formation and recoverable as the high-rate limit of triplet STDP.</p>
+  <div class="metric-row"><div class="metric"><span class="metric-label">Type</span><span class="metric-value ">Rate-Based</span></div><div class="metric"><span class="metric-label">Threshold</span><span class="metric-value ">Sliding</span></div><div class="metric"><span class="metric-label">Cost</span><span class="metric-value high">Very Low</span></div><div class="metric"><span class="metric-label">Stability</span><span class="metric-value high">Good</span></div><div class="metric"><span class="metric-label">Bio. Plausibility</span><span class="metric-value medium">Medium</span></div></div>
+</div><div class="content-section"><h2 class="purple">Learning Rule</h2><div class="formula-block "><span class="label">BCM Weight Update</span><div class="eq">dw/dt = φ(y, θ_M) · x</div>
+<div class="eq">φ(y, θ_M) = y · (y − θ_M)</div>
+<div class="eq">dθ_M/dt = (y² − θ_M) / τ_θ</div></div><table class="var-table"><thead><tr><th>Symbol</th><th>Description</th><th>Typical</th></tr></thead><tbody><tr><td class="var-name purple">y</td><td class="var-desc">Postsynaptic firing rate</td><td class="var-val">Hz</td></tr><tr><td class="var-name purple">x</td><td class="var-desc">Presynaptic firing rate</td><td class="var-val">Hz</td></tr><tr><td class="var-name purple">θ_M</td><td class="var-desc">Modification threshold (sliding) — separates LTP (y > θ_M) from LTD (y < θ_M)</td><td class="var-val">Hz</td></tr><tr><td class="var-name purple">φ(y, θ_M)</td><td class="var-desc">Nonlinear plasticity function — negative for y < θ_M; positive for y > θ_M</td><td class="var-val">—</td></tr><tr><td class="var-name purple">τ_θ</td><td class="var-desc">Time constant for threshold adaptation — much slower than spike timescale</td><td class="var-val">hours</td></tr></tbody></table></div><div class="content-section"><h2 class="">Connection to STDP</h2><p>In the high-rate limit, the expected weight change under classical pair-based STDP for Poisson inputs with rates r<sub>pre</sub>, r<sub>post</sub> converges to:</p><div class="formula-block "><span class="label">STDP High-Rate Limit</span><div class="eq">E[Δw] ≈ (A₊·τ₊ − A₋·τ₋) · r<sub>pre</sub> · r<sub>post</sub></div></div><p>This is a pure Hebbian rate rule. The triplet STDP rule recovers BCM more precisely — the slow post-synaptic trace y₂ effectively encodes θ_M:</p><div class="info-box purple"><strong>Triplet STDP → BCM:</strong> The y₂ trace in triplet STDP decays with τ_{y2} ≈ 40 ms, integrating recent postsynaptic spiking. When y₂ is large (high post rate), the A₃⁺ term amplifies LTP — equivalent to operating above θ_M. When y₂ is small (low post rate), the A₂⁻ term dominates, giving LTD — equivalent to below-threshold BCM. The BCM threshold θ_M corresponds to the equilibrium point of y₂.</div></div><div class="content-section"><h2 class="">Applications</h2><table class="comp-table"><thead><tr><th>Application</th><th>Mechanism</th><th>Evidence</th></tr></thead><tbody><tr><td>Ocular dominance columns</td><td>BCM competition between L/R eye inputs during critical period</td><td>Stryker, Shatz (1988–2000)</td></tr><tr><td>Orientation selectivity</td><td>BCM selects strongest correlated input</td><td>Blais et al. (1999)</td></tr><tr><td>Sparse coding</td><td>Sliding threshold maintains target firing rate</td><td>Law & Cooper (1994)</td></tr><tr><td>Homeostasis</td><td>θ_M prevents runaway by adapting to mean activity</td><td>Bienenstock et al. (1982)</td></tr></tbody></table><div class="pro-con"><div class="pro-con-box pros"><h4><span class="pulse"></span>Advantages</h4><ul><li>Sliding threshold provides intrinsic homeostasis — prevents runaway</li><li>Mathematically elegant — single φ function covers LTP and LTD</li><li>Experimentally validated in visual cortex plasticity</li><li>Connected to triplet STDP — provides rate-level interpretation</li></ul></div><div class="pro-con-box cons"><h4><span class="pulse" style="background:var(--red)"></span>Limitations</h4><ul><li>Rate-based — loses spike-timing information entirely</li><li>θ_M adaptation is very slow (hours) — not appropriate for fast learning</li><li>BCM does not predict plasticity from individual spike pairs</li><li>Biological substrate for the sliding threshold is not fully identified</li></ul></div></div></div>
+<div class="page-nav"><a href="stdp-pairing.html">← <span>Pairing Schemes</span></a><a href="stdp-surrogate.html" style="text-align:right"><span>Surrogate Gradient</span> →</a></div>
+</main>
+<footer>NEURO REFERENCE · <a href="index.html" style="color:var(--text3);text-decoration:none">← Back to Index</a></footer>
+</body>
+</html>

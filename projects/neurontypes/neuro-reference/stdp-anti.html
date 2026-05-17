@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anti-STDP — Neuro Reference</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">⬡ NEURO REF</a>
+  <div class="nav-links">
+    <a class="neuron" href="lif.html">LIF</a>
+    <a class="neuron" href="eif.html">EIF</a>
+    <a class="neuron" href="adex.html">AdEx</a>
+    <a class="neuron" href="izhikevich.html">Izhikevich</a>
+    <a class="neuron" href="hh.html">H-H</a>
+    <a class="neuron" href="fhn.html">FHN</a>
+    <a class="neuron" href="morris-lecar.html">ML</a>
+    <a class="neuron" href="srm.html">SRM</a>
+    <a class="neuron" href="multicompartment.html">Multi-C</a>
+    <a class="neuron" href="stochastic.html">Stoch.</a>
+    <a class="stdp" href="stdp-classical.html">Classical</a>
+    <a class="stdp" href="stdp-multiplicative.html">Mult.</a>
+    <a class="stdp" href="stdp-triplet.html">Triplet</a>
+    <a class="stdp" href="stdp-voltage.html">Voltage</a>
+    <a class="stdp" href="stdp-anti.html">Anti</a>
+    <a class="stdp" href="stdp-symmetric.html">Sym.</a>
+    <a class="stdp" href="stdp-reward.html">R-STDP</a>
+    <a class="stdp" href="stdp-pairing.html">Pairing</a>
+    <a class="stdp" href="stdp-bcm.html">BCM</a>
+    <a class="stdp" href="stdp-surrogate.html">Surrogate</a>
+  </div>
+</nav>
+<main>
+<div class="page-header">
+  <div class="breadcrumb"><a href="index.html">Index</a> › STDP 05</div>
+  <h1><span class="stdp">STDP 05</span><br>Anti-STDP</h1>
+  <p class="subtitle">The sign of the classical STDP learning window is reversed: pre-before-post causes LTD, and post-before-pre causes LTP. This anti-Hebbian rule implements predictive suppression — the synapse weakens connections that are causally reliable, effectively canceling predictable inputs. Found experimentally in the electric fish electrosensory lateral line lobe.</p>
+  <div class="metric-row"><div class="metric"><span class="metric-label">Type</span><span class="metric-value ">Anti-Hebbian</span></div><div class="metric"><span class="metric-label">Traces</span><span class="metric-value ">2</span></div><div class="metric"><span class="metric-label">Cost</span><span class="metric-value high">Very Low</span></div><div class="metric"><span class="metric-label">Stability</span><span class="metric-value medium">Circuit-Dependent</span></div><div class="metric"><span class="metric-label">Bio. Plausibility</span><span class="metric-value medium">Medium</span></div></div>
+</div><div class="content-section"><h2 class="purple">Learning Rule</h2><div class="formula-block "><span class="label">Reversed STDP Window</span><div class="eq">Δw = −A₊ · exp(−Δt/τ₊)    if Δt > 0   [pre before post → LTD]</div>
+<div class="eq">Δw = +A₋ · exp(Δt/τ₋)     if Δt < 0   [post before pre → LTP]</div></div><div class="info-box purple"><strong>Compare to classical:</strong> In classical STDP, positive Δt (causal order) → LTP. In anti-STDP, positive Δt → LTD. The network learns to suppress connections that repeatedly predict future postsynaptic firing — the opposite of causal reinforcement.</div></div><div class="content-section"><h2 class="">Biological Substrate</h2><table class="comp-table"><thead><tr><th>Location</th><th>Evidence</th><th>Function</th></tr></thead><tbody><tr><td>Electric fish (ELL)</td><td>Clearly documented by Bell et al. (1997)</td><td>Cancels predictable electrosensory reafference</td></tr><tr><td>Cerebellum (some circuits)</td><td>Parallel fiber → Purkinje cell LTD (requires CF input)</td><td>Cancels expected sensory signals</td></tr><tr><td>Inhibitory circuits</td><td>Some GABAergic synapses show reversed plasticity</td><td>Stabilizes excitatory-inhibitory balance</td></tr><tr><td>Recurrent cortical</td><td>Theoretical — reduces self-excitation of stable patterns</td><td>Prevents runaway attractor states</td></tr></tbody></table></div><div class="content-section"><h2 class="">Predictive Cancellation Function</h2><p>Anti-STDP implements a negative feedback loop: if presynaptic cell A reliably fires before postsynaptic cell B (a causal pattern), the connection A→B weakens. This reduces B's response to A's input, suppressing the predicted signal. Only novel, unpredicted inputs that break the temporal pattern remain effective.</p><div class="pro-con"><div class="pro-con-box pros"><h4><span class="pulse"></span>Advantages</h4><ul><li>Natural mechanism for sensory cancellation — cancels expected, not novel input</li><li>Biologically documented in specific systems</li><li>Can coexist with standard STDP to implement predictive coding</li><li>Same computational cost as classical STDP</li></ul></div><div class="pro-con-box cons"><h4><span class="pulse" style="background:var(--red)"></span>Limitations</h4><ul><li>Destabilizing for generic excitatory cortical networks</li><li>Applicable only to specific circuit types — not a general learning rule</li><li>Rarely a default choice — requires careful circuit context</li><li>Interaction with classical STDP in mixed networks is complex</li></ul></div></div></div>
+<div class="page-nav"><a href="stdp-voltage.html">← <span>Voltage STDP</span></a><a href="stdp-symmetric.html" style="text-align:right"><span>Symmetric STDP</span> →</a></div>
+</main>
+<footer>NEURO REFERENCE · <a href="index.html" style="color:var(--text3);text-decoration:none">← Back to Index</a></footer>
+</body>
+</html>

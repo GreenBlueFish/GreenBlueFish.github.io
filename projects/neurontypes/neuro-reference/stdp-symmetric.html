@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Symmetric STDP — Neuro Reference</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">⬡ NEURO REF</a>
+  <div class="nav-links">
+    <a class="neuron" href="lif.html">LIF</a>
+    <a class="neuron" href="eif.html">EIF</a>
+    <a class="neuron" href="adex.html">AdEx</a>
+    <a class="neuron" href="izhikevich.html">Izhikevich</a>
+    <a class="neuron" href="hh.html">H-H</a>
+    <a class="neuron" href="fhn.html">FHN</a>
+    <a class="neuron" href="morris-lecar.html">ML</a>
+    <a class="neuron" href="srm.html">SRM</a>
+    <a class="neuron" href="multicompartment.html">Multi-C</a>
+    <a class="neuron" href="stochastic.html">Stoch.</a>
+    <a class="stdp" href="stdp-classical.html">Classical</a>
+    <a class="stdp" href="stdp-multiplicative.html">Mult.</a>
+    <a class="stdp" href="stdp-triplet.html">Triplet</a>
+    <a class="stdp" href="stdp-voltage.html">Voltage</a>
+    <a class="stdp" href="stdp-anti.html">Anti</a>
+    <a class="stdp" href="stdp-symmetric.html">Sym.</a>
+    <a class="stdp" href="stdp-reward.html">R-STDP</a>
+    <a class="stdp" href="stdp-pairing.html">Pairing</a>
+    <a class="stdp" href="stdp-bcm.html">BCM</a>
+    <a class="stdp" href="stdp-surrogate.html">Surrogate</a>
+  </div>
+</nav>
+<main>
+<div class="page-header">
+  <div class="breadcrumb"><a href="index.html">Index</a> › STDP 06</div>
+  <h1><span class="stdp">STDP 06</span><br>Symmetric STDP</h1>
+  <p class="subtitle">Both temporal orderings of pre and post spikes produce LTP when the inter-spike interval is small, and LTD when it is large. Temporal proximity matters more than causal direction. Detects synchrony and temporal correlation without directional preference. Found in cerebellar cortex and some neocortical synapses.</p>
+  <div class="metric-row"><div class="metric"><span class="metric-label">Type</span><span class="metric-value ">Associative</span></div><div class="metric"><span class="metric-label">Traces</span><span class="metric-value ">2</span></div><div class="metric"><span class="metric-label">Cost</span><span class="metric-value high">Very Low</span></div><div class="metric"><span class="metric-label">Stability</span><span class="metric-value medium">Moderate</span></div><div class="metric"><span class="metric-label">Bio. Plausibility</span><span class="metric-value medium">Medium</span></div></div>
+</div><div class="content-section"><h2 class="purple">Learning Rule</h2><div class="formula-block "><span class="label">Symmetric Window</span><div class="eq">Δw = +A₊ · exp(−|Δt|/τ₊)               for |Δt| < t<sub>cross</sub></div>
+<div class="eq">Δw = −A₋ · exp(−(|Δt| − t<sub>cross</sub>)/τ₋)   for |Δt| ≥ t<sub>cross</sub></div></div><table class="var-table"><thead><tr><th>Symbol</th><th>Description</th><th>Typical</th></tr></thead><tbody><tr><td class="var-name purple">|Δt|</td><td class="var-desc">Absolute inter-spike interval — both orderings give same sign of plasticity</td><td class="var-val">ms</td></tr><tr><td class="var-name purple">t<sub>cross</sub></td><td class="var-desc">Crossover time: below this interval → LTP; above → LTD</td><td class="var-val">~20 ms</td></tr><tr><td class="var-name purple">A₊, A₋</td><td class="var-desc">LTP and LTD amplitudes</td><td class="var-val">—</td></tr><tr><td class="var-name purple">τ₊, τ₋</td><td class="var-desc">Time constants for potentiation and depression</td><td class="var-val">ms</td></tr></tbody></table></div><div class="content-section"><h2 class="">Comparison with Classical STDP</h2><table class="comp-table"><thead><tr><th>Feature</th><th>Classical (Asymmetric)</th><th>Symmetric</th></tr></thead><tbody><tr><td>LTP condition</td><td>Pre fires before post (causal)</td><td>Either order, small |Δt|</td></tr><tr><td>LTD condition</td><td>Post fires before pre</td><td>Either order, large |Δt|</td></tr><tr><td>Temporal coding</td><td>Causal sequence detection</td><td>Synchrony/coincidence detection</td></tr><tr><td>Biological location</td><td>Hippocampus, neocortex</td><td>Cerebellum, some cortical synapses</td></tr><tr><td>Sequence learning</td><td>Yes — directional chains</td><td>No — cannot encode order</td></tr><tr><td>Noise robustness</td><td>Sensitive to jitter (sign depends on order)</td><td>More robust (sign depends on |Δt| only)</td></tr></tbody></table><div class="pro-con"><div class="pro-con-box pros"><h4><span class="pulse"></span>Advantages</h4><ul><li>Detects synchrony without requiring causal order — noise robust</li><li>Natural for binding spatially distributed inputs that co-activate</li><li>Found in cerebellum — biological support for specific circuits</li><li>Averages out timing noise; more stable under jittered inputs</li></ul></div><div class="pro-con-box cons"><h4><span class="pulse" style="background:var(--red)"></span>Limitations</h4><ul><li>Cannot encode temporal sequences or directional dependencies</li><li>Fewer experimental benchmarks than asymmetric STDP</li><li>Less commonly implemented in neuromorphic hardware literature</li><li>Boundary between LTP and LTD (t_cross) is sensitive to noise</li></ul></div></div></div>
+<div class="page-nav"><a href="stdp-anti.html">← <span>Anti-STDP</span></a><a href="stdp-reward.html" style="text-align:right"><span>Reward-Modulated STDP</span> →</a></div>
+</main>
+<footer>NEURO REFERENCE · <a href="index.html" style="color:var(--text3);text-decoration:none">← Back to Index</a></footer>
+</body>
+</html>

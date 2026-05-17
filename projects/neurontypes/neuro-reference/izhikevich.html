@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Izhikevich — Neuro Reference</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">⬡ NEURO REF</a>
+  <div class="nav-links">
+    <a class="neuron" href="lif.html">LIF</a>
+    <a class="neuron" href="eif.html">EIF</a>
+    <a class="neuron" href="adex.html">AdEx</a>
+    <a class="neuron" href="izhikevich.html">Izhikevich</a>
+    <a class="neuron" href="hh.html">H-H</a>
+    <a class="neuron" href="fhn.html">FHN</a>
+    <a class="neuron" href="morris-lecar.html">ML</a>
+    <a class="neuron" href="srm.html">SRM</a>
+    <a class="neuron" href="multicompartment.html">Multi-C</a>
+    <a class="neuron" href="stochastic.html">Stoch.</a>
+    <a class="stdp" href="stdp-classical.html">Classical</a>
+    <a class="stdp" href="stdp-multiplicative.html">Mult.</a>
+    <a class="stdp" href="stdp-triplet.html">Triplet</a>
+    <a class="stdp" href="stdp-voltage.html">Voltage</a>
+    <a class="stdp" href="stdp-anti.html">Anti</a>
+    <a class="stdp" href="stdp-symmetric.html">Sym.</a>
+    <a class="stdp" href="stdp-reward.html">R-STDP</a>
+    <a class="stdp" href="stdp-pairing.html">Pairing</a>
+    <a class="stdp" href="stdp-bcm.html">BCM</a>
+    <a class="stdp" href="stdp-surrogate.html">Surrogate</a>
+  </div>
+</nav>
+<main>
+<div class="page-header">
+  <div class="breadcrumb"><a href="index.html">Index</a> › MODEL 04</div>
+  <h1><span class="neuron">MODEL 04</span><br>Izhikevich Model</h1>
+  <p class="subtitle">Two coupled equations reproducing approximately 20 distinct cortical and thalamic firing patterns by tuning four scalar parameters. Combines the computational efficiency of the LIF with the biological richness approaching Hodgkin-Huxley, making it the most widely used model in large-scale SNN research.</p>
+  <div class="metric-row"><div class="metric"><span class="metric-label">ODEs</span><span class="metric-value ">2</span></div><div class="metric"><span class="metric-label">Spike Precision</span><span class="metric-value high">High</span></div><div class="metric"><span class="metric-label">Dendritic Effects</span><span class="metric-value none">None</span></div><div class="metric"><span class="metric-label">Computational Cost</span><span class="metric-value high">Low</span></div><div class="metric"><span class="metric-label">Firing Types</span><span class="metric-value high">~20</span></div></div>
+</div><div class="content-section"><h2 class="">Governing Equations</h2><div class="formula-block "><span class="label">Voltage & Recovery</span><div class="eq">dv/dt = 0.04v² + 5v + 140 − u + I</div>
+<div class="eq">du/dt = a(bv − u)</div></div><table class="var-table"><thead><tr><th>Symbol</th><th>Description</th><th>Typical</th></tr></thead><tbody><tr><td class="var-name ">v</td><td class="var-desc">Membrane potential (dimensionless-scaled) — state variable</td><td class="var-val">mV-scaled</td></tr><tr><td class="var-name ">u</td><td class="var-desc">Recovery variable — models combined Na⁺ inactivation and K⁺ activation</td><td class="var-val">—</td></tr><tr><td class="var-name ">a</td><td class="var-desc">Recovery time scale — small a = slow recovery → easier bursting</td><td class="var-val">0.02 (RS)</td></tr><tr><td class="var-name ">b</td><td class="var-desc">Coupling of u to subthreshold v — higher b = stronger feedback</td><td class="var-val">0.2 (RS)</td></tr><tr><td class="var-name ">c</td><td class="var-desc">After-spike reset value of v</td><td class="var-val">−65 mV</td></tr><tr><td class="var-name ">d</td><td class="var-desc">After-spike increment of u — governs aftercurrent magnitude</td><td class="var-val">8 (RS)</td></tr><tr><td class="var-name ">I</td><td class="var-desc">Input current (dimensionless)</td><td class="var-val">—</td></tr></tbody></table></div><div class="content-section"><h2 class="">Reset Mechanism</h2><div class="formula-block "><span class="label">Dual Reset</span><div class="eq">if v ≥ +30 mV :   emit spike,   v ← c,   u ← u + d</div></div><p>Unlike AdEx, the reset here is purely to fixed values c and d — no ODE integration of adaptation. The simplicity is intentional: the quadratic term in dv/dt generates the spike upswing, and the reset encodes the afterhyperpolarization parametrically.</p></div><div class="content-section"><h2 class="">Firing Pattern Parameter Table</h2><table class="comp-table"><thead><tr><th>Neuron Type</th><th>a</th><th>b</th><th>c</th><th>d</th><th>STDP Relevance</th></tr></thead><tbody><tr><td>Regular Spiking (RS)</td><td>0.02</td><td>0.2</td><td>−65</td><td>8</td><td>Primary cortical excitatory neuron</td></tr><tr><td>Fast Spiking (FS)</td><td>0.1</td><td>0.2</td><td>−65</td><td>2</td><td>Inhibitory interneurons; inhibitory STDP</td></tr><tr><td>Intrinsically Bursting (IB)</td><td>0.02</td><td>0.2</td><td>−55</td><td>4</td><td>Burst-timing-dependent plasticity</td></tr><tr><td>Chattering (CH)</td><td>0.02</td><td>0.2</td><td>−50</td><td>2</td><td>High-freq oscillations; narrow STDP window</td></tr><tr><td>Low-Threshold Spiking (LTS)</td><td>0.02</td><td>0.25</td><td>−65</td><td>2</td><td>Inhibitory circuits with delayed STDP</td></tr><tr><td>Thalamo-cortical (TC)</td><td>0.02</td><td>0.25</td><td>−65</td><td>0.05</td><td>Rebound bursting after inhibition</td></tr><tr><td>Resonator (RZ)</td><td>0.1</td><td>0.26</td><td>−65</td><td>2</td><td>Subthreshold resonance affects STDP timing</td></tr></tbody></table><div class="info-box "><strong>Why this matters for STDP:</strong> Firing pattern profoundly changes inter-spike interval statistics. A bursting neuron (IB) creates many rapid pre-post pairs within a burst, driving strong LTP via all-to-all STDP. A fast-spiking FS neuron creates dense spike trains that interact differently with the STDP window than adapted RS patterns.</div></div><div class="pro-con"><div class="pro-con-box pros"><h4><span class="pulse"></span>Advantages</h4><ul><li>~20 firing patterns from a single 2-ODE model with one parameter change</li><li>Explicitly includes the spike peak at +30 mV — more realistic ISI statistics</li><li>Computationally identical to LIF — scales to millions of neurons</li><li>Widely validated; parameters available for dozens of specific neuron types</li></ul></div><div class="pro-con-box cons"><h4><span class="pulse" style="background:var(--red)"></span>Limitations</h4><ul><li>Dimensionless units — harder to connect directly to measured quantities</li><li>Still a point neuron — no dendritic computation</li><li>Quadratic term can cause numerical instability with large Δt</li><li>Parameters not directly interpretable as ion channel conductances</li></ul></div></div>
+<div class="page-nav"><a href="adex.html">← <span>AdEx</span></a><a href="hh.html" style="text-align:right"><span>Hodgkin-Huxley</span> →</a></div>
+</main>
+<footer>NEURO REFERENCE · <a href="index.html" style="color:var(--text3);text-decoration:none">← Back to Index</a></footer>
+</body>
+</html>

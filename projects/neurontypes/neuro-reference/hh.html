@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hodgkin-Huxley — Neuro Reference</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">⬡ NEURO REF</a>
+  <div class="nav-links">
+    <a class="neuron" href="lif.html">LIF</a>
+    <a class="neuron" href="eif.html">EIF</a>
+    <a class="neuron" href="adex.html">AdEx</a>
+    <a class="neuron" href="izhikevich.html">Izhikevich</a>
+    <a class="neuron" href="hh.html">H-H</a>
+    <a class="neuron" href="fhn.html">FHN</a>
+    <a class="neuron" href="morris-lecar.html">ML</a>
+    <a class="neuron" href="srm.html">SRM</a>
+    <a class="neuron" href="multicompartment.html">Multi-C</a>
+    <a class="neuron" href="stochastic.html">Stoch.</a>
+    <a class="stdp" href="stdp-classical.html">Classical</a>
+    <a class="stdp" href="stdp-multiplicative.html">Mult.</a>
+    <a class="stdp" href="stdp-triplet.html">Triplet</a>
+    <a class="stdp" href="stdp-voltage.html">Voltage</a>
+    <a class="stdp" href="stdp-anti.html">Anti</a>
+    <a class="stdp" href="stdp-symmetric.html">Sym.</a>
+    <a class="stdp" href="stdp-reward.html">R-STDP</a>
+    <a class="stdp" href="stdp-pairing.html">Pairing</a>
+    <a class="stdp" href="stdp-bcm.html">BCM</a>
+    <a class="stdp" href="stdp-surrogate.html">Surrogate</a>
+  </div>
+</nav>
+<main>
+<div class="page-header">
+  <div class="breadcrumb"><a href="index.html">Index</a> › MODEL 05</div>
+  <h1><span class="neuron">MODEL 05</span><br>Hodgkin-Huxley Model</h1>
+  <p class="subtitle">The biophysical gold standard, derived from voltage-clamp experiments on the squid giant axon by Hodgkin and Huxley in 1952. Four coupled ODEs govern membrane voltage and three ionic gating variables. The spike shape, after-hyperpolarization, and refractory period all emerge naturally from the dynamics — no explicit reset is needed.</p>
+  <div class="metric-row"><div class="metric"><span class="metric-label">ODEs</span><span class="metric-value ">4+</span></div><div class="metric"><span class="metric-label">Spike Precision</span><span class="metric-value high">Realistic</span></div><div class="metric"><span class="metric-label">Dendritic Effects</span><span class="metric-value medium">Partial</span></div><div class="metric"><span class="metric-label">Computational Cost</span><span class="metric-value low">High</span></div><div class="metric"><span class="metric-label">Biological Fidelity</span><span class="metric-value high">Very High</span></div></div>
+</div><div class="content-section"><h2 class="">Governing Equations</h2><div class="formula-block "><span class="label">Membrane Voltage</span><div class="eq">C<sub>m</sub> · dV/dt = −g<sub>Na</sub>·m³·h·(V−E<sub>Na</sub>) − g<sub>K</sub>·n⁴·(V−E<sub>K</sub>) − g<sub>L</sub>·(V−E<sub>L</sub>) + I</div></div><div class="formula-block "><span class="label">Gating Variable ODEs</span><div class="eq">dm/dt = α<sub>m</sub>(V)·(1−m) − β<sub>m</sub>(V)·m</div>
+<div class="eq">dh/dt = α<sub>h</sub>(V)·(1−h) − β<sub>h</sub>(V)·h</div>
+<div class="eq">dn/dt = α<sub>n</sub>(V)·(1−n) − β<sub>n</sub>(V)·n</div></div><table class="var-table"><thead><tr><th>Symbol</th><th>Description</th><th>Typical</th></tr></thead><tbody><tr><td class="var-name ">C<sub>m</sub></td><td class="var-desc">Membrane capacitance</td><td class="var-val">1 μF/cm²</td></tr><tr><td class="var-name ">g<sub>Na</sub></td><td class="var-desc">Maximum Na⁺ conductance</td><td class="var-val">120 mS/cm²</td></tr><tr><td class="var-name ">g<sub>K</sub></td><td class="var-desc">Maximum K⁺ conductance</td><td class="var-val">36 mS/cm²</td></tr><tr><td class="var-name ">g<sub>L</sub></td><td class="var-desc">Leak conductance</td><td class="var-val">0.3 mS/cm²</td></tr><tr><td class="var-name ">E<sub>Na</sub></td><td class="var-desc">Na⁺ reversal potential</td><td class="var-val">+50 mV</td></tr><tr><td class="var-name ">E<sub>K</sub></td><td class="var-desc">K⁺ reversal potential</td><td class="var-val">−77 mV</td></tr><tr><td class="var-name ">E<sub>L</sub></td><td class="var-desc">Leak reversal potential</td><td class="var-val">−54 mV</td></tr><tr><td class="var-name ">m</td><td class="var-desc">Na⁺ activation gate — fast variable; drives depolarizing upstroke</td><td class="var-val">0–1</td></tr><tr><td class="var-name ">h</td><td class="var-desc">Na⁺ inactivation gate — slower; terminates spike</td><td class="var-val">0–1</td></tr><tr><td class="var-name ">n</td><td class="var-desc">K⁺ activation gate — drives repolarization and AHP</td><td class="var-val">0–1</td></tr><tr><td class="var-name ">α<sub>x</sub>(V), β<sub>x</sub>(V)</td><td class="var-desc">Voltage-dependent rate functions for gate x opening/closing</td><td class="var-val">ms⁻¹</td></tr></tbody></table></div><div class="content-section"><h2 class="">Reset Mechanism</h2><p>There is no explicit reset. The spike arises organically:</p><div class="info-box "><strong>Spike sequence:</strong><br>
+1. Depolarization opens m gates fast (Na⁺ in) → regenerative upstroke<br>
+2. h gates inactivate (blocking Na⁺) + n gates open slow (K⁺ out) → repolarization<br>
+3. n remains elevated after spike → after-hyperpolarization (AHP)<br>
+4. h recovers slowly → absolute refractory period while h is inactivated</div></div><div class="content-section"><h2 class="">Relevance to STDP</h2><p>The HH model is essential when studying STDP mechanisms that depend on realistic voltage trajectories:</p><table class="comp-table"><thead><tr><th>STDP Mechanism</th><th>Why HH Matters</th></tr></thead><tbody><tr><td>NMDA-dependent STDP</td><td>NMDA conductance depends on V nonlinearly — HH gives realistic V waveforms</td></tr><tr><td>Backpropagating AP (bAP)</td><td>bAP amplitude/shape depends on Na⁺ channel kinetics in dendrites</td></tr><tr><td>Calcium-based plasticity</td><td>Ca²⁺ influx through NMDA and VGCC depends on exact V trajectory</td></tr><tr><td>AHP effects on STDP</td><td>AHP sets next spike timing; HH AHP is realistic; LIF AHP is artificial</td></tr></tbody></table><div class="pro-con"><div class="pro-con-box pros"><h4><span class="pulse"></span>Advantages</h4><ul><li>Gold standard — highest biological fidelity of any single-compartment model</li><li>Spike shape, AHP, and refractoriness emerge naturally</li><li>Enables mechanistic study of NMDA, Ca²⁺, and channel-level STDP</li><li>Extensible — add channels (Ca²⁺, IA, etc.) as extra ODEs</li></ul></div><div class="pro-con-box cons"><h4><span class="pulse" style="background:var(--red)"></span>Limitations</h4><ul><li>High cost — 4 ODEs per compartment, Δt must be ≈ 0.01 ms</li><li>Fitting to non-squid neurons requires re-deriving α/β functions</li><li>Large network simulations infeasible without simplification</li><li>Rate functions are empirical — not universal across species</li></ul></div></div></div>
+<div class="page-nav"><a href="izhikevich.html">← <span>Izhikevich</span></a><a href="fhn.html" style="text-align:right"><span>FitzHugh-Nagumo</span> →</a></div>
+</main>
+<footer>NEURO REFERENCE · <a href="index.html" style="color:var(--text3);text-decoration:none">← Back to Index</a></footer>
+</body>
+</html>

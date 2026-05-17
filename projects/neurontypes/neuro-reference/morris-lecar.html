@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Morris-Lecar — Neuro Reference</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">⬡ NEURO REF</a>
+  <div class="nav-links">
+    <a class="neuron" href="lif.html">LIF</a>
+    <a class="neuron" href="eif.html">EIF</a>
+    <a class="neuron" href="adex.html">AdEx</a>
+    <a class="neuron" href="izhikevich.html">Izhikevich</a>
+    <a class="neuron" href="hh.html">H-H</a>
+    <a class="neuron" href="fhn.html">FHN</a>
+    <a class="neuron" href="morris-lecar.html">ML</a>
+    <a class="neuron" href="srm.html">SRM</a>
+    <a class="neuron" href="multicompartment.html">Multi-C</a>
+    <a class="neuron" href="stochastic.html">Stoch.</a>
+    <a class="stdp" href="stdp-classical.html">Classical</a>
+    <a class="stdp" href="stdp-multiplicative.html">Mult.</a>
+    <a class="stdp" href="stdp-triplet.html">Triplet</a>
+    <a class="stdp" href="stdp-voltage.html">Voltage</a>
+    <a class="stdp" href="stdp-anti.html">Anti</a>
+    <a class="stdp" href="stdp-symmetric.html">Sym.</a>
+    <a class="stdp" href="stdp-reward.html">R-STDP</a>
+    <a class="stdp" href="stdp-pairing.html">Pairing</a>
+    <a class="stdp" href="stdp-bcm.html">BCM</a>
+    <a class="stdp" href="stdp-surrogate.html">Surrogate</a>
+  </div>
+</nav>
+<main>
+<div class="page-header">
+  <div class="breadcrumb"><a href="index.html">Index</a> › MODEL 07</div>
+  <h1><span class="neuron">MODEL 07</span><br>Morris-Lecar Model</h1>
+  <p class="subtitle">A conductance-based model with Ca²⁺ and K⁺ currents, originally derived for barnacle muscle fiber. The fast Ca²⁺ activation is treated as instantaneous (m∞), leaving only one gating ODE for K⁺. Supports both Class I and Class II excitability by parameter choice — critical for models where calcium dynamics underlie STDP.</p>
+  <div class="metric-row"><div class="metric"><span class="metric-label">ODEs</span><span class="metric-value ">2</span></div><div class="metric"><span class="metric-label">Spike Precision</span><span class="metric-value medium">Moderate</span></div><div class="metric"><span class="metric-label">Dendritic Effects</span><span class="metric-value none">None</span></div><div class="metric"><span class="metric-label">Computational Cost</span><span class="metric-value high">Low</span></div><div class="metric"><span class="metric-label">Ca²⁺ Dynamics</span><span class="metric-value high">Yes</span></div></div>
+</div><div class="content-section"><h2 class="">Governing Equations</h2><div class="formula-block "><span class="label">Membrane & K⁺ Gate</span><div class="eq">C · dV/dt = I<sub>ext</sub> − g<sub>Ca</sub>·m∞(V)·(V−E<sub>Ca</sub>) − g<sub>K</sub>·w·(V−E<sub>K</sub>) − g<sub>L</sub>·(V−E<sub>L</sub>)</div>
+<div class="eq">dw/dt = φ · (w∞(V) − w) / τ<sub>w</sub>(V)</div></div><div class="formula-block "><span class="label">Steady-State Functions</span><div class="eq">m∞(V) = 0.5 · (1 + tanh((V − V₁)/V₂))</div>
+<div class="eq">w∞(V) = 0.5 · (1 + tanh((V − V₃)/V₄))</div></div><table class="var-table"><thead><tr><th>Symbol</th><th>Description</th><th>Typical</th></tr></thead><tbody><tr><td class="var-name ">g<sub>Ca</sub>, g<sub>K</sub>, g<sub>L</sub></td><td class="var-desc">Maximum conductances for Ca²⁺, K⁺, and leak channels</td><td class="var-val">mS/cm²</td></tr><tr><td class="var-name ">E<sub>Ca</sub>, E<sub>K</sub>, E<sub>L</sub></td><td class="var-desc">Reversal potentials</td><td class="var-val">+120, −84, −60 mV</td></tr><tr><td class="var-name ">m∞(V)</td><td class="var-desc">Instantaneous Ca²⁺ activation (fast — always at steady state)</td><td class="var-val">sigmoid</td></tr><tr><td class="var-name ">w</td><td class="var-desc">Slow K⁺ gating variable — recovery</td><td class="var-val">0–1</td></tr><tr><td class="var-name ">w∞(V)</td><td class="var-desc">Steady-state K⁺ activation</td><td class="var-val">sigmoid</td></tr><tr><td class="var-name ">τ<sub>w</sub>(V)</td><td class="var-desc">Voltage-dependent K⁺ time constant</td><td class="var-val">ms</td></tr><tr><td class="var-name ">φ</td><td class="var-desc">Temperature-like scaling factor for w kinetics</td><td class="var-val">0.04</td></tr><tr><td class="var-name ">V₁, V₂, V₃, V₄</td><td class="var-desc">Half-activation voltages and slope factors for sigmoid functions</td><td class="var-val">mV</td></tr></tbody></table></div><div class="content-section"><h2 class="">Reset Mechanism</h2><p>No explicit reset. The spike arises from Ca²⁺ current activation (fast, via m∞) and terminates via K⁺ gate opening (slow, via w). Class I vs Class II excitability is set by the relative positions of the nullclines:</p><table class="comp-table"><thead><tr><th>Excitability Class</th><th>Onset</th><th>Minimum Firing Rate</th><th>STDP Use</th></tr></thead><tbody><tr><td>Class I</td><td>Via saddle-node bifurcation</td><td>Arbitrarily low (0 Hz+)</td><td>Rate-modulated STDP; continuous frequency control</td></tr><tr><td>Class II</td><td>Via Hopf bifurcation</td><td>Non-zero minimum (~10 Hz+)</td><td>Oscillatory STDP; phase locking</td></tr></tbody></table></div><div class="content-section"><h2 class="">Why Morris-Lecar for STDP</h2><div class="info-box "><strong>Ca²⁺ hypothesis of STDP:</strong> The direction and magnitude of synaptic change depends on postsynaptic Ca²⁺ concentration. High Ca²⁺ (from NMDA + VGCC coincidence) → LTP; moderate Ca²⁺ → LTD. Morris-Lecar explicitly models Ca²⁺ current, making it the preferred substrate for studying how membrane dynamics shape the Ca²⁺ signal that drives plasticity.</div><div class="pro-con"><div class="pro-con-box pros"><h4><span class="pulse"></span>Advantages</h4><ul><li>Explicit Ca²⁺ current — directly links to STDP calcium hypothesis</li><li>Two excitability classes — tests STDP under different spike onset dynamics</li><li>Analytically similar to FHN but with biophysical conductance interpretation</li><li>Phase-plane techniques fully applicable</li></ul></div><div class="pro-con-box cons"><h4><span class="pulse" style="background:var(--red)"></span>Limitations</h4><ul><li>Derived from barnacle muscle — not directly a cortical neuron model</li><li>Parameters require fitting to specific preparations</li><li>No adaptation — cannot reproduce firing pattern diversity</li></ul></div></div></div>
+<div class="page-nav"><a href="fhn.html">← <span>FitzHugh-Nagumo</span></a><a href="srm.html" style="text-align:right"><span>Spike Response Model</span> →</a></div>
+</main>
+<footer>NEURO REFERENCE · <a href="index.html" style="color:var(--text3);text-decoration:none">← Back to Index</a></footer>
+</body>
+</html>

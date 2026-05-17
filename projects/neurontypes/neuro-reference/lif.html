@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LIF — Neuro Reference</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">⬡ NEURO REF</a>
+  <div class="nav-links">
+    <a class="neuron" href="lif.html">LIF</a>
+    <a class="neuron" href="eif.html">EIF</a>
+    <a class="neuron" href="adex.html">AdEx</a>
+    <a class="neuron" href="izhikevich.html">Izhikevich</a>
+    <a class="neuron" href="hh.html">H-H</a>
+    <a class="neuron" href="fhn.html">FHN</a>
+    <a class="neuron" href="morris-lecar.html">ML</a>
+    <a class="neuron" href="srm.html">SRM</a>
+    <a class="neuron" href="multicompartment.html">Multi-C</a>
+    <a class="neuron" href="stochastic.html">Stoch.</a>
+    <a class="stdp" href="stdp-classical.html">Classical</a>
+    <a class="stdp" href="stdp-multiplicative.html">Mult.</a>
+    <a class="stdp" href="stdp-triplet.html">Triplet</a>
+    <a class="stdp" href="stdp-voltage.html">Voltage</a>
+    <a class="stdp" href="stdp-anti.html">Anti</a>
+    <a class="stdp" href="stdp-symmetric.html">Sym.</a>
+    <a class="stdp" href="stdp-reward.html">R-STDP</a>
+    <a class="stdp" href="stdp-pairing.html">Pairing</a>
+    <a class="stdp" href="stdp-bcm.html">BCM</a>
+    <a class="stdp" href="stdp-surrogate.html">Surrogate</a>
+  </div>
+</nav>
+<main>
+<div class="page-header">
+  <div class="breadcrumb"><a href="index.html">Index</a> › MODEL 01</div>
+  <h1><span class="neuron">MODEL 01</span><br>Leaky Integrate-and-Fire</h1>
+  <p class="subtitle">The simplest spiking neuron model. Integrates input current with a passive membrane leak and fires when voltage crosses a threshold, which is then instantaneously reset. The analytical tractability of the LIF makes it the foundation of mean-field theory and the default substrate for STDP studies.</p>
+  <div class="metric-row"><div class="metric"><span class="metric-label">ODEs</span><span class="metric-value ">1</span></div><div class="metric"><span class="metric-label">Spike Precision</span><span class="metric-value high">High</span></div><div class="metric"><span class="metric-label">Dendritic Effects</span><span class="metric-value none">None</span></div><div class="metric"><span class="metric-label">Computational Cost</span><span class="metric-value high">Very Low</span></div><div class="metric"><span class="metric-label">Biological Fidelity</span><span class="metric-value low">Low</span></div></div>
+</div><div class="content-section"><h2 class="">Governing Equation</h2><div class="formula-block "><span class="label">Membrane Voltage</span><div class="eq">τ<sub>m</sub> · dV/dt = −(V − V<sub>rest</sub>) + R · I(t)</div></div><table class="var-table"><thead><tr><th>Symbol</th><th>Description</th><th>Typical</th></tr></thead><tbody><tr><td class="var-name ">τ<sub>m</sub></td><td class="var-desc">Membrane time constant — controls passive decay speed</td><td class="var-val">10–20 ms</td></tr><tr><td class="var-name ">V</td><td class="var-desc">Membrane potential (state variable)</td><td class="var-val">mV</td></tr><tr><td class="var-name ">V<sub>rest</sub></td><td class="var-desc">Resting membrane potential</td><td class="var-val">−65 to −70 mV</td></tr><tr><td class="var-name ">R</td><td class="var-desc">Membrane resistance — scales input current effect</td><td class="var-val">10–100 MΩ</td></tr><tr><td class="var-name ">I(t)</td><td class="var-desc">Total input current (synaptic + external) at time t</td><td class="var-val">pA</td></tr></tbody></table></div><div class="content-section"><h2 class="">Reset Mechanism</h2><div class="formula-block "><span class="label">Threshold & Reset</span><div class="eq">if V ≥ V<sub>thresh</sub> :   emit spike,   V ← V<sub>reset</sub>,   hold for t<sub>ref</sub> ms</div></div><table class="var-table"><thead><tr><th>Symbol</th><th>Description</th><th>Typical</th></tr></thead><tbody><tr><td class="var-name ">V<sub>thresh</sub></td><td class="var-desc">Spike threshold — voltage that triggers a spike</td><td class="var-val">−55 mV</td></tr><tr><td class="var-name ">V<sub>reset</sub></td><td class="var-desc">Post-spike reset voltage (can model AHP by setting below rest)</td><td class="var-val">−65 mV</td></tr><tr><td class="var-name ">t<sub>ref</sub></td><td class="var-desc">Absolute refractory period — neuron cannot fire during this window</td><td class="var-val">2–5 ms</td></tr></tbody></table><div class="info-box "><strong>Key insight:</strong> The reset is discontinuous — V jumps instantaneously. This is biologically unrealistic (real spikes take ~2 ms) but computationally convenient and negligible for most STDP questions where inter-spike intervals ≫ spike width.</div></div><div class="content-section"><h2 class="">Online Trace Implementation for STDP</h2><p>STDP is implemented via exponentially decaying eligibility traces that are updated at each spike:</p><div class="formula-block "><span class="label">Pre/Post Traces</span><div class="eq">dx/dt = −x/τ₊    → x ← x + 1  at each pre-spike</div>
+<div class="eq">dy/dt = −y/τ₋    → y ← y + 1  at each post-spike</div>
+<div class="eq">At post-spike:   w ← w + A₊ · x</div>
+<div class="eq">At pre-spike:    w ← w − A₋ · y</div></div></div><div class="content-section"><h2 class="">Characteristics</h2><table class="comp-table"><thead><tr><th>Property</th><th>Details</th></tr></thead><tbody><tr><td>Spike precision</td><td>High — spikes are instantaneous, unambiguous, deterministic events</td></tr><tr><td>Dendritic effects</td><td>None — single-compartment point neuron; all inputs collapse to soma</td></tr><tr><td>Cost (time step)</td><td>Very low — explicit Euler stable at Δt = 0.1–1 ms</td></tr><tr><td>Biological fidelity</td><td>Low — no spike shape, no adaptation, no realistic aftercurrent</td></tr><tr><td>STDP suitability</td><td>Excellent — Δt is perfectly defined; default model for STDP theory</td></tr><tr><td>Common uses</td><td>Large network simulations, STDP analysis, mean-field theory, neuromorphic hardware</td></tr></tbody></table><div class="pro-con"><div class="pro-con-box pros"><h4><span class="pulse"></span>Advantages</h4><ul><li>Analytically tractable — closed-form solutions for Poisson inputs</li><li>Computationally trivial — ideal for networks of 10⁴–10⁶ neurons</li><li>Natural substrate for STDP — spike times are exact</li><li>Well-studied — decades of theoretical results available</li></ul></div><div class="pro-con-box cons"><h4><span class="pulse" style="background:var(--red)"></span>Limitations</h4><ul><li>No spike shape — threshold crossing is artificial</li><li>No adaptation — cannot reproduce spike frequency adaptation</li><li>No subthreshold resonance — misses important dynamics</li><li>Reset is biologically unrealistic — discontinuous jump</li></ul></div></div></div>
+<div class="page-nav"><span></span><a href="eif.html" style="text-align:right"><span>EIF</span> →</a></div>
+</main>
+<footer>NEURO REFERENCE · <a href="index.html" style="color:var(--text3);text-decoration:none">← Back to Index</a></footer>
+</body>
+</html>

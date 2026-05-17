@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pairing Schemes — Neuro Reference</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">⬡ NEURO REF</a>
+  <div class="nav-links">
+    <a class="neuron" href="lif.html">LIF</a>
+    <a class="neuron" href="eif.html">EIF</a>
+    <a class="neuron" href="adex.html">AdEx</a>
+    <a class="neuron" href="izhikevich.html">Izhikevich</a>
+    <a class="neuron" href="hh.html">H-H</a>
+    <a class="neuron" href="fhn.html">FHN</a>
+    <a class="neuron" href="morris-lecar.html">ML</a>
+    <a class="neuron" href="srm.html">SRM</a>
+    <a class="neuron" href="multicompartment.html">Multi-C</a>
+    <a class="neuron" href="stochastic.html">Stoch.</a>
+    <a class="stdp" href="stdp-classical.html">Classical</a>
+    <a class="stdp" href="stdp-multiplicative.html">Mult.</a>
+    <a class="stdp" href="stdp-triplet.html">Triplet</a>
+    <a class="stdp" href="stdp-voltage.html">Voltage</a>
+    <a class="stdp" href="stdp-anti.html">Anti</a>
+    <a class="stdp" href="stdp-symmetric.html">Sym.</a>
+    <a class="stdp" href="stdp-reward.html">R-STDP</a>
+    <a class="stdp" href="stdp-pairing.html">Pairing</a>
+    <a class="stdp" href="stdp-bcm.html">BCM</a>
+    <a class="stdp" href="stdp-surrogate.html">Surrogate</a>
+  </div>
+</nav>
+<main>
+<div class="page-header">
+  <div class="breadcrumb"><a href="index.html">Index</a> › STDP 08</div>
+  <h1><span class="stdp">STDP 08</span><br>Nearest-Neighbor vs. All-to-All Pairing</h1>
+  <p class="subtitle">When a neuron emits multiple spikes, a pairing scheme determines which pre-post spike combinations are counted. All-to-all sums over every combination; nearest-neighbor uses only the most recent spikes from each side. The choice profoundly affects stability, burst sensitivity, and biological plausibility.</p>
+  <div class="metric-row"><div class="metric"><span class="metric-label">Type</span><span class="metric-value ">Implementation</span></div><div class="metric"><span class="metric-label">Cost (NN)</span><span class="metric-value high">O(1)</span></div><div class="metric"><span class="metric-label">Cost (A2A)</span><span class="metric-value low">O(N²)</span></div><div class="metric"><span class="metric-label">Stability (NN)</span><span class="metric-value high">Good</span></div><div class="metric"><span class="metric-label">Stability (A2A)</span><span class="metric-value low">Poor at high rates</span></div></div>
+</div><div class="content-section"><h2 class="purple">All-to-All Rule</h2><div class="formula-block "><span class="label">All-to-All</span><div class="eq">Δw = Σ_f Σ_g W(t<sub>post</sub>⁽ᵍ⁾ − t<sub>pre</sub>⁽ᶠ⁾)</div></div><p>Every presynaptic spike f is paired with every postsynaptic spike g and vice versa. The total weight change is the sum over all pairs, weighted by the STDP window W(Δt).</p><div class="info-box purple">Under high-frequency bursting, all-to-all STDP can create enormous weight changes because a burst of N spikes generates N² pairs. This can cause runaway potentiation unless multiplicative bounds are also applied.</div></div><div class="content-section"><h2 class="">Nearest-Neighbor Rule</h2><div class="formula-block "><span class="label">Nearest-Neighbor (Symmetric Variant)</span><div class="eq">At post-spike t<sub>post</sub>:  Δw⁺ = W⁺(t<sub>post</sub> − t<sub>pre</sub><sup>last</sup>)</div>
+<div class="eq">At pre-spike t<sub>pre</sub>:   Δw⁻ = W⁻(t<sub>post</sub><sup>last</sup> − t<sub>pre</sub>)</div></div><p>Only the immediately preceding spike from the other neuron is counted. Two sub-variants:</p><table class="comp-table"><thead><tr><th>Variant</th><th>Post-spike pairing</th><th>Pre-spike pairing</th><th>Notes</th></tr></thead><tbody><tr><td>Symmetric NN</td><td>Last pre-spike</td><td>Last post-spike</td><td>Most common; biologically motivated</td></tr><tr><td>Reduced NN</td><td>Last spike of either</td><td>Last spike of either</td><td>Most conservative; fewest updates</td></tr></tbody></table></div><div class="content-section"><h2 class="">Comparison</h2><table class="comp-table"><thead><tr><th>Aspect</th><th>All-to-All</th><th>Nearest-Neighbor</th></tr></thead><tbody><tr><td>Weight under bursts</td><td>Runaway potentiation risk (N² pairs)</td><td>Stable — one pair per spike maximum</td></tr><tr><td>Biological plausibility</td><td>Lower — ignores refractory constraints</td><td>Higher — reflects absolute refractory period</td></tr><tr><td>Burst sensitivity</td><td>High — bursts produce many pairs</td><td>Low — only most recent spike counts</td></tr><tr><td>Computational cost</td><td>O(N_pre × N_post) per update window</td><td>O(1) per update</td></tr><tr><td>Theoretical analysis</td><td>Simpler: standard Poisson process math</td><td>Requires ISI distribution analysis</td></tr><tr><td>Common use</td><td>Low-rate regimes, theoretical work</td><td>Network simulations, hardware, high-rate</td></tr></tbody></table><div class="pro-con"><div class="pro-con-box pros"><h4><span class="pulse"></span>Advantages</h4><ul><li>All-to-all captures full spike-train statistics for theoretical analysis</li><li>Nearest-neighbor is biologically consistent with refractory periods</li><li>Nearest-neighbor is O(1) — ideal for neuromorphic hardware</li><li>Both can be combined with any STDP window (classical, triplet, etc.)</li></ul></div><div class="pro-con-box cons"><h4><span class="pulse" style="background:var(--red)"></span>Limitations</h4><ul><li>All-to-all is unstable at high rates without multiplicative STDP</li><li>Nearest-neighbor loses burst information that may carry learning signal</li><li>Neither scheme is definitively confirmed as the biological implementation</li><li>Different choices give quantitatively different plasticity outcomes</li></ul></div></div></div>
+<div class="page-nav"><a href="stdp-reward.html">← <span>R-STDP</span></a><a href="stdp-bcm.html" style="text-align:right"><span>BCM Rule</span> →</a></div>
+</main>
+<footer>NEURO REFERENCE · <a href="index.html" style="color:var(--text3);text-decoration:none">← Back to Index</a></footer>
+</body>
+</html>

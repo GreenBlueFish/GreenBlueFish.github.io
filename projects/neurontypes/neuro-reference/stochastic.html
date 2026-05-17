@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stochastic IF — Neuro Reference</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">⬡ NEURO REF</a>
+  <div class="nav-links">
+    <a class="neuron" href="lif.html">LIF</a>
+    <a class="neuron" href="eif.html">EIF</a>
+    <a class="neuron" href="adex.html">AdEx</a>
+    <a class="neuron" href="izhikevich.html">Izhikevich</a>
+    <a class="neuron" href="hh.html">H-H</a>
+    <a class="neuron" href="fhn.html">FHN</a>
+    <a class="neuron" href="morris-lecar.html">ML</a>
+    <a class="neuron" href="srm.html">SRM</a>
+    <a class="neuron" href="multicompartment.html">Multi-C</a>
+    <a class="neuron" href="stochastic.html">Stoch.</a>
+    <a class="stdp" href="stdp-classical.html">Classical</a>
+    <a class="stdp" href="stdp-multiplicative.html">Mult.</a>
+    <a class="stdp" href="stdp-triplet.html">Triplet</a>
+    <a class="stdp" href="stdp-voltage.html">Voltage</a>
+    <a class="stdp" href="stdp-anti.html">Anti</a>
+    <a class="stdp" href="stdp-symmetric.html">Sym.</a>
+    <a class="stdp" href="stdp-reward.html">R-STDP</a>
+    <a class="stdp" href="stdp-pairing.html">Pairing</a>
+    <a class="stdp" href="stdp-bcm.html">BCM</a>
+    <a class="stdp" href="stdp-surrogate.html">Surrogate</a>
+  </div>
+</nav>
+<main>
+<div class="page-header">
+  <div class="breadcrumb"><a href="index.html">Index</a> › MODEL 10</div>
+  <h1><span class="neuron">MODEL 10</span><br>Stochastic Integrate-and-Fire</h1>
+  <p class="subtitle">Extends the LIF with noise to capture trial-to-trial variability, channel noise, and synaptic fluctuations. Two formulations: additive voltage noise (Langevin) or an escape-rate hazard function (SRM₀). Connects STDP to Bayesian inference — the neuron can be shown to approximate maximum likelihood estimation of its inputs.</p>
+  <div class="metric-row"><div class="metric"><span class="metric-label">ODEs</span><span class="metric-value ">1+noise</span></div><div class="metric"><span class="metric-label">Spike Precision</span><span class="metric-value medium">Moderate</span></div><div class="metric"><span class="metric-label">Dendritic Effects</span><span class="metric-value none">None</span></div><div class="metric"><span class="metric-label">Computational Cost</span><span class="metric-value high">Low</span></div><div class="metric"><span class="metric-label">Probabilistic</span><span class="metric-value high">Yes</span></div></div>
+</div><div class="content-section"><h2 class="">Governing Equations — Two Formulations</h2><div class="formula-block "><span class="label">Langevin (Noise-Voltage)</span><div class="eq">τ<sub>m</sub> · dV/dt = −(V − V<sub>rest</sub>) + R·I(t) + σ · ξ(t)</div></div><div class="formula-block "><span class="label">Escape Noise (Hazard Function)</span><div class="eq">ρ(t) = ρ₀ · exp((V(t) − V<sub>thresh</sub>) / δ<sub>u</sub>)</div></div><table class="var-table"><thead><tr><th>Symbol</th><th>Description</th><th>Typical</th></tr></thead><tbody><tr><td class="var-name ">σ</td><td class="var-desc">Noise amplitude — controls voltage fluctuation magnitude</td><td class="var-val">mV</td></tr><tr><td class="var-name ">ξ(t)</td><td class="var-desc">White Gaussian noise — zero mean, unit variance</td><td class="var-val">dimensionless</td></tr><tr><td class="var-name ">ρ(t)</td><td class="var-desc">Instantaneous firing rate — probability of emitting a spike per unit time</td><td class="var-val">Hz</td></tr><tr><td class="var-name ">ρ₀</td><td class="var-desc">Baseline firing rate at threshold — scales the hazard function</td><td class="var-val">Hz</td></tr><tr><td class="var-name ">δ<sub>u</sub></td><td class="var-desc">Sharpness parameter — small δ = sharp effective threshold; large = soft</td><td class="var-val">mV</td></tr></tbody></table></div><div class="content-section"><h2 class="">Reset Mechanism</h2><p>In the Langevin formulation, reset is identical to LIF — V jumps to V<sub>reset</sub> upon a threshold crossing, which now occurs stochastically due to noise.</p><p>In the escape noise formulation, a spike is generated at random time with probability ρ(t)·dt per timestep. Upon spike generation, V is reset. Inter-spike intervals become random even under constant input, matching in-vivo variability (CV of ISI ≈ 0.5–1.0).</p><div class="info-box "><strong>Escape noise advantage:</strong> The hazard ρ(t) is differentiable with respect to parameters, enabling gradient-based learning rules for STDP. The stochastic neuron can be shown to perform gradient ascent on the log-likelihood of its observed spike train — a principled probabilistic interpretation of Hebbian learning.</div></div><div class="content-section"><h2 class="">Probabilistic STDP</h2><p>In stochastic STDP, weight updates are expected values over the randomness in spike generation:</p><div class="formula-block "><span class="label">Expected STDP Update</span><div class="eq">E[Δw | pre spike at t<sub>pre</sub>] = ∫ STDP(t−t<sub>pre</sub>) · ρ(t) dt</div></div><p>This softens the sharp STDP window into a smooth gradient, producing more stable and noise-robust weight distributions than deterministic STDP.</p><div class="pro-con"><div class="pro-con-box pros"><h4><span class="pulse"></span>Advantages</h4><ul><li>Captures trial-to-trial ISI variability — matches in-vivo recordings</li><li>Escape noise connects STDP to maximum likelihood / Bayesian inference</li><li>Smooth gradients from probabilistic framework — more stable STDP</li><li>Analytically tractable with the Fokker-Planck equation for population density</li></ul></div><div class="pro-con-box cons"><h4><span class="pulse" style="background:var(--red)"></span>Limitations</h4><ul><li>Inherent timing jitter — STDP windows are probabilistically blurred</li><li>Stochastic simulations require many trials for reliable weight estimates</li><li>Hazard function parameters (ρ₀, δ_u) are hard to measure experimentally</li></ul></div></div></div>
+<div class="page-nav"><a href="multicompartment.html">← <span>Multi-Compartment</span></a><a href="stdp-classical.html" style="text-align:right"><span>Classical STDP</span> →</a></div>
+</main>
+<footer>NEURO REFERENCE · <a href="index.html" style="color:var(--text3);text-decoration:none">← Back to Index</a></footer>
+</body>
+</html>

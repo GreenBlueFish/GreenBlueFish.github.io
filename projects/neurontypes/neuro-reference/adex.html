@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AdEx — Neuro Reference</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">⬡ NEURO REF</a>
+  <div class="nav-links">
+    <a class="neuron" href="lif.html">LIF</a>
+    <a class="neuron" href="eif.html">EIF</a>
+    <a class="neuron" href="adex.html">AdEx</a>
+    <a class="neuron" href="izhikevich.html">Izhikevich</a>
+    <a class="neuron" href="hh.html">H-H</a>
+    <a class="neuron" href="fhn.html">FHN</a>
+    <a class="neuron" href="morris-lecar.html">ML</a>
+    <a class="neuron" href="srm.html">SRM</a>
+    <a class="neuron" href="multicompartment.html">Multi-C</a>
+    <a class="neuron" href="stochastic.html">Stoch.</a>
+    <a class="stdp" href="stdp-classical.html">Classical</a>
+    <a class="stdp" href="stdp-multiplicative.html">Mult.</a>
+    <a class="stdp" href="stdp-triplet.html">Triplet</a>
+    <a class="stdp" href="stdp-voltage.html">Voltage</a>
+    <a class="stdp" href="stdp-anti.html">Anti</a>
+    <a class="stdp" href="stdp-symmetric.html">Sym.</a>
+    <a class="stdp" href="stdp-reward.html">R-STDP</a>
+    <a class="stdp" href="stdp-pairing.html">Pairing</a>
+    <a class="stdp" href="stdp-bcm.html">BCM</a>
+    <a class="stdp" href="stdp-surrogate.html">Surrogate</a>
+  </div>
+</nav>
+<main>
+<div class="page-header">
+  <div class="breadcrumb"><a href="index.html">Index</a> › MODEL 03</div>
+  <h1><span class="neuron">MODEL 03</span><br>Adaptive Exponential Integrate-and-Fire</h1>
+  <p class="subtitle">AdEx adds a slow adaptation current w to the EIF model. A single neuron type controlled by four parameters (a, b, τ_w, and the EIF shape parameters) reproduces regular spiking, intrinsic bursting, fast spiking, transient spiking, and delayed spiking — the principal cortical cell types.</p>
+  <div class="metric-row"><div class="metric"><span class="metric-label">ODEs</span><span class="metric-value ">2</span></div><div class="metric"><span class="metric-label">Spike Precision</span><span class="metric-value high">High</span></div><div class="metric"><span class="metric-label">Dendritic Effects</span><span class="metric-value none">None</span></div><div class="metric"><span class="metric-label">Computational Cost</span><span class="metric-value high">Low</span></div><div class="metric"><span class="metric-label">Biological Fidelity</span><span class="metric-value medium">Med-High</span></div></div>
+</div><div class="content-section"><h2 class="">Governing Equations</h2><div class="formula-block "><span class="label">Membrane & Adaptation</span><div class="eq">C<sub>m</sub> · dV/dt = −g<sub>L</sub>(V − E<sub>L</sub>) + g<sub>L</sub>·δ<sub>T</sub>·exp((V−V<sub>T</sub>)/δ<sub>T</sub>) − w + I(t)</div>
+<div class="eq">τ<sub>w</sub> · dw/dt = a(V − E<sub>L</sub>) − w</div></div><table class="var-table"><thead><tr><th>Symbol</th><th>Description</th><th>Typical</th></tr></thead><tbody><tr><td class="var-name ">w</td><td class="var-desc">Adaptation current — opposes depolarization; accumulates with firing</td><td class="var-val">pA</td></tr><tr><td class="var-name ">τ<sub>w</sub></td><td class="var-desc">Adaptation time constant — controls how slowly w decays</td><td class="var-val">100–300 ms</td></tr><tr><td class="var-name ">a</td><td class="var-desc">Subthreshold adaptation — couples w to V below threshold</td><td class="var-val">0–4 nS</td></tr><tr><td class="var-name ">b</td><td class="var-desc">Spike-triggered adaptation increment — added to w at each spike</td><td class="var-val">0–100 pA</td></tr><tr><td class="var-name ">All EIF params</td><td class="var-desc">C<sub>m</sub>, g<sub>L</sub>, E<sub>L</sub>, δ<sub>T</sub>, V<sub>T</sub> as defined in EIF</td><td class="var-val">—</td></tr></tbody></table></div><div class="content-section"><h2 class="">Reset Mechanism</h2><div class="formula-block "><span class="label">Dual Reset</span><div class="eq">if V ≥ V<sub>peak</sub> :   emit spike,   V ← V<sub>reset</sub>,   w ← w + b</div></div><p>The key difference from EIF: the adaptation variable w also jumps at each spike by the amount b. This spike-triggered increment accumulates across bursts, progressively slowing firing and eventually halting it — the hallmark of adaptation.</p></div><div class="content-section"><h2 class="">Firing Patterns from Parameter Tuning</h2><table class="comp-table"><thead><tr><th>Pattern</th><th>a</th><th>b</th><th>τ<sub>w</sub></th><th>Behavior</th></tr></thead><tbody><tr><td>Regular Spiking (RS)</td><td>−0.5 nS</td><td>7 pA</td><td>100 ms</td><td>Slowing ISIs — standard excitatory cortical neuron</td></tr><tr><td>Intrinsic Bursting (IB)</td><td>−0.5 nS</td><td>40 pA</td><td>100 ms</td><td>Initial burst then regular spiking</td></tr><tr><td>Fast Spiking (FS)</td><td>0 nS</td><td>0 pA</td><td>100 ms</td><td>Constant rate without adaptation — interneuron</td></tr><tr><td>Transient Spiking (TS)</td><td>4 nS</td><td>0 pA</td><td>500 ms</td><td>One or few spikes then silence</td></tr><tr><td>Delayed Acc. (DA)</td><td>0 nS</td><td>0 pA</td><td>90 ms</td><td>Slowly accelerating — ramp input</td></tr></tbody></table><div class="pro-con"><div class="pro-con-box pros"><h4><span class="pulse"></span>Advantages</h4><ul><li>Reproduces all major cortical firing patterns with one model</li><li>Adaptation is physiologically crucial for STDP — changes effective ISIs</li><li>Low cost — two ODEs; easily integrated with 0.1 ms steps</li><li>Well-validated against intracellular recordings</li></ul></div><div class="pro-con-box cons"><h4><span class="pulse" style="background:var(--red)"></span>Limitations</h4><ul><li>Six parameters to tune — harder to hand-set than LIF</li><li>Still a point neuron — no dendritic effects</li><li>No subthreshold oscillations or resonance</li><li>w variable has no direct biophysical analog (phenomenological)</li></ul></div></div></div>
+<div class="page-nav"><a href="eif.html">← <span>EIF</span></a><a href="izhikevich.html" style="text-align:right"><span>Izhikevich</span> →</a></div>
+</main>
+<footer>NEURO REFERENCE · <a href="index.html" style="color:var(--text3);text-decoration:none">← Back to Index</a></footer>
+</body>
+</html>

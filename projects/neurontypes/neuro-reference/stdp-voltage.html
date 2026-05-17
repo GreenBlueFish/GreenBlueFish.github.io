@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Voltage-Dependent STDP — Neuro Reference</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">⬡ NEURO REF</a>
+  <div class="nav-links">
+    <a class="neuron" href="lif.html">LIF</a>
+    <a class="neuron" href="eif.html">EIF</a>
+    <a class="neuron" href="adex.html">AdEx</a>
+    <a class="neuron" href="izhikevich.html">Izhikevich</a>
+    <a class="neuron" href="hh.html">H-H</a>
+    <a class="neuron" href="fhn.html">FHN</a>
+    <a class="neuron" href="morris-lecar.html">ML</a>
+    <a class="neuron" href="srm.html">SRM</a>
+    <a class="neuron" href="multicompartment.html">Multi-C</a>
+    <a class="neuron" href="stochastic.html">Stoch.</a>
+    <a class="stdp" href="stdp-classical.html">Classical</a>
+    <a class="stdp" href="stdp-multiplicative.html">Mult.</a>
+    <a class="stdp" href="stdp-triplet.html">Triplet</a>
+    <a class="stdp" href="stdp-voltage.html">Voltage</a>
+    <a class="stdp" href="stdp-anti.html">Anti</a>
+    <a class="stdp" href="stdp-symmetric.html">Sym.</a>
+    <a class="stdp" href="stdp-reward.html">R-STDP</a>
+    <a class="stdp" href="stdp-pairing.html">Pairing</a>
+    <a class="stdp" href="stdp-bcm.html">BCM</a>
+    <a class="stdp" href="stdp-surrogate.html">Surrogate</a>
+  </div>
+</nav>
+<main>
+<div class="page-header">
+  <div class="breadcrumb"><a href="index.html">Index</a> › STDP 04</div>
+  <h1><span class="stdp">STDP 04</span><br>Voltage-Dependent STDP (Clopath Rule)</h1>
+  <p class="subtitle">Plasticity gated by the postsynaptic membrane voltage rather than spike occurrence alone. Three voltage traces drive LTP and LTD through rectified thresholds. More biologically realistic — NMDA receptors are voltage-gated coincidence detectors, so postsynaptic voltage directly controls Ca²⁺ influx and plasticity.</p>
+  <div class="metric-row"><div class="metric"><span class="metric-label">Type</span><span class="metric-value ">Unsupervised</span></div><div class="metric"><span class="metric-label">Gating</span><span class="metric-value ">Voltage</span></div><div class="metric"><span class="metric-label">Cost</span><span class="metric-value medium">Medium</span></div><div class="metric"><span class="metric-label">Stability</span><span class="metric-value high">Good</span></div><div class="metric"><span class="metric-label">Bio. Plausibility</span><span class="metric-value high">Very High</span></div></div>
+</div><div class="content-section"><h2 class="purple">Learning Rule</h2><div class="formula-block "><span class="label">Clopath LTP & LTD</span><div class="eq">LTP: dw/dt = A<sub>LTP</sub> · [ū₋ − θ₋]₊ · [u − θ₊]₊ · x̄</div>
+<div class="eq">LTD: dw/dt = −A<sub>LTD</sub> · ū₊ · [ū₋ − θ₋]₊ · x</div></div><div class="formula-block "><span class="label">Voltage Traces</span><div class="eq">τ₋ · dū₋/dt = −ū₋ + u(t)</div>
+<div class="eq">τ₊ · dū₊/dt = −ū₊ + u(t)</div></div><table class="var-table"><thead><tr><th>Symbol</th><th>Description</th><th>Typical</th></tr></thead><tbody><tr><td class="var-name purple">u</td><td class="var-desc">Instantaneous postsynaptic membrane voltage (mV)</td><td class="var-val">mV</td></tr><tr><td class="var-name purple">ū₋</td><td class="var-desc">Low-pass filtered voltage with τ₋ (~10 ms) — tracks recent depolarization</td><td class="var-val">mV</td></tr><tr><td class="var-name purple">ū₊</td><td class="var-desc">Slower low-pass filtered voltage with τ₊ (~7 ms)</td><td class="var-val">mV</td></tr><tr><td class="var-name purple">θ₋</td><td class="var-desc">LTP voltage threshold — typically near resting potential (~−70 mV)</td><td class="var-val">−70 mV</td></tr><tr><td class="var-name purple">θ₊</td><td class="var-desc">Spiking threshold for LTP — typically near −45 mV</td><td class="var-val">−45 mV</td></tr><tr><td class="var-name purple">[z]₊</td><td class="var-desc">Rectification: max(z, 0) — ensures only positive values contribute</td><td class="var-val">—</td></tr><tr><td class="var-name purple">x</td><td class="var-desc">Presynaptic spike trace — x ← x+1 at each pre-spike, decays with τ_x</td><td class="var-val">—</td></tr><tr><td class="var-name purple">x̄</td><td class="var-desc">Slow presynaptic trace for LTP term</td><td class="var-val">—</td></tr><tr><td class="var-name purple">A<sub>LTP</sub>, A<sub>LTD</sub></td><td class="var-desc">Potentiation and depression amplitudes</td><td class="var-val">—</td></tr></tbody></table></div><div class="content-section"><h2 class="">Biological Interpretation</h2><div class="info-box purple"><strong>Why voltage rather than spikes?</strong><br>
+LTP requires: (1) presynaptic glutamate (captured by x̄) AND (2) sufficient postsynaptic depolarization to unblock NMDA receptors (captured by [u − θ₊]₊) AND (3) the postsynaptic neuron was recently active (captured by [ū₋ − θ₋]₊). All three conditions mirror the biophysics of NMDA-mediated Ca²⁺ influx.<br><br>
+LTD requires: presynaptic activity (x) during periods of low postsynaptic voltage following prior activity (ū₋ > θ₋ but u < θ₊). This corresponds to homosynaptic LTD from subthreshold postsynaptic depolarization — a well-documented biological phenomenon.</div><div class="pro-con"><div class="pro-con-box pros"><h4><span class="pulse"></span>Advantages</h4><ul><li>Most biologically realistic STDP formulation — voltage is the actual NMDA gate</li><li>Reproduces STDP, BCM, and rate-dependent LTP/LTD in one framework</li><li>Predicts STDP reversal at different holding potentials — confirmed experimentally</li><li>Works with voltage-based neuron models (EIF, HH, AdEx) without modification</li></ul></div><div class="pro-con-box cons"><h4><span class="pulse" style="background:var(--red)"></span>Limitations</h4><ul><li>Complex: many parameters (θ₋, θ₊, τ₋, τ₊, A_LTP, A_LTD, τ_x)</li><li>Requires continuous access to postsynaptic voltage — harder on event-based hardware</li><li>Voltage traces must be integrated with care to avoid numerical instability</li><li>Fitting requires combined voltage-clamp and plasticity data</li></ul></div></div></div>
+<div class="page-nav"><a href="stdp-triplet.html">← <span>Triplet STDP</span></a><a href="stdp-anti.html" style="text-align:right"><span>Anti-STDP</span> →</a></div>
+</main>
+<footer>NEURO REFERENCE · <a href="index.html" style="color:var(--text3);text-decoration:none">← Back to Index</a></footer>
+</body>
+</html>
