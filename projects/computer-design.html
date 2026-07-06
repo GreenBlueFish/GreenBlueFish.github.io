@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Project Title — Your Name</title>  <!-- EDIT -->
+  <title>Computer Design — Rowan Leonard</title>  <!-- EDIT -->
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../style.css" />  <!-- note the ../ to go up one folder -->
 </head>
@@ -12,7 +12,7 @@
   <!-- ── NAV ── -->
   <nav>
     <div class="container">
-      <span class="nav-logo">yourname.github.io</span>  <!-- EDIT -->
+      <span class="nav-logo">GreenBlueFish.github.io</span>  <!-- EDIT -->
       <ul class="nav-links">
         <li><a href="../index.html#about">about</a></li>
         <li><a href="../index.html#projects">projects</a></li>
@@ -30,33 +30,35 @@
       <!-- ── PROJECT HEADER ── -->
       <div class="project-header">
         <div class="project-tags">
-          <span class="tag">C++</span>        <!-- EDIT: your tags -->
           <span class="tag">from scratch</span>
         </div>
-        <h1>Neural Network Library</h1>       <!-- EDIT: project title -->
+        <h1>Computer Design</h1>       <!-- EDIT: project title -->
         <p class="project-subtitle">
-          A fully custom neural network library built without any ML frameworks,
-          used as the foundation for all my subsequent network experiments.
-        </p>  <!-- EDIT: one sentence summary -->
-        <a class="github-link" href="https://github.com/yourusername/repo" target="_blank">
-          View on GitHub ↗
-        </a>  <!-- EDIT -->
+          Custom computer architectures with their own custom ISA's built from gate‑logic.
+        </p>
       </div>
 
       <!-- ── MOTIVATION ── -->
       <div class="content-section">
         <p class="section-label">Motivation</p>
         <h2>Why I built this</h2>
-        <img src="images/computer_architecture_v4.png" alt="diagram of the network architecture" />
+        <h3>Computer 1</h3>
         <p>
-          I wanted to understand how backpropagation actually works at the level of
-          individual weight updates, not just use a framework as a black box. Building
-          the library from scratch forced me to understand every operation.
+          I had taught myself boolean algebra and had learnt from articles and videos online, how 
+          to build half and full adders and as well as what the basic components of a computer are 
+          (ALU, memory, instruction decoder). I knew I would eventually be learning through my classes
+          basic computer architecture which would teach me the way computer design is done and what it
+          looks like but I didn't like the idea of not learning and exploring this on my own first and 
+          solving the problems myself without any influence on modern design so I decided to throw
+          myself into make a computer based on my ideas and the basic components I had learnt. This set 
+          me off to build my first computer which was an 8 bit computer with 4 bit values (not overly
+          impressive) and a custom ISA that was turing complete.
         </p>
-        <figure>
-            <img src="images/computer_architecture_v4.png" alt="diagram of the network architecture" />
-            <figcaption>Forward pass through a 3-layer dense network</figcaption>
-        </figure>
+        <h3>Computer 2</h3>
+        <p>
+          I took another attempt at making a computer and took the lessons I learnt from my first computer
+          to design a more capable 16 bit computer with a more diverse ISA and sturdier architecture.
+        </p>
 
         <!-- EDIT: explain your reason for the project -->
       </div>
@@ -65,6 +67,11 @@
       <div class="content-section">
         <p class="section-label">Approach</p>
         <h2>How I built it</h2>
+        <h3>Computer 1</h3>
+        <figure>
+            <img src="images/computer_design/computer_1.png" alt="computer 1 layout" />
+            <figcaption>Computer 1 Layout</figcaption>
+        </figure>
         <p>
           The library is structured around a <code>Layer</code> base class with
           <code>forward()</code> and <code>backward()</code> methods. Each layer type
@@ -84,6 +91,12 @@ Matrix DenseLayer::forward(const Matrix&amp; input) {
     return activate(weights * input + bias);
 }</code></pre>
       </div>
+
+       <img src="images/computer_architecture_v4.png" alt="diagram of the network architecture" />
+        <figure>
+            <img src="images/computer_architecture_v4.png" alt="diagram of the network architecture" />
+            <figcaption>Forward pass through a 3-layer dense network</figcaption>
+        </figure>
 
       <!-- ── RESULTS ── -->
       <div class="content-section">
