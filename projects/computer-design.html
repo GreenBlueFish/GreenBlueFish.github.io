@@ -82,64 +82,21 @@
             <figcaption>Computer 1 ISA</figcaption>
         </figure>
         <p>
-          
-          The library is structured around a <code>Layer</code> base class with
-          <code>forward()</code> and <code>backward()</code> methods. Each layer type
-          (dense, conv, activation) inherits from it, making it easy to stack layers
-          into a network.
+          The letters indicate registers so ab could be 00 to 11 and the same for cd. Because of how 
+          many images I have of this computer all logic blocks can be seen below  
         </p>
+        <a class="btn btn-primary" href="#computer_1">View Designs</a>
         <p>
           Gradients are computed analytically and accumulated via the chain rule during
           the backward pass, then applied by a configurable optimizer (SGD or Adam).
         </p>
-        <!-- EDIT: describe your technical approach -->
-
-        <!-- Code snippet — delete this block if you don't want one -->
-        <pre><code>// Example: forward pass through a dense layer
-Matrix DenseLayer::forward(const Matrix&amp; input) {
-    this->input = input;
-    return activate(weights * input + bias);
-}</code></pre>
-      </div>
-
-       <img src="images/computer_architecture_v4.png" alt="diagram of the network architecture" />
-        <figure>
-            <img src="images/computer_architecture_v4.png" alt="diagram of the network architecture" />
-            <figcaption>Forward pass through a 3-layer dense network</figcaption>
-        </figure>
-
-      <!-- ── RESULTS ── -->
-      <div class="content-section">
-        <p class="section-label">Results</p>
-        <h2>Outcomes</h2>
-
-        <!-- Stat boxes — delete or add boxes as needed -->
-        <div class="results-grid">
-          <div class="result-box">
-            <span class="result-value">94%</span>
-            <span class="result-label">test accuracy on MNIST</span>
-          </div>
-          <div class="result-box">
-            <span class="result-value">2</span>
-            <span class="result-label">library versions built</span>
-          </div>
-        </div>  <!-- EDIT or delete -->
-
-        <p>
-          The library successfully trained on several benchmark datasets and served as
-          the base for the map classifier and architecture search projects.
-        </p>
-        <!-- EDIT: what did you achieve / measure -->
-      </div>
 
       <!-- ── WHAT I LEARNED ── -->
       <div class="content-section">
         <p class="section-label">Reflection</p>
         <h2>What I learned</h2>
         <p>
-          Implementing the backward pass manually made the chain rule click in a way
-          that reading about it never did. I also gained a much better intuition for
-          why vanishing gradients happen in deep networks with sigmoid activations.
+          
         </p>
         <!-- EDIT: what was the key insight or takeaway -->
       </div>
@@ -153,6 +110,43 @@ Matrix DenseLayer::forward(const Matrix&amp; input) {
       Built with HTML/CSS · hosted on GitHub Pages
     </div>
   </footer>
+
+  <section id="computer_1">
+    <div class="container">
+      <h2 class="section-label">Computer 1 Architecture</h2>
+      <figure>
+            <img src="images/computer_design/computer_1_large.png" alt="computer 1 full" />
+            <figcaption>This is the uncompressed image of the computer</figcaption>
+      </figure>
+      <figure>
+            <img src="images/computer_design/computer_1_ALU_Demux.png" alt="computer 1 ALU Demux" />
+            <figcaption>
+              The top left is my ALU with select lines. The bottom right is my 1 bit full adder
+              with midifications so it outputs XOR, AND, OR, NOT, negate, and pass through. And the
+              right circuit is a 5-bi demux.
+            </figcaption>
+      </figure>
+      <figure>
+            <img src="images/computer_design/computer_1_instruc_decode.png" alt="computer 1 instruction decoder" />
+            <figcaption>
+              This component took in an instruction for the instruction memory block and decodes
+              it so the instruction can run. I did not implement pipelining as I didn't know what
+              that was at the time of implementation.
+            </figcaption>
+      </figure>
+      <figure>
+            <img src="images/computer_design/computer_1_ALU_feed.png" alt="computer 1 ALU feed" />
+            <figcaption>
+              This circuit took in instructions for the instruction decoder and the 4 registers into 
+              the ALU for processing
+            </figcaption>
+      </figure>
+      <figure>
+            <img src="images/computer_design/computer_1_general.png" alt="computer 1 general" />
+            <figcaption>A few other general circuits</figcaption>
+      </figure>
+    </div>
+  </section>
 
 </body>
 </html>
