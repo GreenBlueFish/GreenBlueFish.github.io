@@ -86,30 +86,54 @@
           many images I have of this computer all logic blocks can be seen below  
         </p>
         <a class="btn btn-primary" href="#computer_1">View Designs</a>
+
+        <h3>Computer 2</h3>
+        <figure>
+            <img src="images/computer_design/computer_2.png" alt="computer 2 layout" />
+            <figcaption>Computer 2 Layout</figcaption>
+        </figure>
         <p>
-          Gradients are computed analytically and accumulated via the chain rule during
-          the backward pass, then applied by a configurable optimizer (SGD or Adam).
+          My second attempt of making a computer was a lot larger. It was a 16-bit computer with 16 registers,
+          1 memory block for both data and instructions, an ALU with more operations than my first computer, and
+          a custom 16-bit ISA (shown below, the first image are the instructions and the second image is what 
+          each instruction does). Like my first computer the letters indicate the registers so abcd can be 0000 
+          to 1111 and likewise for efgh. What made this ISA unique to the first is that I had some instructions
+          use multiple 16-bit words. For example "cret reg# val" would be two lines of assembly, the first would
+          be the instruction line with the corresponding register (ex. 0001 0000 0000 abcd) and the second would
+          be a 16-bit word of data. I also added features to expand the computer to add a seprate stack block of
+          memory but I am yet to implement it.
         </p>
+        <figure>
+            <img src="images/computer_design/computer_2_ISA_1.png" alt="computer 2 ISA 1" />
+            <figcaption>Computer 2 Instructions</figcaption>
+        </figure>
+        <figure>
+            <img src="images/computer_design/computer_2_ISA_2.png" alt="computer 2 ISA 2" />
+            <figcaption>Computer 2 Instruction Definitions</figcaption>
+        </figure>
+        <p>
+          Some more designs for computer 2 can be seen below
+        </p>
+        <a class="btn btn-primary" href="#computer_2">View Designs</a>
 
       <!-- ── WHAT I LEARNED ── -->
       <div class="content-section">
         <p class="section-label">Reflection</p>
         <h2>What I learned</h2>
         <p>
-          
+          There are a few major takeaways from these projects. The first is that I should have used a hardward 
+          description language to implement this stuff. It was good experience to have to design all the blocks
+          myself but it became too much after a while, expecially with the 16 bit computer. I am now designing 
+          my computers in verilog. Another takeaway is that I should pipeline my data. I didn't know that data 
+          pipelining was even a thing when I started both these projects, I learnt about it later in one of my
+          courses. If I were to implement these computers, I would not be able to run my clock nearly as fast 
+          with pipelining. I also would in the future use a standard ISA like RISC-V as there are already compilers
+          out there for the language and it is known how to turn C or C++ into RISC-V.
         </p>
-        <!-- EDIT: what was the key insight or takeaway -->
       </div>
 
     </div>
   </div>
-
-  <!-- ── FOOTER ── -->
-  <footer>
-    <div class="container">
-      Built with HTML/CSS · hosted on GitHub Pages
-    </div>
-  </footer>
 
   <section id="computer_1">
     <div class="container">
@@ -138,7 +162,7 @@
             <img src="images/computer_design/computer_1_ALU_feed.png" alt="computer 1 ALU feed" />
             <figcaption>
               This circuit took in instructions for the instruction decoder and the 4 registers into 
-              the ALU for processing
+              the ALU for processing.
             </figcaption>
       </figure>
       <figure>
@@ -148,5 +172,41 @@
     </div>
   </section>
 
+  <section id="computer_2">
+    <div class="container">
+      <h2 class="section-label">Computer 2 Architecture</h2>
+      <figure>
+            <img src="images/computer_design/computer_2_ALU.png" alt="computer 2 ALU" />
+            <figcaption>Full ALU in computer 2</figcaption>
+      </figure>
+      <figure>
+            <img src="images/computer_design/computer_2_ALU_zoomed.png" alt="computer 2 ALU zoomed in" />
+            <figcaption>Full ALU in computer 2 zoomed in</figcaption>
+      </figure>
+      <figure>
+            <img src="images/computer_design/computer_2_generic.png" alt="computer 2 general" />
+            <figcaption>
+              The left most circuit is my instruction counter. The top right circuit is my 1-bit full adder 
+              with a few additions for more functionality. The middle right circuit is for the instruction
+              decoder. And the bottom right circuit is for selecting between single or multiple line instructions
+              from the ISA.
+            </figcaption>
+      </figure>
+      <figure>
+            <img src="images/computer_design/computer_2_instruc_decoder.png alt="computer 2 instruction decoder" />
+            <figcaption>This is my instruction decoder circuit</figcaption>
+      </figure>
+
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="container">
+      Built with HTML/CSS · hosted on GitHub Pages
+    </div>
+  </footer>
+
 </body>
 </html>
+
