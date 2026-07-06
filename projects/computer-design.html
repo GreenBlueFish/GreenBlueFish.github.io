@@ -69,11 +69,20 @@
         <h2>How I built it</h2>
         <h3>Computer 1</h3>
         <figure>
-            <img src="images/computer_design/computer_1.odg" alt="computer 1 layout" />
+            <img src="images/computer_design/computer_1.png" alt="computer 1 layout" />
             <figcaption>Computer 1 Layout</figcaption>
         </figure>
         <p>
-          The computer has 4 registers 
+          The computer has 4 registers, ALU, instruction decoder, and 2 memory blocks where the top
+          block (labeled IN in the top left) is for 8-bit instructions and the bottom block if for 4-bit data 
+          (labeled D in the top left). Below is the ISA.
+        </p> 
+        <figure>
+            <img src="images/computer_design/computer_1_ISA.png" alt="computer 1 ISA" />
+            <figcaption>Computer 1 ISA</figcaption>
+        </figure>
+        <p>
+          
           The library is structured around a <code>Layer</code> base class with
           <code>forward()</code> and <code>backward()</code> methods. Each layer type
           (dense, conv, activation) inherits from it, making it easy to stack layers
