@@ -43,7 +43,7 @@
         <a class="github-link" href="https://github.com/GreenBlueFish/Neural-Network-V3.4" target="_blank">
           Neural Network 1 View on GitHub ↗
         </a>
-        <a class="github-link" href="https://github.com/GreenBlueFish/Neurobloom" target="_blank">
+        <a class="github-link" href="https://github.com/GreenBlueFish/Neurobloom_V1" target="_blank">
           Neural Network 2 View on GitHub ↗
         </a>
       </div>
@@ -96,8 +96,8 @@
           testing.
         </p>
         <p>
-          One utility could evaluate permutations of activation functions 
-          across nodes and layers, allowing different activation strategies
+          One tool was made to evaluate permutations of activation functions 
+          across nodes and layers, allowing different activation functions
            to be benchmarked against a given architecture and dataset.
         </p>
         <p>
@@ -128,7 +128,7 @@
           activation function and connection topology independently.
         </p>
         <p>
-          The architecture was designed to support advanced experimentation, including weighted and 
+          The architecture was designed to support network experimentation, including weighted and 
           unweighted residual learning, inter-network communication, variable activation functions, 
           and custom cost functions assigned at the individual node level. One area of interest was 
           exploring neuron-like behavior by constraining nodes toward target equilibrium states and 
@@ -152,40 +152,25 @@
         </ul>
       </div>
 
-      <!-- ── RESULTS ── -->
-      <div class="content-section">
-        <p class="section-label">Results</p>
-        <h2>Outcomes</h2>
-
-        <!-- Stat boxes — delete or add boxes as needed -->
-        <div class="results-grid">
-          <div class="result-box">
-            <span class="result-value">94%</span>
-            <span class="result-label">test accuracy on MNIST</span>
-          </div>
-          <div class="result-box">
-            <span class="result-value">2</span>
-            <span class="result-label">library versions built</span>
-          </div>
-        </div>  <!-- EDIT or delete -->
-
-        <p>
-          The library successfully trained on several benchmark datasets and served as
-          the base for the map classifier and architecture search projects.
-        </p>
-        <!-- EDIT: what did you achieve / measure -->
-      </div>
-
       <!-- ── WHAT I LEARNED ── -->
       <div class="content-section">
         <p class="section-label">Reflection</p>
         <h2>What I learned</h2>
         <p>
-          Implementing the backward pass manually made the chain rule click in a way
-          that reading about it never did. I also gained a much better intuition for
-          why vanishing gradients happen in deep networks with sigmoid activations.
+          Through the process of designing neural networks and experimenting with different architectures and training configurations, I realized that my primary interest lies not in using pre‑existing models, but in building them—and in creating the tools that make such systems possible. This insight made it clear that my long‑term direction should focus on developing machine‑learning infrastructure, both software and hardware, rather than solely applying existing models.
         </p>
-        <!-- EDIT: what was the key insight or takeaway -->
+        <p>
+        Constructing these networks also taught me several foundational concepts, most notably the vanishing gradient problem. I independently discovered this issue while training a network that used sigmoid activation functions and initialized weights and biases in the range of −5 to 5. The gradients rapidly diminished, causing many parameters to stop updating altogether. I spent hours inspecting individual neuron values and manually backpropagating computations to verify correctness. Only later did I encounter an article describing the vanishing gradient problem, confirming the phenomenon I had already diagnosed and resolved on my own.
+        <br><br>
+        These implementations also strengthened my ability to debug neural networks. After many hours examining failing models, I developed an intuition for the patterns and failure modes that commonly arise when a network behaves unexpectedly. Below is a list of the most frequent issues I encountered.
+        </p>
+
+        <li>vanishing or exploding gradients</li>
+        <li>weight and bias symmetry</li>
+        <li>parameters becoming stuck or non‑responsive</li>
+        <li>uneven or unstable parameter distributions</li>
+        <li>misaligned activation function choices for the task</li>
+        <li>activation functions that suppress or destroy useful signal</li>
       </div>
 
     </div>
