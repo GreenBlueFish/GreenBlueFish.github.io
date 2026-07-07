@@ -56,12 +56,19 @@
           neuromorphic computing. Below is a list of some of the influencial papers and textbooks I read through
         </p>
         <ul>
-          <li><a href="https://www.researchgate.net/publication/400029980_A_New_Era_in_Computing_A_Review_of_Neuromorphic_Computing_Chip_Architecture_and_Applications" target="_blank">A New Era in Computing: A Review of Neuromorphic Computing Chip Architecture and Applications</a></li>
-          <li></li>
-          <li></li>
-          <li></li>
+          <li><a href="https://www.researchgate.net/publication/400029980_A_New_Era_in_Computing_A_Review_of_Neuromorphic_Computing_Chip_Architecture_and_Applications" target="_blank" rel="noopener noreferrer">A New Era in Computing: A Review of Neuromorphic Computing Chip Architecture and Applications</a></li>
+          <li><a href="https://arxiv.org/abs/2502.20415" target="_blank" rel="noopener noreferrer">A Quarter of a Century of Neuromorphic Architectures on FPGAs - an Overview</a></li>
+          <li><a href="https://www.researchgate.net/publication/395417663_A_Review_of_Recent_Developments_in_Neuromorphic_Computing_Based_on_Emerging_Memory_Devices" target="_blank" rel="noopener noreferrer"> Review of Recent Developments in Neuromorphic Computing Based on Emerging Memory Devices</a></li>
+          <li><a href="https://neuronaldynamics.epfl.ch/online/index.html" target="_blank" rel="noopener noreferrer">Neuronal Dynamics - Textbook</a></li>
+          <li><a href="https://www.academia.edu/43014289/Neuroscience_by_Dale_Purves_et_al_eds_z_lib_org_5" target="_blank" rel="noopener noreferrer">Neuroscience 5th Edition - Textbook</a></li>
         </ul>
-        <!-- EDIT: explain your reason for the project -->
+        <p>
+          After reading through the papers and going deep into the textbooks I decided to apply the knowledge I had 
+          learnt to an accelerator. I had made a team of myself and two other people (<a href="https://www.linkedin.com/in/melikamirsajjadi/" target="_blank" rel="noopener noreferrer">Melika M.</a> & <a href="https://www.linkedin.com/in/ronkazachkov/?skipRedirect=true" target="_blank" rel="noopener noreferrer">Ron Kazachkov</a>) and after reading a few papers we decided to implement <a href="t/publication/307795262_Unsupervised_Learning_of_Digit_Recognition_Using_Spike-Timing-Dependent_Plasticity" target="_blank" rel="noopener noreferrer">Unsupervised learning of digit recognition using spike-timing-dependent plasticity</a>. We decided to modify the neuron dynamics to make hardware implementation easier (this turned out to be a mistake). Below are the 4 equations outlining our models
+        </p>
+        <ol>
+          <li>Neuron Updating (Forware prop): X<sub>post</sub><sup>data</sup> += (X<sub>pre<sub>1</sub></sub><sup>firing</sup> & W<sub>post<sub>1</sub></sub> + X<sub>pre<sub>2</sub></sub><sup>firing</sup> & W<sub>post<sub>2</sub></sub> + ... + X<sub>pre<sub>n</sub></sub><sup>firing</sup> & W<sub>post<sub>n</sub></sub>)</li>
+        </ol>
       </div>
 
       <!-- ── APPROACH ── -->
