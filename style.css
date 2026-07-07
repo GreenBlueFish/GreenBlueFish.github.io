@@ -466,3 +466,9 @@ p code {
   text-align: center;
   margin-top: -0.75rem;
 }
+
+.hidden-link {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color:rgba(13, 27, 48, 0.92)
+}
