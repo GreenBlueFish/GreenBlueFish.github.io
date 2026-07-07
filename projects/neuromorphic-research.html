@@ -47,13 +47,10 @@
 
       <!-- ── MOTIVATION ── -->
       <div class="content-section">
-        <p class="section-label">Motivation</p>
+        <p class="section-label">Motivation and Approach</p>
         <h2>Why I built this</h2>
         <p>
-          During my 2A term I read about spiking neural networks and neuromorphic computing through reseach papers
-          and articles. Given that I love to design neural network libraries and computers, neuromorphic computing
-          seemed perfect. I started reading through some papers and text books to learn the basics of both SNN's and
-          neuromorphic computing. Below is a list of some of the influencial papers and textbooks I read through
+          During my 2A term I read about spiking neural networks and neuromorphic computing through reseach papers and articles. Given that I love to design neural network libraries and computers, neuromorphic computing seemed perfect. I started reading through some papers and text books to learn the basics of both SNN's and neuromorphic computing. Below is a list of some of the influencial papers and textbooks I read through
         </p>
         <ul>
           <li><a href="https://www.researchgate.net/publication/400029980_A_New_Era_in_Computing_A_Review_of_Neuromorphic_Computing_Chip_Architecture_and_Applications" target="_blank" rel="noopener noreferrer">A New Era in Computing: A Review of Neuromorphic Computing Chip Architecture and Applications</a></li>
@@ -63,75 +60,44 @@
           <li><a href="https://www.academia.edu/43014289/Neuroscience_by_Dale_Purves_et_al_eds_z_lib_org_5" target="_blank" rel="noopener noreferrer">Neuroscience 5th Edition - Textbook</a></li>
         </ul>
         <p>
-          After reading through the papers and going deep into the textbooks I decided to apply the knowledge I had 
-          learnt to an accelerator. I had made a team of myself and two other people (<a href="https://www.linkedin.com/in/melikamirsajjadi/" target="_blank" rel="noopener noreferrer">Melika M.</a> & <a href="https://www.linkedin.com/in/ronkazachkov/?skipRedirect=true" target="_blank" rel="noopener noreferrer">Ron Kazachkov</a>) and after reading a few papers we decided to implement <a href="t/publication/307795262_Unsupervised_Learning_of_Digit_Recognition_Using_Spike-Timing-Dependent_Plasticity" target="_blank" rel="noopener noreferrer">Unsupervised learning of digit recognition using spike-timing-dependent plasticity</a>. We decided to modify the neuron dynamics to make hardware implementation easier (this turned out to be a mistake). Below are the 4 equations outlining our models
+          After reading through the papers and going deep into the textbooks I decided to apply the knowledge I had learnt to an accelerator. I had made a team of myself and two other people (<a href="https://www.linkedin.com/in/melikamirsajjadi/" target="_blank" rel="noopener noreferrer">Melika M.</a> & <a href="https://www.linkedin.com/in/ronkazachkov/?skipRedirect=true" target="_blank" rel="noopener noreferrer">Ron Kazachkov</a>) and after reading a few papers we decided to implement <a href="t/publication/307795262_Unsupervised_Learning_of_Digit_Recognition_Using_Spike-Timing-Dependent_Plasticity" target="_blank" rel="noopener noreferrer">Unsupervised learning of digit recognition using spike-timing-dependent plasticity</a>. The paper used the MNIST dataset to train a SNN unsupervised. We decided to modify the neuron dynamics to make hardware implementation easier (this turned out to be a mistake). Below are the 4 equations outlining our models
         </p>
         <ol>
-          <li>Neuron Updating (Forware prop): X<sub>post</sub><sup>data</sup> += (X<sub>pre<sub>1</sub></sub><sup>firing</sup> & W<sub>post<sub>1</sub></sub> + X<sub>pre<sub>2</sub></sub><sup>firing</sup> & W<sub>post<sub>2</sub></sub> + ... + X<sub>pre<sub>n</sub></sub><sup>firing</sup> & W<sub>post<sub>n</sub></sub>)</li>
+          <li>Neuron Updating (Forware prop): X<sub>post</sub><sup>data</sup> += (X<sub>pre<sub>1</sub></sub><sup>firing</sup> &amp; W<sub>post<sub>1</sub></sub> + X<sub>pre<sub>2</sub></sub><sup>firing</sup> &amp; W<sub>post<sub>2</sub></sub> + ... + X<sub>pre<sub>n</sub></sub><sup>firing</sup> &amp; W<sub>post<sub>n</sub></sub>)</li>
           <li>Threshold/Reset: if X<sup>data</sup> &gt; X<sub>threshold</sub> then X<sup>data</sup> = X<sub>reset</sub> and X<sup>firing</sup> = 1 </li>
-          <li>Weight Updating (STDP): (A<sub>+</sub> * X<sub>pre</sub><sup>data</sup>) & X<sub>post</sub><sup>firing</sup></li> - (A<sub>-</sub> * X<sub>post</sub><sup>data</sup>) & X<sub>pre</sub><sup>firing</sup></li>
-          <li>Forward Step in Time: X<sup>data</sup> *= decay_rate, where 0 &lt; decay_rate &gt; 1</li>
+          <li>Weight Updating (STDP): (A<sub>+</sub> * X<sub>pre</sub><sup>data</sup>) &amp; X<sub>post</sub><sup>firing</sup></li> - (A<sub>-</sub> * X<sub>post</sub><sup>data</sup>) &amp; X<sub>pre</sub><sup>firing</sup></li>
+          <li>Forward Step in Time: X<sup>data</sup> *= decay_rate, where 0 &lt; decay_rate &lt; 1</li>
         </ol>
-        <p>Where X is a 16-bit neuron value with the first 15 bits being 1Q14 (X<sup>data</sup>) and the most significant bit is the firing bit (X<sup>firing</sup>) which is a 0 if the neuron didn't just fire and a 1 if the neuron did just fire. X<sub>post</sub> is a postsynaptic neuron and X<sub>pre</sub> is a presynaptic neuron. W is a 15-bit (1Q14) weight value representing a synaptic "weight". The other values(X<sub>threshold</sub>, X<sub>reset</sub>, A<sub>+</sub>, A<sub>-</sub>, decay_rate) are model presets.</p>
-      </div>
-
-      <!-- ── APPROACH ── -->
-      <div class="content-section">
-        <p class="section-label">Approach</p>
-        <h2>How I built it</h2>
+        <p>Where X is a 16-bit neuron value with the first 15 bits being 1Q14 (X<sup>data</sup>) and the most significant bit is the firing bit (X<sup>firing</sup>) which is a 0 if the neuron didn't just fire and a 1 if the neuron did just fire. X<sub>post</sub> is a postsynaptic neuron and X<sub>pre</sub> is a presynaptic neuron. W is a 15-bit (1Q14) weight value representing a synaptic "weight". The other values (X<sub>threshold</sub>, X<sub>reset</sub>, A<sub>+</sub>, A<sub>-</sub>, decay_rate) are model presets.</p>
         <p>
-          The library is structured around a <code>Layer</code> base class with
-          <code>forward()</code> and <code>backward()</code> methods. Each layer type
-          (dense, conv, activation) inherits from it, making it easy to stack layers
-          into a network.
+          I build a logic block (seen below) in verilog to describe the behaviour of these equations. I wanted to use only 1 DSP slice per logic block to maximize the number of logic blocks as the board I was planning on using (a Zync 7020 SoC) had 220 DSP slices.
         </p>
+        <figure>
+            <img src="images/neuromorphic_research/logic_block.png" alt="logic block" />
+            <figcaption>Diagram of SNN acclerator logic block</figcaption>
+        </figure>
         <p>
-          Gradients are computed analytically and accumulated via the chain rule during
-          the backward pass, then applied by a configurable optimizer (SGD or Adam).
+          Once I had made a logic block that worked I used it in a scaleable architecture (shown below). I designed the architecture around the knowledge that the Zync 7020 SoC has 35 BRAM slics (once configured). The idea was to stored all the neuron values in 1-3 BRAM slices and use the rest of the 34-32 BRAM slices for storing weight values.
         </p>
-        <!-- EDIT: describe your technical approach -->
-
-        <!-- Code snippet — delete this block if you don't want one -->
-        <pre><code>// Example: forward pass through a dense layer
-Matrix DenseLayer::forward(const Matrix&amp; input) {
-    this->input = input;
-    return activate(weights * input + bias);
-}</code></pre>
-      </div>
-
-      <!-- ── RESULTS ── -->
-      <div class="content-section">
-        <p class="section-label">Results</p>
-        <h2>Outcomes</h2>
-
-        <!-- Stat boxes — delete or add boxes as needed -->
-        <div class="results-grid">
-          <div class="result-box">
-            <span class="result-value">94%</span>
-            <span class="result-label">test accuracy on MNIST</span>
-          </div>
-          <div class="result-box">
-            <span class="result-value">2</span>
-            <span class="result-label">library versions built</span>
-          </div>
-        </div>  <!-- EDIT or delete -->
-
+        <figure>
+            <img src="images/neuromorphic_research/accelerator_architecture.png" alt="accelerator architecture" />
+            <figcaption>Diagram of SNN acclerator architecture</figcaption>
+        </figure>
         <p>
-          The library successfully trained on several benchmark datasets and served as
-          the base for the map classifier and architecture search projects.
+          After implementing the architecture in verilog I wrote a python (cocotb) apparatus for testing and running models on the network. Sadly though after completing all this work one of the members of the team told me that the neuron equations we picked did not work well for the MNIST data set. The best accuracy we acheived was 85%. Because of this I am not going to implement the much larger SNN model in my apparatus as it would require more code which is not worth if for a model that I know doesn't work.
         </p>
-        <!-- EDIT: what did you achieve / measure -->
       </div>
 
       <!-- ── WHAT I LEARNED ── -->
       <div class="content-section">
         <p class="section-label">Reflection</p>
         <h2>What I learned</h2>
-        <p>
-          Implementing the backward pass manually made the chain rule click in a way
-          that reading about it never did. I also gained a much better intuition for
-          why vanishing gradients happen in deep networks with sigmoid activations.
-        </p>
+          <p>
+            talk about 
+            -how I used many luts to use only one dsp slice which probably was a bad idea
+            -this is not a neuromorphic computer, it's an accelerator, my next version will be a neuromorphic computer
+            -too many control signals and bad naming
+          </p>
         <!-- EDIT: what was the key insight or takeaway -->
       </div>
 
