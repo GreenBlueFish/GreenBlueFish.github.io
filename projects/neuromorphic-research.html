@@ -68,7 +68,11 @@
         </p>
         <ol>
           <li>Neuron Updating (Forware prop): X<sub>post</sub><sup>data</sup> += (X<sub>pre<sub>1</sub></sub><sup>firing</sup> & W<sub>post<sub>1</sub></sub> + X<sub>pre<sub>2</sub></sub><sup>firing</sup> & W<sub>post<sub>2</sub></sub> + ... + X<sub>pre<sub>n</sub></sub><sup>firing</sup> & W<sub>post<sub>n</sub></sub>)</li>
+          <li>Threshold/Reset: if X<sup>data</sup> &gt; X<sub>threshold</sub> then X<sup>data</sup> = X<sub>reset</sub> and X<sup>firing</sup> = 1 </li>
+          <li>Weight Updating (STDP): (A<sub>+</sub> * X<sub>pre</sub><sup>data</sup>) & X<sub>post</sub><sup>firing</sup></li> - (A<sub>-</sub> * X<sub>post</sub><sup>data</sup>) & X<sub>pre</sub><sup>firing</sup></li>
+          <li>Forward Step in Time: X<sup>data</sup> *= decay_rate, where 0 &lt; decay_rate &gt; 1</li>
         </ol>
+        <p>Where X is a 16-bit neuron value with the first 15 bits being 1Q14 (X<sup>data</sup>) and the most significant bit is the firing bit (X<sup>firing</sup>) which is a 0 if the neuron didn't just fire and a 1 if the neuron did just fire. X<sub>post</sub> is a postsynaptic neuron and X<sub>pre</sub> is a presynaptic neuron. W is a 15-bit (1Q14) weight value representing a synaptic "weight". The other values(X<sub>threshold</sub>, X<sub>reset</sub>, A<sub>+</sub>, A<sub>-</sub>, decay_rate) are model presets.</p>
       </div>
 
       <!-- ── APPROACH ── -->
