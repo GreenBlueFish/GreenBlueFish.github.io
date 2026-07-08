@@ -59,18 +59,11 @@
         <p class="section-label">Approach</p>
         <h2>How I built it</h2>
         <p>
-          The drone was made up of 4 motors controlled by 4 electric speed controllers (ESCs) which connected to an ESP32 (WROOM) microcontroller which was the brain of the dron. The ESC was pwm controlled and was powered by a custom made power distribution board that hooked up to the lithium ion battery. There was also a gyroscopic sensor that hooked up to the ESP32. The drone connected wirelessly via bluetooth to a PS3 controller (the code to do that was done through an open source library).
+          The drone was made up of 4 motors controlled by 4 electric speed controllers (ESCs) which connected to an ESP32 (WROOM) microcontroller which was the brain of the dron. The ESC was pwm controlled and was powered by a custom made power distribution board that hooked up to a fuse, then the lithium ion battery. There was also a gyroscopic sensor that hooked up to the ESP32. The drone connected wirelessly via bluetooth to a PS3 controller (the code to do that was done through an open source library).
         </p>
         <p>
           I designed all the system control code in C++. I have since lost the code for this project sadly. That being said I do remember the basic structure of the code. There was a main class for ESC control with 4 objects, each controlling one ESC. I had another class that dealt with gyroscopic data and would automatically calculate roll and pitch; a class that dealt with controller input and output (I would shake the controller depending on the total power to the motors, the roll, and the pitch); and a class that delt with safety funcitions, such as when I walked away too far and the controller disconnected it would shut off all motors. Or if the drone's angle changed too quickly.
         </p>
-
-        <!-- Code snippet — delete this block if you don't want one -->
-        <pre><code>// Example: forward pass through a dense layer
-Matrix DenseLayer::forward(const Matrix&amp; input) {
-    this->input = input;
-    return activate(weights * input + bias);
-}</code></pre>
       </div>
 
       <!-- ── WHAT I LEARNED ── -->
@@ -78,10 +71,7 @@ Matrix DenseLayer::forward(const Matrix&amp; input) {
         <p class="section-label">Reflection</p>
         <h2>What I learned</h2>
         <p>
-          -don't try to implement wireless tech (I tried to make my own custom controller)
-          Implementing the backward pass manually made the chain rule click in a way
-          that reading about it never did. I also gained a much better intuition for
-          why vanishing gradients happen in deep networks with sigmoid activations.
+          One of the most important things building this drone taught me was to always think about safety features from the begining. Origionally I did not have any saftey features, no power cut off, no throttle acceleration control, and no control to cut power if the drone started to tilt. Obviously this was an issue and the first couple times I learnt exactly why I should consider saftey from the very begining. For the record, no one was ever hurt and no property external to the drone was damaged. That being said I did shatter a drone blade againt a locker, damage my microcontroller pins, and damaged the drone body. After these experiences I spent a couple days writing only safety features. This resulted in a power shutoff button, excessive tilt shut off, excessive tilt accleration shut off, throttle control, lost connectivity to controller shut off, sudden change in accleration shut off (if the drone hits something), and lost connectivity to either the ESCs or gyroscope shut off. After I wrote those features no other incidents happened. 
         </p>
         <!-- EDIT: what was the key insight or takeaway -->
       </div>
