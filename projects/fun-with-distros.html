@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Project Title — Your Name</title>  <!-- EDIT -->
+  <title>Laptops, Distros, and Networking — Rowan Leonard</title>  <!-- EDIT -->
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../style.css" />  <!-- note the ../ to go up one folder -->
 </head>
@@ -12,7 +12,7 @@
   <!-- ── NAV ── -->
   <nav>
     <div class="container">
-      <span class="nav-logo">yourname.github.io</span>  <!-- EDIT -->
+      <span class="nav-logo">GreenBlueFish.github.io</span>  <!-- EDIT -->
       <ul class="nav-links">
         <li><a href="../index.html#about">about</a></li>
         <li><a href="../index.html#projects">projects</a></li>
@@ -30,13 +30,12 @@
       <!-- ── PROJECT HEADER ── -->
       <div class="project-header">
         <div class="project-tags">
-          <span class="tag">C++</span>        <!-- EDIT: your tags -->
-          <span class="tag">from scratch</span>
+          <span class="tag">Linux</span>
+          <span class="tag">Bash</span>
         </div>
-        <h1>Neural Network Library</h1>       <!-- EDIT: project title -->
+        <h1>Laptops, Distros, and Networking</h1>       <!-- EDIT: project title -->
         <p class="project-subtitle">
-          A fully custom neural network library built without any ML frameworks,
-          used as the foundation for all my subsequent network experiments.
+          I have a number of laptops and computers at home. For fun I install different Linux distros and play around with them.
         </p>  <!-- EDIT: one sentence summary -->
         <a class="github-link" href="https://github.com/yourusername/repo" target="_blank">
           View on GitHub ↗
@@ -46,75 +45,76 @@
       <!-- ── MOTIVATION ── -->
       <div class="content-section">
         <p class="section-label">Motivation</p>
-        <h2>Why I built this</h2>
+        <h2>My Story with Laptops, Distros, and Networking</h2>
         <p>
-          I wanted to understand how backpropagation actually works at the level of
-          individual weight updates, not just use a framework as a black box. Building
-          the library from scratch forced me to understand every operation.
+          There is a local computer store that fixed computers and sold both new and second hand computers that my family goes to. One day I went in and asked if they had any old laptops they couldn't sell or that didn't work so I could try to fix and play around with them. To my surprise they said yes and handed me 3.5 Lenovo ThinkPad Yoga 11Es. The 0.5 was a screen. I took them back to my dorm room and spent a night fixing them. They all had issues, ones screens did not turn on, one beeped odd patterns, and the third didn't have a battery and was missing a hard drive. I fixed two of them by swapping screens, batteries, hard drives, fans, and keyboards and installing new operating systems on them. I remember starting with the Linux distro Debian with a GUI. I ended up giving away one of the laptops as I didn't need both and played around with Debian on the other. I remember looking at Libre Office tools, playing some games, and looking into partitioning tables.
         </p>
-        <!-- EDIT: explain your reason for the project -->
+        <p>
+          A little while later I became curious in computer networking and found out about Cisco Packet Tracer. It was free so I downloaded it a took a few courses. They covered simple things like how to wire up networks, what a switch, router, server, and modem was. And then some more fundamental networking skills such as what an IP address, MAC address and subnet mask was. It also went into what DHCP was and the basic protocals for both DHCP and ethernet. I learned about LAN, WAN, SOHO network, and the 7 network layers. The courses also talked about different network protocals such as wifi, bluetooth, and NFC, and also talked about SSID. I got hooked and through making simple networks on Cisco Packet Tracers applied that knowledge.
+        </p>
+        <p>
+          After a while I wondered if I could maybe get another computer and try to get them to talk to each other through ethernet without a switch and router. I figured it would be easy as I would just turn the port settings to manual DHCP and give each computer a unique IP address (192.168.0.x with subnet 255.255.255.0). I was too scared to do this on my personal laptop as I didn't want to break anything so I went back to the store and to my surprise got another 2 laptops (a Lenovo T520 and Lenovo L440), they both worked but were old and slow. They were running Windows 8. I installed Linux Mint Cinnamon on the L440 and Kali Linux on the T520. I then tried to connect the computer up dirrecly via their ethernet ports but I couldn't get it to work, I later found out it wasn't possible to do as older computers do not automatically swap TX and RX. So I just left them laying around. I used Kali a little bit to understand how it worked but I never got really into it. Later on at my first co-op a senior engineer and I were talking and he mentioned he had some networking equiptment he didn't need (a Netgear GS308E switch and Tp-Link Archer C80 router). I asked if I could borrow it and he gave me it for free. I bought a few ethernet cables and connected the router to the switch and the switch to each computer. It worked! I was able to access the router settings page and could ping each computer. I also started to use the Kali laptop to run wireshark and nmap. My network was an offline LAN (SOHO network) which meant I could run any network hacking tool I wanted, plus all the equiptment was free so if something broke it would be no cost to me. I played around with these networks during my 1A co-op semester.
+        </p>
+        <p>
+          Later over the 2025 christmas I went back to the store, got yet another few laptops. I asked the senior engineer if he had any other networking equiptment, he did. On top of that I asked around to see if people had any old routers, switches, laptops, or computers I could have. To my surprise people did. Currently my networking equiptment is made up of.
+        </p>
+        <ul>
+          <li>Computers
+            <ul>
+              <li>Lenovo Yoga 11e</li>
+              <li>Lenovo L440</li>
+              <li>Lenovo T520</li>
+              <li>Lenovo Yoga 260</li>
+              <li>Lenovo T540p</li>
+              <li>Lenovo ThinkCenter M73</li>
+              <li>HP pavilion dv6</li>
+            </ul>
+          </li>
+          <li>Switches
+            <ul>
+              <li>Netgear GS308E</li>
+              <li>Tp-Link TL-SG116</li>
+              <li>Tp-Link TL-SG100SD</li>
+            </ul>
+          </li>
+          <li>Routers
+            <ul>
+              <li>Tp-Link Archer C80</li>
+              <li>D-Link DIR-655</li>
+            </ul>
+          </li>
+        </ul>
+        <p>
+          I have so much equiptment that to move it all I cary it in a suitcase. During my second co-op I would often go to campus and connect together a large network with all my computers, switches, and routers. I would troubleshoot and make sure any device could talk to any other device. Then I would try to send packets with the from MAC address being wrong, I would try to trick switches, and spam computers with requests. Then I would log into my routers and configure to try to prevent this, a simple example is ignoring ICMP echo requests so nmap wouldn't find the router and any networks connected to it. 
+        </p>
+        <h3>Distros</h3>
+        <p>
+          In having so many laptops I have had a lot of ability to install different Linux Distros to see what they are like. Below is a list of distros I have installed
+        </p>
+        <ul>
+          <li>Debian GUI</li>
+          <li>Ubuntu</li>
+          <li>Mint Cinnamon</li>
+          <li>Mint Mate</li>
+          <li>Elemantary OS</li>
+          <li>Parrot OS</li>
+          <li>Kali Linux</li>
+          <li>Tails</li>
+          <li>Red Star (yes, the North Korean OS)</li>
+        </ul>
+        <p>
+          Of these distros I found Mint Cinnamon my favorite as it was very user friendly and I could still easily manage my computer ethernet, wifi, and partitions (pretty much the three things I need to deal with). That being said I did also like Elematary OSs feel and GUI a lot.
+        </p>
+        <p>
+          Kali linux was obviously the best distro for me to learn about network hacking as it came with a suit of tools that I would not have know existed if they weren't included. 
+        </p>
+        <p>
+          Tails was always on my 256GB usb stick whenever I was testing computers so I could make sure the computer was working well before I added a hard drive.
+        </p>
+        <p>
+          You are also probably wondering about Red Star. I was able to get a copy of it through the internet archive. I tried installing it on what I deem to be my worst laptop (incase it broke the laptop) but there was an issue with the partition table. I couldn't get it to work. Someday though I will try to find the source code and fix the issue (I might need to learn Korean first though...).
+        </p>
       </div>
-
-      <!-- ── APPROACH ── -->
-      <div class="content-section">
-        <p class="section-label">Approach</p>
-        <h2>How I built it</h2>
-        <p>
-          The library is structured around a <code>Layer</code> base class with
-          <code>forward()</code> and <code>backward()</code> methods. Each layer type
-          (dense, conv, activation) inherits from it, making it easy to stack layers
-          into a network.
-        </p>
-        <p>
-          Gradients are computed analytically and accumulated via the chain rule during
-          the backward pass, then applied by a configurable optimizer (SGD or Adam).
-        </p>
-        <!-- EDIT: describe your technical approach -->
-
-        <!-- Code snippet — delete this block if you don't want one -->
-        <pre><code>// Example: forward pass through a dense layer
-Matrix DenseLayer::forward(const Matrix&amp; input) {
-    this->input = input;
-    return activate(weights * input + bias);
-}</code></pre>
-      </div>
-
-      <!-- ── RESULTS ── -->
-      <div class="content-section">
-        <p class="section-label">Results</p>
-        <h2>Outcomes</h2>
-
-        <!-- Stat boxes — delete or add boxes as needed -->
-        <div class="results-grid">
-          <div class="result-box">
-            <span class="result-value">94%</span>
-            <span class="result-label">test accuracy on MNIST</span>
-          </div>
-          <div class="result-box">
-            <span class="result-value">2</span>
-            <span class="result-label">library versions built</span>
-          </div>
-        </div>  <!-- EDIT or delete -->
-
-        <p>
-          The library successfully trained on several benchmark datasets and served as
-          the base for the map classifier and architecture search projects.
-        </p>
-        <!-- EDIT: what did you achieve / measure -->
-      </div>
-
-      <!-- ── WHAT I LEARNED ── -->
-      <div class="content-section">
-        <p class="section-label">Reflection</p>
-        <h2>What I learned</h2>
-        <p>
-          Implementing the backward pass manually made the chain rule click in a way
-          that reading about it never did. I also gained a much better intuition for
-          why vanishing gradients happen in deep networks with sigmoid activations.
-        </p>
-        <!-- EDIT: what was the key insight or takeaway -->
-      </div>
-
     </div>
   </div>
 

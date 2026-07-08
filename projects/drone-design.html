@@ -43,7 +43,11 @@
         <p class="section-label">Motivation</p>
         <h2>Why I built this</h2>
         <p>
-          For my grade 12 tech class I had to spend the entire semester on one project, I thought it would be fun to make a drone. To challange myself I decided to design all hardware and implement all software from scratch. Below is a video of the drone flying. I didn't implement a stabilization algorithm thus why the drone is unstable.
+          For my grade 12 tech class, I had to spend an entire semester on a single project, and I thought
+          it would be fun to build a drone. To push myself, I decided to design all the hardware and write
+          all the software from scratch rather than buying an off-the-shelf flight controller. Below is a
+          video of the drone flying — I never got around to implementing a stabilization algorithm, which is
+          why it's visibly unstable in the air.
         </p>
         <!-- EDIT: explain your reason for the project -->
          <div class="video-wrapper">
@@ -59,10 +63,21 @@
         <p class="section-label">Approach</p>
         <h2>How I built it</h2>
         <p>
-          The drone was made up of 4 motors controlled by 4 electric speed controllers (ESCs) which connected to an ESP32 (WROOM) microcontroller which was the brain of the dron. The ESC was pwm controlled and was powered by a custom made power distribution board that hooked up to a fuse, then the lithium ion battery. There was also a gyroscopic sensor that hooked up to the ESP32. The drone connected wirelessly via bluetooth to a PS3 controller (the code to do that was done through an open source library).
+          The drone was built around 4 motors, each driven by its own electronic speed controller (ESC),
+          all controlled by an ESP32 (WROOM) microcontroller acting as the brain of the drone. The ESCs were
+          PWM-controlled and powered through a custom power distribution board that ran from a fuse to a
+          lithium-ion battery. A gyroscopic sensor was also wired into the ESP32 for orientation data. For
+          input, the drone connected wirelessly over Bluetooth to a PS3 controller, using an open-source
+          library to handle the pairing and communication.
         </p>
         <p>
-          I designed all the system control code in C++. I have since lost the code for this project sadly. That being said I do remember the basic structure of the code. There was a main class for ESC control with 4 objects, each controlling one ESC. I had another class that dealt with gyroscopic data and would automatically calculate roll and pitch; a class that dealt with controller input and output (I would shake the controller depending on the total power to the motors, the roll, and the pitch); and a class that delt with safety funcitions, such as when I walked away too far and the controller disconnected it would shut off all motors. Or if the drone's angle changed too quickly.
+          I wrote all the system control code in C++. Sadly, I've since lost the actual source for this
+          project, but I still remember the basic structure. There was a main class for ESC control, with
+          4 objects, one per ESC. Another class handled gyroscope data and continuously computed roll and
+          pitch. A third class handled controller input and output, including haptic feedback — I'd rumble
+          the controller based on total motor power, roll, and pitch. A fourth class handled safety logic:
+          if I walked too far away and the controller disconnected, or if the drone's angle changed too
+          quickly, it would cut power to all motors.
         </p>
       </div>
 
@@ -71,7 +86,19 @@
         <p class="section-label">Reflection</p>
         <h2>What I learned</h2>
         <p>
-          One of the most important things building this drone taught me was to always think about safety features from the begining. Origionally I did not have any saftey features, no power cut off, no throttle acceleration control, and no control to cut power if the drone started to tilt. Obviously this was an issue and the first couple times I learnt exactly why I should consider saftey from the very begining. For the record, no one was ever hurt and no property external to the drone was damaged. That being said I did shatter a drone blade againt a locker, damage my microcontroller pins, and damaged the drone body. After these experiences I spent a couple days writing only safety features. This resulted in a power shutoff button, excessive tilt shut off, excessive tilt accleration shut off, throttle control, lost connectivity to controller shut off, sudden change in accleration shut off (if the drone hits something), and lost connectivity to either the ESCs or gyroscope shut off. After I wrote those features no other incidents happened. 
+          One of the most important things this drone taught me was to think about safety features from
+          day one, not as an afterthought. Originally, I had none: no power cutoff, no throttle acceleration
+          limiting, and no cutoff for excessive tilt. Predictably, that caused problems, and the first
+          couple of incidents taught me exactly why safety needs to be designed in from the beginning. For
+          the record, no one was ever hurt and nothing outside the drone itself was damaged — but I did
+          shatter a propeller against a locker, damage my microcontroller's pins, and dent the drone's frame.
+        </p>
+        <p>
+          After that, I spent a couple of days writing nothing but safety logic. That pass added a manual
+          power shutoff button, a cutoff for excessive tilt, a cutoff for excessive tilt acceleration,
+          throttle limiting, an automatic shutoff if the controller lost connection, a shutoff triggered by
+          a sudden change in acceleration (i.e., the drone hitting something), and a shutoff if the ESCs or
+          gyroscope lost connectivity. After adding those features, I didn't have another incident.
         </p>
         <!-- EDIT: what was the key insight or takeaway -->
       </div>
