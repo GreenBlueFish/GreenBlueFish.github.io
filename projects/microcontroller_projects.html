@@ -61,6 +61,10 @@
             <img src="images/microcontrollers/plant_project_design.png" alt="plant project layout" />
             <figcaption>Plant Monitor Layout</figcaption>
         </figure>
+        <figure>
+            <img src="images/microcontrollers/plant_project_circuit.png" alt="plant project circuit" />
+            <figcaption>Plant Monitor Circuit</figcaption>
+        </figure>
         <p>
           The idea was that there were 5 sensors that keeped track of the plants health and that data was sent to the user via a 4 digit display. The traffic light was used to indicate the plants health. The rotary encoder (potentiometer) and button were used to look at different sensor data and the RGB LED was for telling the user what sensor they had selected. And yes, I did include a flame sensor. It came with sensors packet I ordered online and thought it would be funny to include. If the plant catches fire the traffic light turns red, in hind sight maybe I should have included an alarm. Below is a photo of the board with the sensors and interface excluding the 4 digit display.
         </p>
@@ -84,68 +88,41 @@
             Your browser does not support the video tag.
           </video>
         </div>
+        <p>
+          To see the full documentation that myself and my partner made you can see that <a href="images/microcontrollers/plant_project_docs.pdf" target="_blank" rel="noopener noreferrer">here</a></li>.
+        </p>
       </div>
 
-      <!-- ── APPROACH ── -->
+      <!-- ── ESP32 Drone ── -->
       <div class="content-section">
-        <p class="section-label">Approach</p>
-        <h2>How I built it</h2>
+        <div class="project-tags">
+          <span class="tag">ESP32 WROOM</span>
+        </div>
+        <p class="section-label">Drone project</p>
+        <a class="github-link" href="https://github.com/GreenBlueFish/LH516A-10L_Programmer/tree/main" target="_blank">
+          View on GitHub ↗
+        </a>
+        <h2>About the Project</h2>
         <p>
-          The library is structured around a <code>Layer</code> base class with
-          <code>forward()</code> and <code>backward()</code> methods. Each layer type
-          (dense, conv, activation) inherits from it, making it easy to stack layers
-          into a network.
+          More about the project can be found <a class="project-link" href="drone-design.html">here</a>. To give a quick summary of the project. I built a 4 motor drone from scratch. I used and ESP32 WROOM board to control the drone. The ESP32 used PWM to control the ESC's which inturn controlled the motors. I integrated a gyroscope chip to be able to tell dirrection and tilt, and I controlled the drone via a PS3 controller connected to the ESP32 via bluetooth.
         </p>
-        <p>
-          Gradients are computed analytically and accumulated via the chain rule during
-          the backward pass, then applied by a configurable optimizer (SGD or Adam).
-        </p>
-        <!-- EDIT: describe your technical approach -->
-
-        <!-- Code snippet — delete this block if you don't want one -->
-        <pre><code>// Example: forward pass through a dense layer
-Matrix DenseLayer::forward(const Matrix&amp; input) {
-    this->input = input;
-    return activate(weights * input + bias);
-}</code></pre>
       </div>
 
-      <!-- ── RESULTS ── -->
+
+      <!-- ── Arduino Due IC Programmer ── -->
       <div class="content-section">
-        <p class="section-label">Results</p>
-        <h2>Outcomes</h2>
-
-        <!-- Stat boxes — delete or add boxes as needed -->
-        <div class="results-grid">
-          <div class="result-box">
-            <span class="result-value">94%</span>
-            <span class="result-label">test accuracy on MNIST</span>
-          </div>
-          <div class="result-box">
-            <span class="result-value">2</span>
-            <span class="result-label">library versions built</span>
-          </div>
-        </div>  <!-- EDIT or delete -->
-
+        <div class="project-tags">
+          <span class="tag">Ardunio Due</span>
+        </div>
+        <p class="section-label">IC Programmer</p>
+        <a class="github-link" href="https://github.com/GreenBlueFish/LH516A-10L_Programmer/tree/main" target="_blank">
+          View on GitHub ↗
+        </a>
+        <h2>About the Project</h2>
         <p>
-          The library successfully trained on several benchmark datasets and served as
-          the base for the map classifier and architecture search projects.
+          A friend had ordered too many LH5164A-10L SRAM 64Kbit memory chips and gave me a couple to play around with. I wanted to read and write data off of them to see how the process worked so I used my Arduino Due to read and write data from and to the memory chip. The project was fairly simple, it involved writing an 8-bit memory address and 8-bit data to the chip and enabling writing. Likewise reading was similar, I sent in an 8-bit memory address and read from the 8-bit data line. I was able to fully read and write to the chip. I was able to varify this by sweeping over the entire chip and reading the memory addresses, then writing to specific ones, then reading again. Everything matched so the code worked.
         </p>
-        <!-- EDIT: what did you achieve / measure -->
       </div>
-
-      <!-- ── WHAT I LEARNED ── -->
-      <div class="content-section">
-        <p class="section-label">Reflection</p>
-        <h2>What I learned</h2>
-        <p>
-          Implementing the backward pass manually made the chain rule click in a way
-          that reading about it never did. I also gained a much better intuition for
-          why vanishing gradients happen in deep networks with sigmoid activations.
-        </p>
-        <!-- EDIT: what was the key insight or takeaway -->
-      </div>
-
     </div>
   </div>
 
