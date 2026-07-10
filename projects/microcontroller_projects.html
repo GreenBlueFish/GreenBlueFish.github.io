@@ -59,21 +59,21 @@
         </p>
         <figure>
             <img src="images/microcontrollers/plant_project_design.png" alt="plant project layout" />
-            <figcaption>Computer 1 Layout</figcaption>
+            <figcaption>Plant Monitor Layout</figcaption>
         </figure>
         <p>
           The idea was that there were 5 sensors that keeped track of the plants health and that data was sent to the user via a 4 digit display. The traffic light was used to indicate the plants health. The rotary encoder (potentiometer) and button were used to look at different sensor data and the RGB LED was for telling the user what sensor they had selected. And yes, I did include a flame sensor. It came with sensors packet I ordered online and thought it would be funny to include. If the plant catches fire the traffic light turns red, in hind sight maybe I should have included an alarm. Below is a photo of the board with the sensors and interface excluding the 4 digit display.
         </p>
         <figure>
             <img src="images/microcontrollers/plant_project_sensors.jpg" alt="plant project circuit" />
-            <figcaption>Computer 1 Layout</figcaption>
+            <figcaption>Plant Monitor Sensors and Interface Circuit</figcaption>
         </figure>
         <p>
           We were not allowed to use any libraries except for communication between the boards so I had to implement the 4 digit display by myself. Below is a photo of the 4 digit display with the sensors and interface. I never intended to share these photos thus why this photo doesn't show the 4 digit display well.
         </p>
         <figure>
             <img src="images/microcontrollers/plant_project_full.jpg" alt="plant project circuit" />
-            <figcaption>Computer 1 Layout</figcaption>
+            <figcaption>Plant Monitor Circuit with Display</figcaption>
         </figure>
         <p>
           To implement this I used 4 shift regitsters to run each of the 4 7-segment displays. This took me a while to get working but I eventually was able to get it to work. The video below shows it counting. I have automuted the video as I took the video for a friend who had provided me with the shift registers and he walked me through how to use one.
