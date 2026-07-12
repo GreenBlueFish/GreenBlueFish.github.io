@@ -35,7 +35,7 @@
           <span class="tag">Arduino (Uno, Due)</span>
           <span class="tag">ESP32 WROOM</span>
         </div>
-        <h1>Experience with Microcontroller</h1>
+        <h1>Experience with Microcontrollers</h1>
         <p class="project-subtitle">
           I have made many small microcontroller projects. Read more to find out about them.
         </p>  <!-- EDIT: one sentence summary -->
@@ -52,10 +52,22 @@
         </a>  <!-- EDIT -->
         <h2>About the Project</h2>
         <p>
-          For one of my courses in 1A, myself and a team mate were tasked with making anything we wanted using an STM32 Nucleo board. There were only a few requirements. The first one was we needed to solve a problem. Myself and my parten had a habit of killing plants so we decided to make an automatic plant monitor. Another requirement was that we needed to use two boards and get them to talk to each other. We also needed to be able to display something to the user.
+          For one of my courses in 1A, my teammate and I were tasked with building anything we wanted using
+          an STM32 Nucleo board. There were only a few requirements: we had to solve some kind of problem,
+          use two boards and get them talking to each other, and display something to the user. My partner
+          and I both had a habit of killing houseplants, so naturally, we decided to build an automatic
+          plant monitor.
         </p>
         <p>
-          I was at this point some what familiar with microcontollers so I implemented all the circuity and code by myself while my partner worked on documentation and meetings. The basic layout of the project is shown below in the schematic. I know that there are transistor symbols, ignore those. I didn't understand how transistors worked and thought they were perfect digital switches so I was going to control power to each sensor by selecting it with the buss line. The idea is that each sensor only was turned on when it was needed to save power because origionally I thought the power required to turn all sensors on was too much. I was wrong after measuring and ended up hooking all sensors up dirrectly. 
+          I was somewhat familiar with microcontrollers at this point, so I implemented all the circuitry
+          and code myself while my partner handled documentation and meetings. The basic layout of the
+          project is shown in the schematic below. Fair warning: there are transistor symbols in there that
+          you should just ignore. At the time, I didn't actually understand how transistors worked and
+          assumed they were perfect digital switches, so my plan was to power each sensor individually by
+          selecting it over the bus line — the idea being that each sensor would only turn on when needed,
+          to save power, since I originally (and incorrectly) thought powering all the sensors at once would
+          draw too much current. Turns out I was wrong once I actually measured it, so I ended up wiring
+          all the sensors up directly instead.
         </p>
         <figure>
             <img src="images/microcontrollers/plant_project_design.png" alt="plant project layout" />
@@ -66,21 +78,34 @@
             <figcaption>Plant Monitor Circuit</figcaption>
         </figure>
         <p>
-          The idea was that there were 5 sensors that keeped track of the plants health and that data was sent to the user via a 4 digit display. The traffic light was used to indicate the plants health. The rotary encoder (potentiometer) and button were used to look at different sensor data and the RGB LED was for telling the user what sensor they had selected. And yes, I did include a flame sensor. It came with sensors packet I ordered online and thought it would be funny to include. If the plant catches fire the traffic light turns red, in hind sight maybe I should have included an alarm. Below is a photo of the board with the sensors and interface excluding the 4 digit display.
+          The idea was that 5 sensors would keep track of the plant's health, with that data sent to the
+          user via a 4-digit display. The traffic light indicated overall plant health, the rotary encoder
+          (a potentiometer) and button let the user cycle through different sensor readings, and the RGB
+          LED showed which sensor was currently selected. And yes, I did include a flame sensor — it came
+          bundled in a sensor pack I ordered online, and I thought it would be funny to wire in. If the
+          plant catches fire, the traffic light turns red; in hindsight, maybe an actual alarm would have
+          been the smarter call. Below is a photo of the board with the sensors and interface, minus the
+          4-digit display.
         </p>
         <figure>
             <img src="images/microcontrollers/plant_project_sensors.jpg" alt="plant project circuit" />
             <figcaption>Plant Monitor Sensors and Interface Circuit</figcaption>
         </figure>
         <p>
-          We were not allowed to use any libraries except for communication between the boards so I had to implement the 4 digit display by myself. Below is a photo of the 4 digit display with the sensors and interface. I never intended to share these photos thus why this photo doesn't show the 4 digit display well.
+          We weren't allowed to use any libraries except for communication between the boards, so I had to
+          implement the 4-digit display myself, from scratch. Below is a photo of the display alongside the
+          sensors and interface. I never planned on sharing these photos, which is why this one doesn't
+          show the display very well.
         </p>
         <figure>
             <img src="images/microcontrollers/plant_project_full.jpg" alt="plant project circuit" />
             <figcaption>Plant Monitor Circuit with Display</figcaption>
         </figure>
         <p>
-          To implement this I used 4 shift regitsters to run each of the 4 7-segment displays. This took me a while to get working but I eventually was able to get it to work. The video below shows it counting. I have automuted the video as I took the video for a friend who had provided me with the shift registers and he walked me through how to use one.
+          To pull this off, I used 4 shift registers to drive each of the 4 seven-segment displays. It
+          took a while to get right, but I got there eventually — the video below shows it counting. I
+          muted the video since I originally recorded it for a friend who'd given me the shift registers
+          and walked me through how to use one.
         </p>
         <div class="video-wrapper">
           <video controls muted>
@@ -89,7 +114,8 @@
           </video>
         </div>
         <p>
-          To see the full documentation that myself and my partner made you can see that <a href="images/microcontrollers/plant_project_docs.pdf" target="_blank" rel="noopener noreferrer">here</a></li>.
+          To see the full documentation my partner and I put together, you can find it
+          <a href="images/microcontrollers/plant_project_docs.pdf" target="_blank" rel="noopener noreferrer">here</a>.
         </p>
       </div>
 
@@ -104,7 +130,11 @@
         </a>
         <h2>About the Project</h2>
         <p>
-          More about the project can be found <a class="project-link" href="drone-design.html">here</a>. To give a quick summary of the project. I built a 4 motor drone from scratch. I used and ESP32 WROOM board to control the drone. The ESP32 used PWM to control the ESC's which inturn controlled the motors. I integrated a gyroscope chip to be able to tell dirrection and tilt, and I controlled the drone via a PS3 controller connected to the ESP32 via bluetooth.
+          More about the project can be found <a class="project-link" href="drone-design.html">here</a>. To
+          give a quick summary: I built a 4-motor drone from scratch, using an ESP32 WROOM board to control
+          it. The ESP32 used PWM to control the ESCs, which in turn controlled the motors. I integrated a
+          gyroscope chip to sense direction and tilt, and I flew the drone using a PS3 controller connected
+          to the ESP32 over Bluetooth.
         </p>
       </div>
 
@@ -112,7 +142,7 @@
       <!-- ── Arduino Due IC Programmer ── -->
       <div class="content-section">
         <div class="project-tags">
-          <span class="tag">Ardunio Due</span>
+          <span class="tag">Arduino Due</span>
         </div>
         <p class="section-label">IC Programmer</p>
         <a class="github-link" href="https://github.com/GreenBlueFish/LH516A-10L_Programmer/tree/main" target="_blank">
@@ -120,7 +150,14 @@
         </a>
         <h2>About the Project</h2>
         <p>
-          A friend had ordered too many LH5164A-10L SRAM 64Kbit memory chips and gave me a couple to play around with. I wanted to read and write data off of them to see how the process worked so I used my Arduino Due to read and write data from and to the memory chip. The project was fairly simple, it involved writing an 8-bit memory address and 8-bit data to the chip and enabling writing. Likewise reading was similar, I sent in an 8-bit memory address and read from the 8-bit data line. I was able to fully read and write to the chip. I was able to varify this by sweeping over the entire chip and reading the memory addresses, then writing to specific ones, then reading again. Everything matched so the code worked.
+          A friend had ordered too many LH5164A-10L SRAM 64Kbit memory chips and handed me a couple to play
+          around with. I wanted to see how the read/write process actually worked at the hardware level, so
+          I used my Arduino Due to read and write data to one of the chips. The project itself was fairly
+          simple: writing involved sending an 8-bit memory address and 8-bit data to the chip and asserting
+          the write-enable line, while reading meant sending an 8-bit address and reading back the 8-bit
+          data line. I confirmed everything worked by sweeping the entire address space and reading back
+          every value, writing to a handful of specific addresses, then reading again — everything matched,
+          so the read/write logic was solid.
         </p>
       </div>
     </div>
