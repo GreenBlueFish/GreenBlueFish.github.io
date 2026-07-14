@@ -48,15 +48,32 @@
         <p class="section-label">Digital</p>
         <h2>Overview</h2>
         <p>
-          During my 3rd co-op term (right after 2A) I decided to join UW ASIC. The digital team was building a 10G ethernet parser. I decided to join but first had to complete a digital team onboarding. The project was writing an spi peripheral that integrated with an already made pwm peripheral. The code of that can be found <a href="https://github.com/GreenBlueFish/onboarding-start" target="_blank" rel="noopener noreferrer">here</a> 
+          During my 3rd co-op term, right after 2A, I joined UW ASIC. At the time, the digital team was
+          building a 10G Ethernet parser, but before contributing to that I had to complete the digital
+          team's onboarding project: implementing an SPI peripheral that interfaces with an existing PWM
+          peripheral. The source for that project is available
+          <a href="https://github.com/GreenBlueFish/onboarding-start" target="_blank" rel="noopener noreferrer">here</a>.
         </p>
         <h3>Onboarding</h3>
         <p>
-          The onboard project involved taking in a one bit data line and clock from an attached device. Then writing some code for a cross clock domain to be able to receive the data on the systems clock signal. Then I had to load a buffer with the data and decoding it. The first bit indicated read or write, the next three bits indicated a specific register, and the last 8 bits were data for a register. The register values were then read by an pwm module that produced a pwm signal based on the register value. Apart of the onboarding was also to write test code in python using the cocotb libaray. This involved writing signals to the device and testing results were within an acceptable threshold
+          The onboarding project involved taking in a one-bit data line and clock from an attached device,
+          then implementing cross-clock-domain logic to safely capture that data on the system's clock
+          signal. From there, I loaded the incoming bits into a buffer and decoded the frame: the first bit
+          indicated a read or write, the next three bits selected a specific register, and the remaining
+          8 bits were the data payload for that register. The register values were then consumed by a PWM
+          module, which generated a PWM output based on the current register state. Part of the onboarding
+          also involved writing a Python-based testbench using the cocotb library, driving input signals
+          into the design and asserting that the resulting outputs fell within an acceptable tolerance.
         </p>
         <h3>10G Ethernet Parser</h3>
         <p>
-          I decided to work on the interface team. My task was ensuring proper AXI-stream 4 communication protocal between the MAC RX and Frame Parser, and the ARP responder and MAC TX. I started by reading through the <a href="https://developer.arm.com/documentation/ihi0051/b/" target="_blank" rel="noopener noreferrer">AMBA AXI-Stream Protocal Specification</a> to understand the protocal. I then learnt how the MAC, Frame Parser, and ARP responder worked. This was not necessary but I thought it would be a good idea to know. I then....Finish
+          I chose to work on the interface team. My task was to ensure a correct AXI4-Stream communication
+          protocol between the MAC RX and Frame Parser blocks, and between the ARP responder and MAC TX. I
+          started by reading through the
+          <a href="https://developer.arm.com/documentation/ihi0051/b/" target="_blank" rel="noopener noreferrer">AMBA AXI4-Stream Protocol Specification</a>
+          to fully understand the handshaking and signal semantics involved. I then studied how the MAC,
+          Frame Parser, and ARP responder blocks worked internally, not strictly required for my task, but
+          useful context for reasoning about the interface correctly.
         </p>
       </div>
 
@@ -65,7 +82,39 @@
         <p class="section-label">Analog</p>
         <h2>Overview</h2>
           <p>
-            I have not yet finished the onboarding, though I am in the process of making an opamp on an ASIC
+            The Analog ASIC design team, like the digital one, runs its own onboarding process. The task is
+            to design a two-stage Miller-compensated OTA, which I implemented in XSchem and simulated
+            entirely in ngspice. Below is the schematic for my design.
+          </p>
+          <figure>
+            <img src="images/uw_asic/opamp_circuit.png" alt="opamp circuit" />
+            <figcaption>Two-Stage Miller-compensated OTA</figcaption>
+          </figure>
+          <p>
+            I have yet to lay out this design, but plan to do so in the coming weeks. During onboarding, one
+            of the team leads gave me a copy of
+            <a href="https://www.academia.edu/76121731/Design_of_Analog_CMOS_Integrated_Circuits_Behzad_Razavi_z_lib_org_" target="_blank" rel="noopener noreferrer">Design of Analog CMOS Integrated Circuits, Second Edition, by Razavi</a>.
+            I worked through the following chapters:
+          </p>
+          <ul>
+            <li>1. Introduction to Analog Design</li>
+            <li>2. Basic MOS Device Physics</li>
+            <li>3. Single-Stage Amplifiers</li>
+            <li>4. Differential Amplifiers</li>
+            <li>5. Current Mirrors and Biasing Techniques</li>
+            <li>9. Operational Amplifiers</li>
+          </ul>
+          <p>
+            The team lead then assigned the following chapters:
+          </p>
+          <ul>
+            <li>12. Bandgap References</li>
+            <li>15. Oscillators</li>
+            <li>16. Phase-Locked Loops</li>
+          </ul>
+          <p>
+            I'm nearly finished with these. My current task is to summarize each chapter and build working
+            expertise in the material, something I'm actively in the process of completing.
           </p>
         <!-- EDIT: what was the key insight or takeaway -->
       </div>

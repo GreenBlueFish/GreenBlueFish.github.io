@@ -64,7 +64,7 @@
           project is shown in the schematic below. Fair warning: there are transistor symbols in there that
           you should just ignore. At the time, I didn't actually understand how transistors worked and
           assumed they were perfect digital switches, so my plan was to power each sensor individually by
-          selecting it over the bus line — the idea being that each sensor would only turn on when needed,
+          selecting it over the bus line, the idea being that each sensor would only turn on when needed,
           to save power, since I originally (and incorrectly) thought powering all the sensors at once would
           draw too much current. Turns out I was wrong once I actually measured it, so I ended up wiring
           all the sensors up directly instead.
@@ -81,7 +81,7 @@
           The idea was that 5 sensors would keep track of the plant's health, with that data sent to the
           user via a 4-digit display. The traffic light indicated overall plant health, the rotary encoder
           (a potentiometer) and button let the user cycle through different sensor readings, and the RGB
-          LED showed which sensor was currently selected. And yes, I did include a flame sensor — it came
+          LED showed which sensor was currently selected. And yes, I did include a flame sensor, it came
           bundled in a sensor pack I ordered online, and I thought it would be funny to wire in. If the
           plant catches fire, the traffic light turns red; in hindsight, maybe an actual alarm would have
           been the smarter call. Below is a photo of the board with the sensors and interface, minus the
@@ -103,7 +103,7 @@
         </figure>
         <p>
           To pull this off, I used 4 shift registers to drive each of the 4 seven-segment displays. It
-          took a while to get right, but I got there eventually — the video below shows it counting. I
+          took a while to get right, but I got there eventually, the video below shows it counting. I
           muted the video since I originally recorded it for a friend who'd given me the shift registers
           and walked me through how to use one.
         </p>
@@ -156,7 +156,7 @@
           simple: writing involved sending an 8-bit memory address and 8-bit data to the chip and asserting
           the write-enable line, while reading meant sending an 8-bit address and reading back the 8-bit
           data line. I confirmed everything worked by sweeping the entire address space and reading back
-          every value, writing to a handful of specific addresses, then reading again — everything matched,
+          every value, writing to a handful of specific addresses, then reading again, everything matched,
           so the read/write logic was solid.
         </p>
       </div>
