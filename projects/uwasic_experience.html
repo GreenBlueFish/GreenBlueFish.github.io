@@ -67,14 +67,21 @@
         </p>
         <h3>10G Ethernet Parser</h3>
         <p>
-          I chose to work on the interface team. My task was to ensure a correct AXI4-Stream communication
-          protocol between the MAC RX and Frame Parser blocks, and between the ARP responder and MAC TX. I
-          started by reading through the
-          <a href="https://developer.arm.com/documentation/ihi0051/b/" target="_blank" rel="noopener noreferrer">AMBA AXI4-Stream Protocol Specification</a>
-          to fully understand the handshaking and signal semantics involved. I then studied how the MAC,
-          Frame Parser, and ARP responder blocks worked internally, not strictly required for my task, but
-          useful context for reasoning about the interface correctly.
+          I chose to work on the interface team. My task was to ensure a correct AXI4-Stream communication protocol between the MAC RX and Frame Parser blocks, and between the ARP responder and MAC TX. I started by reading through the <a href="https://developer.arm.com/documentation/ihi0051/b/" target="_blank" rel="noopener noreferrer">AMBA AXI4-Stream Protocol Specification</a> to fully understand the handshaking and signal semantics involved. I then studied how the MAC, Frame Parser, and ARP responder blocks worked internally, not strictly required for my task, but useful context for reasoning about the interface correctly. Below is an image of the ethernet parser layout.
         </p>
+        <figure>
+            <img src="images/uw_asic/10G_Etherner_Parser_Photo.png" alt="10G Etherner Parser" />
+            <figcaption>Two-Stage Miller-compensated OTA</figcaption>
+          </figure>
+        <h3>Asynchronous Token Ring FIFO</h3>
+      <p>
+        Between the MAC and the Frame Parser / ARP Responder, the ASIC team identified a need for an
+        asynchronous FIFO to bridge the clock-domain delay between the two blocks. I was tasked with
+        implementing a token-based async FIFO to solve this. The source code is available
+        <a href="https://github.com/GreenBlueFish/Asynchronous-Token-Ring-FIFO" target="_blank" rel="noopener noreferrer">here</a>.
+        The architecture is based on the token ring design described in
+        <a href="https://www.academia.edu/423285/Comparison_of_Synchronization_Techniques_In_Pointer_FIFOs" target="_blank" rel="noopener noreferrer">Comparison of Synchronization Techniques in Pointer FIFOs</a>.
+      </p>
       </div>
 
       <!-- ── Analog ── -->
