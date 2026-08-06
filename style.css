@@ -5,12 +5,12 @@
 
 /* ── Variables ── */
 :root {
-  --bg:        #071b2e;
-  --surface:   #0f2c47;
-  --border:    #1e3f5c;
-  --accent:    #4dd8e8;   /* change this one line to re-theme the whole site */
-  --text:      #eaf6fb;
-  --muted:     #7fa3c2;
+  --bg:        #1a120b;
+  --surface:   #2a1d14;
+  --border:    #3d2b1c;
+  --accent:    #ff9d4d;   /* change this one line to re-theme the whole site */
+  --text:      #fbeee0;
+  --muted:     #c9a88a;
   --font-mono: 'IBM Plex Mono', monospace;
   --font-sans: 'IBM Plex Sans', sans-serif;
 }
