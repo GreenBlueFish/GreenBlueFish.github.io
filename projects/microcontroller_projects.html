@@ -3,172 +3,118 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Experience with Microcontrollers — Rowan Leonard</title>  <!-- EDIT -->
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../style.css" />  <!-- note the ../ to go up one folder -->
+  <title>Experience with Microcontrollers — Rowan Leonard</title>
+  <link rel="stylesheet" href="../style.css" />
 </head>
 <body>
+  <div class="container">
 
-  <!-- ── NAV ── -->
-  <nav>
-    <div class="container">
-      <span class="nav-logo">GreenBlueFish.github.io</span>  <!-- EDIT -->
-      <ul class="nav-links">
-        <li><a href="../index.html#about">about</a></li>
-        <li><a href="../index.html#projects">projects</a></li>
-        <li><a href="../index.html#contact">contact</a></li>
-      </ul>
-    </div>
-  </nav>
+    <a class="back-link" href="../index.html">← home</a>
 
-  <div class="page">
-    <div class="container">
+    <h1>Experience with Microcontrollers</h1>
+    <p class="subtitle">I have made many small microcontroller projects. Read more to find out about them.</p>
+    <p class="page-tags">STM32 Nucleo · Raspberry Pi (4B, pico) · Arduino (Uno, Due) · ESP32 WROOM</p>
 
-      <!-- Back link -->
-      <a class="back-link" href="../index.html">← back to projects</a>
+    <h2>Plant Project</h2>
+    <p class="page-tags">STM32 Nucleo</p>
+    <p><a href="https://github.com/GreenBlueFish/Plant-Project" target="_blank">View on GitHub →</a></p>
+    <h3>About the Project</h3>
+    <p>
+      For one of my courses in 1A, my teammate and I were tasked with building anything we wanted using
+      an STM32 Nucleo board. There were only a few requirements: we had to solve some kind of problem,
+      use two boards and get them talking to each other, and display something to the user. My partner
+      and I both had a habit of killing houseplants, so naturally, we decided to build an automatic
+      plant monitor.
+    </p>
+    <p>
+      I was somewhat familiar with microcontrollers at this point, so I implemented all the circuitry
+      and code myself while my partner handled documentation and meetings. The basic layout of the
+      project is shown in the schematic below. Fair warning: there are transistor symbols in there that
+      you should just ignore. At the time, I didn't actually understand how transistors worked and
+      assumed they were perfect digital switches, so my plan was to power each sensor individually by
+      selecting it over the bus line, the idea being that each sensor would only turn on when needed,
+      to save power, since I originally (and incorrectly) thought powering all the sensors at once would
+      draw too much current. Turns out I was wrong once I actually measured it, so I ended up wiring
+      all the sensors up directly instead.
+    </p>
+    <figure>
+      <img src="images/microcontrollers/plant_project_design.png" alt="plant project layout" />
+      <figcaption>Plant Monitor Layout</figcaption>
+    </figure>
+    <figure>
+      <img src="images/microcontrollers/plant_project_circuit.png" alt="plant project circuit" />
+      <figcaption>Plant Monitor Circuit</figcaption>
+    </figure>
+    <p>
+      The idea was that 5 sensors would keep track of the plant's health, with that data sent to the
+      user via a 4-digit display. The traffic light indicated overall plant health, the rotary encoder
+      (a potentiometer) and button let the user cycle through different sensor readings, and the RGB
+      LED showed which sensor was currently selected. And yes, I did include a flame sensor, it came
+      bundled in a sensor pack I ordered online, and I thought it would be funny to wire in. If the
+      plant catches fire, the traffic light turns red; in hindsight, maybe an actual alarm would have
+      been the smarter call. Below is a photo of the board with the sensors and interface, minus the
+      4-digit display.
+    </p>
+    <figure>
+      <img src="images/microcontrollers/plant_project_sensors.jpg" alt="plant project circuit" />
+      <figcaption>Plant Monitor Sensors and Interface Circuit</figcaption>
+    </figure>
+    <p>
+      We weren't allowed to use any libraries except for communication between the boards, so I had to
+      implement the 4-digit display myself, from scratch. Below is a photo of the display alongside the
+      sensors and interface. I never planned on sharing these photos, which is why this one doesn't
+      show the display very well.
+    </p>
+    <figure>
+      <img src="images/microcontrollers/plant_project_full.jpg" alt="plant project circuit" />
+      <figcaption>Plant Monitor Circuit with Display</figcaption>
+    </figure>
+    <p>
+      To pull this off, I used 4 shift registers to drive each of the 4 seven-segment displays. It
+      took a while to get right, but I got there eventually, the video below shows it counting. I
+      muted the video since I originally recorded it for a friend who'd given me the shift registers
+      and walked me through how to use one.
+    </p>
+    <video controls muted>
+      <source src="videos/microcontroller_projects/plant_project_display.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <p>
+      To see the full documentation my partner and I put together, you can find it
+      <a href="images/microcontrollers/plant_project_docs.pdf" target="_blank" rel="noopener noreferrer">here</a>.
+    </p>
 
-      <!-- ── PROJECT HEADER ── -->
-      <div class="project-header">
-        <div class="project-tags">
-          <span class="tag">STM32 Nucleo</span>
-          <span class="tag">Raspberry Pi (4B, pico)</span>
-          <span class="tag">Arduino (Uno, Due)</span>
-          <span class="tag">ESP32 WROOM</span>
-        </div>
-        <h1>Experience with Microcontrollers</h1>
-        <p class="project-subtitle">
-          I have made many small microcontroller projects. Read more to find out about them.
-        </p>  <!-- EDIT: one sentence summary -->
-      </div>
+    <h2>Drone Project</h2>
+    <p class="page-tags">ESP32 WROOM</p>
+    <p><a href="https://github.com/GreenBlueFish/LH516A-10L_Programmer/tree/main" target="_blank">View on GitHub →</a></p>
+    <h3>About the Project</h3>
+    <p>
+      More about the project can be found <a href="drone-design.html">here</a>. To give a quick summary:
+      I built a 4-motor drone from scratch, using an ESP32 WROOM board to control it. The ESP32 used
+      PWM to control the ESCs, which in turn controlled the motors. I integrated a gyroscope chip to
+      sense direction and tilt, and I flew the drone using a PS3 controller connected to the ESP32
+      over Bluetooth.
+    </p>
 
-      <!-- ── STM32 Nucleo Plant project ── -->
-      <div class="content-section">
-        <div class="project-tags">
-          <span class="tag">STM32 Nucleo</span>
-        </div>
-        <p class="section-label">Plant Project</p>
-        <a class="github-link" href="https://github.com/GreenBlueFish/Plant-Project" target="_blank">
-          View on GitHub ↗
-        </a>  <!-- EDIT -->
-        <h2>About the Project</h2>
-        <p>
-          For one of my courses in 1A, my teammate and I were tasked with building anything we wanted using
-          an STM32 Nucleo board. There were only a few requirements: we had to solve some kind of problem,
-          use two boards and get them talking to each other, and display something to the user. My partner
-          and I both had a habit of killing houseplants, so naturally, we decided to build an automatic
-          plant monitor.
-        </p>
-        <p>
-          I was somewhat familiar with microcontrollers at this point, so I implemented all the circuitry
-          and code myself while my partner handled documentation and meetings. The basic layout of the
-          project is shown in the schematic below. Fair warning: there are transistor symbols in there that
-          you should just ignore. At the time, I didn't actually understand how transistors worked and
-          assumed they were perfect digital switches, so my plan was to power each sensor individually by
-          selecting it over the bus line, the idea being that each sensor would only turn on when needed,
-          to save power, since I originally (and incorrectly) thought powering all the sensors at once would
-          draw too much current. Turns out I was wrong once I actually measured it, so I ended up wiring
-          all the sensors up directly instead.
-        </p>
-        <figure>
-            <img src="images/microcontrollers/plant_project_design.png" alt="plant project layout" />
-            <figcaption>Plant Monitor Layout</figcaption>
-        </figure>
-        <figure>
-            <img src="images/microcontrollers/plant_project_circuit.png" alt="plant project circuit" />
-            <figcaption>Plant Monitor Circuit</figcaption>
-        </figure>
-        <p>
-          The idea was that 5 sensors would keep track of the plant's health, with that data sent to the
-          user via a 4-digit display. The traffic light indicated overall plant health, the rotary encoder
-          (a potentiometer) and button let the user cycle through different sensor readings, and the RGB
-          LED showed which sensor was currently selected. And yes, I did include a flame sensor, it came
-          bundled in a sensor pack I ordered online, and I thought it would be funny to wire in. If the
-          plant catches fire, the traffic light turns red; in hindsight, maybe an actual alarm would have
-          been the smarter call. Below is a photo of the board with the sensors and interface, minus the
-          4-digit display.
-        </p>
-        <figure>
-            <img src="images/microcontrollers/plant_project_sensors.jpg" alt="plant project circuit" />
-            <figcaption>Plant Monitor Sensors and Interface Circuit</figcaption>
-        </figure>
-        <p>
-          We weren't allowed to use any libraries except for communication between the boards, so I had to
-          implement the 4-digit display myself, from scratch. Below is a photo of the display alongside the
-          sensors and interface. I never planned on sharing these photos, which is why this one doesn't
-          show the display very well.
-        </p>
-        <figure>
-            <img src="images/microcontrollers/plant_project_full.jpg" alt="plant project circuit" />
-            <figcaption>Plant Monitor Circuit with Display</figcaption>
-        </figure>
-        <p>
-          To pull this off, I used 4 shift registers to drive each of the 4 seven-segment displays. It
-          took a while to get right, but I got there eventually, the video below shows it counting. I
-          muted the video since I originally recorded it for a friend who'd given me the shift registers
-          and walked me through how to use one.
-        </p>
-        <div class="video-wrapper">
-          <video controls muted>
-            <source src="videos/microcontroller_projects/plant_project_display.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
-        <p>
-          To see the full documentation my partner and I put together, you can find it
-          <a href="images/microcontrollers/plant_project_docs.pdf" target="_blank" rel="noopener noreferrer">here</a>.
-        </p>
-      </div>
+    <h2>IC Programmer</h2>
+    <p class="page-tags">Arduino Due</p>
+    <p><a href="https://github.com/GreenBlueFish/LH516A-10L_Programmer/tree/main" target="_blank">View on GitHub →</a></p>
+    <h3>About the Project</h3>
+    <p>
+      A friend had ordered too many LH5164A-10L SRAM 64Kbit memory chips and handed me a couple to play
+      around with. I wanted to see how the read/write process actually worked at the hardware level, so
+      I used my Arduino Due to read and write data to one of the chips. The project itself was fairly
+      simple: writing involved sending an 8-bit memory address and 8-bit data to the chip and asserting
+      the write-enable line, while reading meant sending an 8-bit address and reading back the 8-bit
+      data line. I confirmed everything worked by sweeping the entire address space and reading back
+      every value, writing to a handful of specific addresses, then reading again, everything matched,
+      so the read/write logic was solid.
+    </p>
 
-      <!-- ── ESP32 Drone ── -->
-      <div class="content-section">
-        <div class="project-tags">
-          <span class="tag">ESP32 WROOM</span>
-        </div>
-        <p class="section-label">Drone project</p>
-        <a class="github-link" href="https://github.com/GreenBlueFish/LH516A-10L_Programmer/tree/main" target="_blank">
-          View on GitHub ↗
-        </a>
-        <h2>About the Project</h2>
-        <p>
-          More about the project can be found <a class="project-link" href="drone-design.html">here</a>. To
-          give a quick summary: I built a 4-motor drone from scratch, using an ESP32 WROOM board to control
-          it. The ESP32 used PWM to control the ESCs, which in turn controlled the motors. I integrated a
-          gyroscope chip to sense direction and tilt, and I flew the drone using a PS3 controller connected
-          to the ESP32 over Bluetooth.
-        </p>
-      </div>
-
-
-      <!-- ── Arduino Due IC Programmer ── -->
-      <div class="content-section">
-        <div class="project-tags">
-          <span class="tag">Arduino Due</span>
-        </div>
-        <p class="section-label">IC Programmer</p>
-        <a class="github-link" href="https://github.com/GreenBlueFish/LH516A-10L_Programmer/tree/main" target="_blank">
-          View on GitHub ↗
-        </a>
-        <h2>About the Project</h2>
-        <p>
-          A friend had ordered too many LH5164A-10L SRAM 64Kbit memory chips and handed me a couple to play
-          around with. I wanted to see how the read/write process actually worked at the hardware level, so
-          I used my Arduino Due to read and write data to one of the chips. The project itself was fairly
-          simple: writing involved sending an 8-bit memory address and 8-bit data to the chip and asserting
-          the write-enable line, while reading meant sending an 8-bit address and reading back the 8-bit
-          data line. I confirmed everything worked by sweeping the entire address space and reading back
-          every value, writing to a handful of specific addresses, then reading again, everything matched,
-          so the read/write logic was solid.
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── FOOTER ── -->
-  <footer>
-    <div class="container">
+    <footer>
       Built with HTML/CSS · hosted on GitHub Pages
-    </div>
-  </footer>
+    </footer>
 
+  </div>
 </body>
 </html>

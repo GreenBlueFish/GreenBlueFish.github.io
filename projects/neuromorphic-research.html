@@ -3,119 +3,127 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Neuromorphic Research — Rowan Leonard</title>  <!-- EDIT -->
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../style.css" />  <!-- note the ../ to go up one folder -->
+  <title>Neuromorphic Research — Rowan Leonard</title>
+  <link rel="stylesheet" href="../style.css" />
 </head>
 <body>
+  <div class="container">
 
-  <!-- ── NAV ── -->
-  <nav>
-    <div class="container">
-      <span class="nav-logo">GreenBlueFish.github.io</span>  <!-- EDIT -->
-      <ul class="nav-links">
-        <li><a href="../index.html#about">about</a></li>
-        <li><a href="../index.html#projects">projects</a></li>
-        <li><a href="../index.html#contact">contact</a></li>
-      </ul>
-    </div>
-  </nav>
+    <a class="back-link" href="../index.html">← home</a>
 
-  <div class="page">
-    <div class="container">
+    <h1>Spiking Neural Network Accelerator</h1>
+    <p class="subtitle">
+      Custom spiking neural network (SNN) hardware accelerator designed to train and run SNN models.
+    </p>
+    <p class="page-tags">SNN · Verilog · Cocotb · from scratch</p>
+    <p><a href="https://github.com/GreenBlueFish/Accelerator_V1" target="_blank">View on GitHub →</a></p>
 
-      <!-- Back link -->
-      <a class="back-link" href="../index.html">← back to projects</a>
+    <h2>Why I built this</h2>
+    <p>
+      During my 2A term I came across spiking neural networks (SNNs) and neuromorphic computing through
+      research papers and articles. Between building neural network libraries from scratch and building
+      my own computers, neuromorphic computing sat right at the intersection of the two things I like
+      designing most. I worked through a stack of papers and textbooks to get a solid grip on the basics
+      of SNNs and neuromorphic hardware before committing to a design. Below is a list of some of the
+      most influential papers and textbooks I read.
+    </p>
+    <ul>
+      <li><a href="https://www.researchgate.net/publication/400029980_A_New_Era_in_Computing_A_Review_of_Neuromorphic_Computing_Chip_Architecture_and_Applications" target="_blank" rel="noopener noreferrer">A New Era in Computing: A Review of Neuromorphic Computing Chip Architecture and Applications</a></li>
+      <li><a href="https://arxiv.org/abs/2502.20415" target="_blank" rel="noopener noreferrer">A Quarter of a Century of Neuromorphic Architectures on FPGAs - an Overview</a></li>
+      <li><a href="https://www.researchgate.net/publication/395417663_A_Review_of_Recent_Developments_in_Neuromorphic_Computing_Based_on_Emerging_Memory_Devices" target="_blank" rel="noopener noreferrer">A Review of Recent Developments in Neuromorphic Computing Based on Emerging Memory Devices</a></li>
+      <li><a href="https://neuronaldynamics.epfl.ch/online/index.html" target="_blank" rel="noopener noreferrer">Neuronal Dynamics - Textbook</a></li>
+      <li><a href="https://www.academia.edu/43014289/Neuroscience_by_Dale_Purves_et_al_eds_z_lib_org_5" target="_blank" rel="noopener noreferrer">Neuroscience 5th Edition - Textbook</a></li>
+    </ul>
+    <p>
+      Once I'd worked through the papers and textbooks, I wanted to put that knowledge into an actual
+      accelerator rather than leave it as reading notes. I put together a team of three, myself along
+      with <a href="https://www.linkedin.com/in/melikamirsajjadi/" target="_blank" rel="noopener noreferrer">Melika M.</a>
+      and <a href="https://www.linkedin.com/in/ronkazachkov/?skipRedirect=true" target="_blank" rel="noopener noreferrer">Ron Kazachkov</a>,
+      and after comparing a few candidate papers we settled on implementing
+      <a href="https://www.researchgate.net/publication/307795262_Unsupervised_Learning_of_Digit_Recognition_Using_Spike-Timing-Dependent_Plasticity" target="_blank" rel="noopener noreferrer">Unsupervised learning of digit recognition using spike-timing-dependent plasticity</a>.
+      The paper trains an SNN on the MNIST dataset in a fully unsupervised setting. We chose to simplify
+      the neuron dynamics to make the hardware implementation more tractable (in hindsight, this cost us
+      accuracy). Below are the four equations that define our model.
+    </p>
+    <ol>
+      <li>Neuron Updating (Forward prop): X<sub>post</sub><sup>data</sup> += (X<sub>pre<sub>1</sub></sub><sup>firing</sup> &amp; W<sub>post<sub>1</sub></sub> + X<sub>pre<sub>2</sub></sub><sup>firing</sup> &amp; W<sub>post<sub>2</sub></sub> + ... + X<sub>pre<sub>n</sub></sub><sup>firing</sup> &amp; W<sub>post<sub>n</sub></sub>)</li>
+      <li>Threshold/Reset: if X<sup>data</sup> &gt; X<sub>threshold</sub> then X<sup>data</sup> = X<sub>reset</sub> and X<sup>firing</sup> = 1</li>
+      <li>Weight Updating (STDP): (A<sub>+</sub> * X<sub>pre</sub><sup>data</sup>) &amp; X<sub>post</sub><sup>firing</sup> - (A<sub>-</sub> * X<sub>post</sub><sup>data</sup>) &amp; X<sub>pre</sub><sup>firing</sup></li>
+      <li>Forward Step in Time: X<sup>data</sup> *= decay_rate, where 0 &lt; decay_rate &lt; 1</li>
+    </ol>
+    <p>
+      Here, X is a 16-bit neuron value: the lower 15 bits are a Q1.14 fixed-point number (X<sup>data</sup>),
+      and the most significant bit is the firing bit (X<sup>firing</sup>), which is 0 if the neuron didn't
+      just fire and 1 if it did. X<sub>post</sub> denotes a postsynaptic neuron and X<sub>pre</sub> a
+      presynaptic neuron. W is a 15-bit Q1.14 weight value representing a synaptic weight. The remaining
+      values (X<sub>threshold</sub>, X<sub>reset</sub>, A<sub>+</sub>, A<sub>-</sub>, decay_rate) are model
+      presets.
+    </p>
+    <p>
+      I built a logic block (seen below) in Verilog to implement these equations directly in hardware. I
+      designed it to use only a single DSP slice per logic block, since I wanted to maximize the number
+      of logic blocks I could fit on the board — the target FPGA (a Zynq 7020 SoC) only has 220 DSP slices
+      to work with.
+    </p>
+    <figure>
+      <img src="images/neuromorphic_research/logic_block.png" alt="logic block" />
+      <figcaption>Diagram of SNN accelerator logic block</figcaption>
+    </figure>
+    <p>
+      Once I had a working logic block, I used it as the building block for a scalable architecture (shown
+      below). The design was shaped around the fact that the Zynq 7020 SoC exposes 35 BRAM slices once
+      configured. The plan was to store all neuron values in 1-3 of those slices and dedicate the
+      remaining 32-34 slices to storing synaptic weights.
+    </p>
+    <figure>
+      <img src="images/neuromorphic_research/accelerator_architecture.png" alt="accelerator architecture" />
+      <figcaption>Diagram of SNN accelerator architecture</figcaption>
+    </figure>
+    <p>
+      After implementing the architecture in Verilog, I wrote a Python (cocotb) test bench for running and
+      validating models on the network. Unfortunately, after all that work, one of my teammates found that
+      the neuron equations we'd chosen didn't hold up well on MNIST — the best accuracy we could get was
+      85%. Because of this, I've decided not to scale the design up to the full-size SNN model in my test
+      bench; it would take a lot more code, and it's not worth writing for a model I already know
+      underperforms.
+    </p>
 
-      <!-- ── PROJECT HEADER ── -->
-      <div class="project-header">
-        <div class="project-tags">
-          <span class="tag">SNN</span>
-          <span class="tag">Verilog</span>
-          <span class="tag">Cocotb</span>
-          <span class="tag">from scratch</span>
-        </div>
-        <h1>Spiking Neural Network Accelerator</h1>       <!-- EDIT: project title -->
-        <p class="project-subtitle">
-          Custom spiking neural network (SNN) hardware accelerator designed
-            to train and run SNN models.
-        </p>  <!-- EDIT: one sentence summary -->
-        <a class="github-link" href="https://github.com/GreenBlueFish/Accelerator_V1" target="_blank">
-          View on GitHub ↗
-        </a>
-      </div>
+    <h2>What I learned</h2>
+    <p>
+      There are a few key lessons I took away from building this accelerator. The most important one is
+      that, before starting on an accelerator, I need to nail down the right equations first. This was
+      hard to get right here: I wanted to get started as quickly as possible to leave myself the most time
+      to actually build, so I picked equations that seemed roughly reasonable rather than validating them
+      first. None of us on the team took the time to test whether the equations actually worked before
+      committing to them in hardware, which in hindsight was a mistake. My teammates have since moved on
+      to testing other equation sets, so by the time I start a second accelerator I should have a much
+      better sense of what actually works.
+    </p>
+    <p>
+      Another thing I should have watched more closely is LUT usage. I was so focused on fitting one DSP
+      slice per logic block that I lost track of the FPGA's LUT budget entirely. After doing the math by
+      hand, I found I'd fall well short of the LUTs needed to implement the full accelerator at 220 logic
+      blocks (one per DSP slice). On top of that, what I built isn't really a neuromorphic computer — it's
+      an SNN accelerator. That's a fine result for this project, but going forward I'd like to design
+      something closer to an actual neuromorphic computer that sidesteps the Von Neumann bottleneck my
+      current design still has.
+    </p>
+    <p>
+      One more thing I'd change: I want to use fewer control signals where possible (I did try to keep
+      this in check here), and where I do need many, adopt a real naming convention instead of naming
+      wires whatever made sense in the moment. Concretely, that means a reference doc where I can look up
+      a signal name and its etymology to figure out what it does — something that would help a lot once
+      the number of control signals grows, and would make it far easier for someone else to review my
+      work. Finally, my next accelerator won't be a solo effort — this one could have gone further, but I
+      had to make design compromises to avoid the extra work that certain choices would have created for a
+      single person.
+    </p>
 
-      <!-- ── MOTIVATION ── -->
-      <div class="content-section">
-        <p class="section-label">Motivation and Approach</p>
-        <h2>Why I built this</h2>
-        <p>
-          During my 2A term I came across spiking neural networks (SNNs) and neuromorphic computing through research papers and articles. Between building neural network libraries from scratch and building my own computers, neuromorphic computing sat right at the intersection of the two things I like designing most. I worked through a stack of papers and textbooks to get a solid grip on the basics of SNNs and neuromorphic hardware before committing to a design. Below is a list of some of the most influential papers and textbooks I read.
-        </p>
-        <ul>
-          <li><a href="https://www.researchgate.net/publication/400029980_A_New_Era_in_Computing_A_Review_of_Neuromorphic_Computing_Chip_Architecture_and_Applications" target="_blank" rel="noopener noreferrer">A New Era in Computing: A Review of Neuromorphic Computing Chip Architecture and Applications</a></li>
-          <li><a href="https://arxiv.org/abs/2502.20415" target="_blank" rel="noopener noreferrer">A Quarter of a Century of Neuromorphic Architectures on FPGAs - an Overview</a></li>
-          <li><a href="https://www.researchgate.net/publication/395417663_A_Review_of_Recent_Developments_in_Neuromorphic_Computing_Based_on_Emerging_Memory_Devices" target="_blank" rel="noopener noreferrer"> Review of Recent Developments in Neuromorphic Computing Based on Emerging Memory Devices</a></li>
-          <li><a href="https://neuronaldynamics.epfl.ch/online/index.html" target="_blank" rel="noopener noreferrer">Neuronal Dynamics - Textbook</a></li>
-          <li><a href="https://www.academia.edu/43014289/Neuroscience_by_Dale_Purves_et_al_eds_z_lib_org_5" target="_blank" rel="noopener noreferrer">Neuroscience 5th Edition - Textbook</a></li>
-        </ul>
-        <p>
-          Once I'd worked through the papers and textbooks, I wanted to put that knowledge into an actual accelerator rather than leave it as reading notes. I put together a team of three, myself along with <a href="https://www.linkedin.com/in/melikamirsajjadi/" target="_blank" rel="noopener noreferrer">Melika M.</a> and <a href="https://www.linkedin.com/in/ronkazachkov/?skipRedirect=true" target="_blank" rel="noopener noreferrer">Ron Kazachkov</a>, and after comparing a few candidate papers we settled on implementing <a href="https://www.researchgate.net/publication/307795262_Unsupervised_Learning_of_Digit_Recognition_Using_Spike-Timing-Dependent_Plasticity" target="_blank" rel="noopener noreferrer">Unsupervised learning of digit recognition using spike-timing-dependent plasticity</a>. The paper trains an SNN on the MNIST dataset in a fully unsupervised setting. We chose to simplify the neuron dynamics to make the hardware implementation more tractable (in hindsight, this cost us accuracy). Below are the four equations that define our model.
-        </p>
-        <ol>
-          <li>Neuron Updating (Forward prop): X<sub>post</sub><sup>data</sup> += (X<sub>pre<sub>1</sub></sub><sup>firing</sup> &amp; W<sub>post<sub>1</sub></sub> + X<sub>pre<sub>2</sub></sub><sup>firing</sup> &amp; W<sub>post<sub>2</sub></sub> + ... + X<sub>pre<sub>n</sub></sub><sup>firing</sup> &amp; W<sub>post<sub>n</sub></sub>)</li>
-          <li>Threshold/Reset: if X<sup>data</sup> &gt; X<sub>threshold</sub> then X<sup>data</sup> = X<sub>reset</sub> and X<sup>firing</sup> = 1 </li>
-          <li>Weight Updating (STDP): (A<sub>+</sub> * X<sub>pre</sub><sup>data</sup>) &amp; X<sub>post</sub><sup>firing</sup> - (A<sub>-</sub> * X<sub>post</sub><sup>data</sup>) &amp; X<sub>pre</sub><sup>firing</sup></li>
-          <li>Forward Step in Time: X<sup>data</sup> *= decay_rate, where 0 &lt; decay_rate &lt; 1</li>
-        </ol>
-        <p>Here, X is a 16-bit neuron value: the lower 15 bits are a Q1.14 fixed-point number (X<sup>data</sup>), and the most significant bit is the firing bit (X<sup>firing</sup>), which is 0 if the neuron didn't just fire and 1 if it did. X<sub>post</sub> denotes a postsynaptic neuron and X<sub>pre</sub> a presynaptic neuron. W is a 15-bit Q1.14 weight value representing a synaptic weight. The remaining values (X<sub>threshold</sub>, X<sub>reset</sub>, A<sub>+</sub>, A<sub>-</sub>, decay_rate) are model presets.</p>
-        <p>
-          I built a logic block (seen below) in Verilog to implement these equations directly in hardware. I designed it to use only a single DSP slice per logic block, since I wanted to maximize the number of logic blocks I could fit on the board — the target FPGA (a Zynq 7020 SoC) only has 220 DSP slices to work with.
-        </p>
-        <figure>
-            <img src="images/neuromorphic_research/logic_block.png" alt="logic block" />
-            <figcaption>Diagram of SNN accelerator logic block</figcaption>
-        </figure>
-        <p>
-          Once I had a working logic block, I used it as the building block for a scalable architecture (shown below). The design was shaped around the fact that the Zynq 7020 SoC exposes 35 BRAM slices once configured. The plan was to store all neuron values in 1-3 of those slices and dedicate the remaining 32-34 slices to storing synaptic weights.
-        </p>
-        <figure>
-            <img src="images/neuromorphic_research/accelerator_architecture.png" alt="accelerator architecture" />
-            <figcaption>Diagram of SNN accelerator architecture</figcaption>
-        </figure>
-        <p>
-          After implementing the architecture in Verilog, I wrote a Python (cocotb) test bench for running and validating models on the network. Unfortunately, after all that work, one of my teammates found that the neuron equations we'd chosen didn't hold up well on MNIST — the best accuracy we could get was 85%. Because of this, I've decided not to scale the design up to the full-size SNN model in my test bench; it would take a lot more code, and it's not worth writing for a model I already know underperforms.
-        </p>
-      </div>
-
-      <!-- ── WHAT I LEARNED ── -->
-      <div class="content-section">
-        <p class="section-label">Reflection</p>
-        <h2>What I learned</h2>
-          <p>
-            There are a few key lessons I took away from building this accelerator. The most important one is that, before starting on an accelerator, I need to nail down the right equations first. This was hard to get right here: I wanted to get started as quickly as possible to leave myself the most time to actually build, so I picked equations that seemed roughly reasonable rather than validating them first. None of us on the team took the time to test whether the equations actually worked before committing to them in hardware, which in hindsight was a mistake. My teammates have since moved on to testing other equation sets, so by the time I start a second accelerator I should have a much better sense of what actually works.
-          </p>
-          <p>
-            Another thing I should have watched more closely is LUT usage. I was so focused on fitting one DSP slice per logic block that I lost track of the FPGA's LUT budget entirely. After doing the math by hand, I found I'd fall well short of the LUTs needed to implement the full accelerator at 220 logic blocks (one per DSP slice). On top of that, what I built isn't really a neuromorphic computer — it's an SNN accelerator. That's a fine result for this project, but going forward I'd like to design something closer to an actual neuromorphic computer that sidesteps the Von Neumann bottleneck my current design still has.
-          </p>
-          <p>
-            One more thing I'd change: I want to use fewer control signals where possible (I did try to keep this in check here), and where I do need many, adopt a real naming convention instead of naming wires whatever made sense in the moment. Concretely, that means a reference doc where I can look up a signal name and its etymology to figure out what it does — something that would help a lot once the number of control signals grows, and would make it far easier for someone else to review my work. Finally, my next accelerator won't be a solo effort — this one could have gone further, but I had to make design compromises to avoid the extra work that certain choices would have created for a single person.
-          </p>
-        <!-- EDIT: what was the key insight or takeaway -->
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ── FOOTER ── -->
-  <footer>
-    <div class="container">
+    <footer>
       Built with HTML/CSS · hosted on GitHub Pages
-    </div>
-    <a class="hidden-link" href="neurontypes/index.html" target="_blank">
-      .
-    </a>  <!-- EDIT -->
-  </footer>
+      <a class="hidden-link" href="neurontypes/index.html" target="_blank">.</a>
+    </footer>
 
+  </div>
 </body>
 </html>

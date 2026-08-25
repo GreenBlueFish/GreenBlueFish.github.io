@@ -3,179 +3,148 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Laptops, Distros, and Networking — Rowan Leonard</title>  <!-- EDIT -->
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../style.css" />  <!-- note the ../ to go up one folder -->
+  <title>Laptops, Distros, and Networking — Rowan Leonard</title>
+  <link rel="stylesheet" href="../style.css" />
 </head>
 <body>
+  <div class="container">
 
-  <!-- ── NAV ── -->
-  <nav>
-    <div class="container">
-      <span class="nav-logo">GreenBlueFish.github.io</span>  <!-- EDIT -->
-      <ul class="nav-links">
-        <li><a href="../index.html#about">about</a></li>
-        <li><a href="../index.html#projects">projects</a></li>
-        <li><a href="../index.html#contact">contact</a></li>
-      </ul>
-    </div>
-  </nav>
+    <a class="back-link" href="../index.html">← home</a>
 
-  <div class="page">
-    <div class="container">
+    <h1>Laptops, Distros, and Networking</h1>
+    <p class="subtitle">
+      I have a number of laptops and computers at home. For fun I install different Linux distros and
+      play around with making networks.
+    </p>
+    <p class="page-tags">Linux · Bash · Networking · Cisco Packet Tracer</p>
 
-      <!-- Back link -->
-      <a class="back-link" href="../index.html">← back to projects</a>
-
-      <!-- ── PROJECT HEADER ── -->
-      <div class="project-header">
-        <div class="project-tags">
-          <span class="tag">Linux</span>
-          <span class="tag">Bash</span>
-          <span class="tag">Networking</span>
-          <span class="tag">Cisco Packet Tracer</span>
-        </div>
-        <h1>Laptops, Distros, and Networking</h1>       <!-- EDIT: project title -->
-        <p class="project-subtitle">
-          I have a number of laptops and computers at home. For fun I install different Linux distros and play around with making networks.
-        </p> 
-      </div>
-
-      <!-- ── MOTIVATION ── -->
-      <div class="content-section">
-        <p class="section-label">Motivation</p>
-        <h2>My Story with Laptops, Distros, and Networking</h2>
-        <p>
-          There's a local computer store my family goes to that fixes computers and sells both new and
-          second-hand machines. One day I went in and asked if they had any old laptops they couldn't sell,
-          or that didn't work, so I could try to fix them up and play around with them. To my surprise, they
-          said yes and handed me 3.5 Lenovo ThinkPad Yoga 11Es (the .5 being a spare screen). I took them
-          back to my dorm room and spent a night fixing them up. They all had issues — one's screen wouldn't
-          turn on, another beeped in odd patterns, and the third was missing both a battery and a hard drive.
-          I got two of them working by swapping screens, batteries, hard drives, fans, and keyboards, and
-          installing fresh operating systems on them. I remember starting with the Linux distro Debian,
-          running a GUI. I ended up giving away one of the laptops since I didn't need both, and kept messing
-          around with Debian on the other — poking through LibreOffice, playing a few games, and digging
-          into partition tables.
-        </p>
-        <p>
-          A little while later I got curious about computer networking and found out about Cisco Packet
-          Tracer. It was free, so I downloaded it and took a few courses. They covered the basics — how to
-          wire up a network, and what a switch, router, server, and modem each did — then moved into more
-          fundamental skills like what an IP address, MAC address, and subnet mask were. It also covered
-          DHCP and the basic protocols for both DHCP and Ethernet. I learned about LAN, WAN, SOHO networks,
-          and the seven layers of the OSI model. The courses also went into different network protocols
-          like Wi-Fi, Bluetooth, and NFC, and touched on SSIDs. I got hooked, and building simple networks
-          in Cisco Packet Tracer let me put all of it into practice.
-        </p>
-        <p>
-          After a while, I wondered if I could get another computer and try to get them talking to each
-          other over Ethernet, with no switch or router involved. I figured it would be easy — just set
-          the port settings to manual DHCP and give each computer a unique IP address (192.168.0.x with
-          subnet 255.255.255.0). I was too scared to try this on my personal laptop in case I broke
-          something, so I went back to the store and, to my surprise, walked out with 2 more laptops (a
-          Lenovo T520 and a Lenovo L440). Both worked, but they were old and slow, still running Windows 8.
-          I installed Linux Mint Cinnamon on the L440 and Kali Linux on the T520. I then tried connecting
-          the two computers directly via their Ethernet ports, but couldn't get it working — I later found
-          out it's not possible on older machines, since they don't automatically swap TX and RX. So I just
-          left them lying around. I poked at Kali a bit to get a feel for it, but never really got into it.
-          Later, at my first co-op, a senior engineer and I got talking, and he mentioned he had some
-          networking equipment he didn't need — a Netgear GS308E switch and a TP-Link Archer C80 router. I
-          asked if I could borrow it, and he just gave it to me for free. I bought a few Ethernet cables,
-          connected the router to the switch and the switch to each computer, and it worked! I could access
-          the router's settings page and ping every computer on the network. I also started using the Kali
-          laptop to run Wireshark and nmap. My network was an offline LAN (a SOHO network), which meant I
-          could run any network-hacking tool I wanted — and since all the equipment was free, breaking
-          something would cost me nothing. I played around with these networks all through my 1A co-op
-          semester.
-        </p>
-        <p>
-          Later, over the 2025 Christmas break, I went back to the store and picked up yet another few
-          laptops. I asked the senior engineer if he had any more networking equipment, and he did. On top
-          of that, I asked around to see if people had any old routers, switches, laptops, or computers
-          lying around — and to my surprise, people did. Currently, my networking equipment is made up of:
-        </p>
+    <h2>My Story with Laptops, Distros, and Networking</h2>
+    <p>
+      There's a local computer store my family goes to that fixes computers and sells both new and
+      second-hand machines. One day I went in and asked if they had any old laptops they couldn't sell,
+      or that didn't work, so I could try to fix them up and play around with them. To my surprise, they
+      said yes and handed me 3.5 Lenovo ThinkPad Yoga 11Es (the .5 being a spare screen). I took them
+      back to my dorm room and spent a night fixing them up. They all had issues — one's screen wouldn't
+      turn on, another beeped in odd patterns, and the third was missing both a battery and a hard drive.
+      I got two of them working by swapping screens, batteries, hard drives, fans, and keyboards, and
+      installing fresh operating systems on them. I remember starting with the Linux distro Debian,
+      running a GUI. I ended up giving away one of the laptops since I didn't need both, and kept messing
+      around with Debian on the other — poking through LibreOffice, playing a few games, and digging
+      into partition tables.
+    </p>
+    <p>
+      A little while later I got curious about computer networking and found out about Cisco Packet
+      Tracer. It was free, so I downloaded it and took a few courses. They covered the basics — how to
+      wire up a network, and what a switch, router, server, and modem each did — then moved into more
+      fundamental skills like what an IP address, MAC address, and subnet mask were. It also covered
+      DHCP and the basic protocols for both DHCP and Ethernet. I learned about LAN, WAN, SOHO networks,
+      and the seven layers of the OSI model. The courses also went into different network protocols
+      like Wi-Fi, Bluetooth, and NFC, and touched on SSIDs. I got hooked, and building simple networks
+      in Cisco Packet Tracer let me put all of it into practice.
+    </p>
+    <p>
+      After a while, I wondered if I could get another computer and try to get them talking to each
+      other over Ethernet, with no switch or router involved. I figured it would be easy — just set
+      the port settings to manual DHCP and give each computer a unique IP address (192.168.0.x with
+      subnet 255.255.255.0). I was too scared to try this on my personal laptop in case I broke
+      something, so I went back to the store and, to my surprise, walked out with 2 more laptops (a
+      Lenovo T520 and a Lenovo L440). Both worked, but they were old and slow, still running Windows 8.
+      I installed Linux Mint Cinnamon on the L440 and Kali Linux on the T520. I then tried connecting
+      the two computers directly via their Ethernet ports, but couldn't get it working — I later found
+      out it's not possible on older machines, since they don't automatically swap TX and RX. So I just
+      left them lying around. I poked at Kali a bit to get a feel for it, but never really got into it.
+      Later, at my first co-op, a senior engineer and I got talking, and he mentioned he had some
+      networking equipment he didn't need — a Netgear GS308E switch and a TP-Link Archer C80 router. I
+      asked if I could borrow it, and he just gave it to me for free. I bought a few Ethernet cables,
+      connected the router to the switch and the switch to each computer, and it worked! I could access
+      the router's settings page and ping every computer on the network. I also started using the Kali
+      laptop to run Wireshark and nmap. My network was an offline LAN (a SOHO network), which meant I
+      could run any network-hacking tool I wanted — and since all the equipment was free, breaking
+      something would cost me nothing. I played around with these networks all through my 1A co-op
+      semester.
+    </p>
+    <p>
+      Later, over the 2025 Christmas break, I went back to the store and picked up yet another few
+      laptops. I asked the senior engineer if he had any more networking equipment, and he did. On top
+      of that, I asked around to see if people had any old routers, switches, laptops, or computers
+      lying around — and to my surprise, people did. Currently, my networking equipment is made up of:
+    </p>
+    <ul>
+      <li>Computers
         <ul>
-          <li>Computers
-            <ul>
-              <li>Lenovo Yoga 11e</li>
-              <li>Lenovo L440</li>
-              <li>Lenovo T520</li>
-              <li>Lenovo Yoga 260</li>
-              <li>Lenovo T540p</li>
-              <li>Lenovo ThinkCentre M73</li>
-              <li>HP Pavilion dv6</li>
-            </ul>
-          </li>
-          <li>Switches
-            <ul>
-              <li>Netgear GS308E</li>
-              <li>TP-Link TL-SG116</li>
-              <li>TP-Link TL-SG100SD</li>
-            </ul>
-          </li>
-          <li>Routers
-            <ul>
-              <li>Tp-Link Archer C80</li>
-              <li>D-Link DIR-655</li>
-            </ul>
-          </li>
+          <li>Lenovo Yoga 11e</li>
+          <li>Lenovo L440</li>
+          <li>Lenovo T520</li>
+          <li>Lenovo Yoga 260</li>
+          <li>Lenovo T540p</li>
+          <li>Lenovo ThinkCentre M73</li>
+          <li>HP Pavilion dv6</li>
         </ul>
-        <p>
-        <p>
-          I have so much equipment now that I have to carry it all around in a suitcase to move it. During
-          my second co-op I'd often bring it to campus and wire together one big network out of all my
-          computers, switches, and routers. I'd troubleshoot until every device could talk to every other
-          device, then start trying to break things — spoofing the source MAC address on packets, tricking
-          switches, and spamming computers with requests. Then I'd log into my routers and configure them
-          to defend against it — a simple example being ignoring ICMP echo requests so nmap couldn't
-          discover the router, or any network behind it.
-        </p>
-        </p>
-        <h3>Distros</h3>
-        <p>
-          In having so many laptops I have had a lot of ability to install different Linux Distros to see what they are like. Below is a list of distros I have installed
-        </p>
+      </li>
+      <li>Switches
         <ul>
-          <li>Debian GUI</li>
-          <li>Ubuntu</li>
-          <li>Mint Cinnamon</li>
-          <li>Mint Mate</li>
-          <li>Elementary OS</li>
-          <li>Parrot OS</li>
-          <li>Kali Linux</li>
-          <li>Tails</li>
-          <li>Red Star (yes, the North Korean OS)</li>
+          <li>Netgear GS308E</li>
+          <li>TP-Link TL-SG116</li>
+          <li>TP-Link TL-SG100SD</li>
         </ul>
-        <p>
-          Of all these distros, Mint Cinnamon is my favorite — it's very user-friendly and I could still
-          easily manage my computer's Ethernet, Wi-Fi, and partitions (pretty much the three things I
-          actually need to deal with). That said, I also really liked Elementary OS's feel and GUI.
-        </p>
-        <p>
-          Kali Linux was obviously the best distro for learning about network hacking, since it comes with
-          a suite of tools I wouldn't have even known existed if they weren't already bundled in.
-        </p>
-        <p>
-          Tails was always on my 256GB USB stick whenever I was testing computers, so I could make sure a
-          computer was working well before I bothered adding a hard drive.
-        </p>
-        <p>
-          You're also probably wondering about Red Star. I was able to get a copy of it through the
-          Internet Archive. I tried installing it on what I consider my worst laptop, in case it bricked the
-          thing, but ran into an issue with the partition table and couldn't get it working. Someday, though,
-          I'll try to dig up the source code and fix it (I might need to learn Korean first, though...).
-        </p>
-      </div>
-    </div>
-  </div>
+      </li>
+      <li>Routers
+        <ul>
+          <li>TP-Link Archer C80</li>
+          <li>D-Link DIR-655</li>
+        </ul>
+      </li>
+    </ul>
+    <p>
+      I have so much equipment now that I have to carry it all around in a suitcase to move it. During
+      my second co-op I'd often bring it to campus and wire together one big network out of all my
+      computers, switches, and routers. I'd troubleshoot until every device could talk to every other
+      device, then start trying to break things — spoofing the source MAC address on packets, tricking
+      switches, and spamming computers with requests. Then I'd log into my routers and configure them
+      to defend against it — a simple example being ignoring ICMP echo requests so nmap couldn't
+      discover the router, or any network behind it.
+    </p>
 
-  <!-- ── FOOTER ── -->
-  <footer>
-    <div class="container">
+    <h3>Distros</h3>
+    <p>
+      In having so many laptops I have had a lot of ability to install different Linux distros to see
+      what they are like. Below is a list of distros I have installed.
+    </p>
+    <ul>
+      <li>Debian GUI</li>
+      <li>Ubuntu</li>
+      <li>Mint Cinnamon</li>
+      <li>Mint Mate</li>
+      <li>Elementary OS</li>
+      <li>Parrot OS</li>
+      <li>Kali Linux</li>
+      <li>Tails</li>
+      <li>Red Star (yes, the North Korean OS)</li>
+    </ul>
+    <p>
+      Of all these distros, Mint Cinnamon is my favorite — it's very user-friendly and I could still
+      easily manage my computer's Ethernet, Wi-Fi, and partitions (pretty much the three things I
+      actually need to deal with). That said, I also really liked Elementary OS's feel and GUI.
+    </p>
+    <p>
+      Kali Linux was obviously the best distro for learning about network hacking, since it comes with
+      a suite of tools I wouldn't have even known existed if they weren't already bundled in.
+    </p>
+    <p>
+      Tails was always on my 256GB USB stick whenever I was testing computers, so I could make sure a
+      computer was working well before I bothered adding a hard drive.
+    </p>
+    <p>
+      You're also probably wondering about Red Star. I was able to get a copy of it through the
+      Internet Archive. I tried installing it on what I consider my worst laptop, in case it bricked the
+      thing, but ran into an issue with the partition table and couldn't get it working. Someday, though,
+      I'll try to dig up the source code and fix it (I might need to learn Korean first, though...).
+    </p>
+
+    <footer>
       Built with HTML/CSS · hosted on GitHub Pages
-    </div>
-  </footer>
+    </footer>
 
+  </div>
 </body>
 </html>

@@ -3,278 +3,162 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rowan Leonard - Portfolio </title>  <!-- EDIT -->
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <title>Rowan Leonard - Portfolio</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div class="container">
 
-  <!-- ── NAV ── -->
-  <nav>
-    <div class="container">
-      <span class="nav-logo">GreenBlueFish.github.io</span>  <!-- EDIT -->
-      <ul class="nav-links">
-        <li><a href="#about">about</a></li>
-        <li><a href="#projects">projects</a></li>
-        <li><a href="#contact">contact</a></li>
-      </ul>
-    </div>
-  </nav>
+    <p class="tagline">Electrical Engineering · University of Waterloo</p>
 
-  <!-- ── HERO ── -->
-  <section id="hero">
-    <div class="container">
-      <p class="hero-tag">Electrical Engineering · University of Waterloo</p>
-      <h1>Hi, I'm <span>Rowan Leonard</span>.<br>I am intellectually curious, analytical, and driven.</h1>  <!-- EDIT -->
-      <p class="hero-desc">
-        Electrical engineering student interested in neural networks, neuromorphic computing, and hardware
-        accelerators. I like building things from scratch to understand how they actually work.
-      </p>  <!-- EDIT -->
-      <div class="hero-links">
-        <a class="btn btn-primary" href="#projects">View projects</a>
-        <a class="btn btn-outline" href="https://github.com/GreenBlueFish" target="_blank">GitHub ↗</a>  <!-- EDIT -->
-        <a class="btn btn-outline" href="Resume_Rowan_Leonard.pdf" target="_blank">Resume ↗</a>
-      </div>
-    </div>
-  </section>
+    <h1>Rowan Leonard</h1>
 
-  <!-- ── ABOUT ── -->
-  <!--
-  <section id="about">
-    <div class="container">
-      <p class="section-label">About</p>
+    <p>
+      I am intellectually curious, analytical, and driven. Electrical engineering student
+      interested in neural networks, neuromorphic computing, and hardware accelerators.
+      I like building things from scratch to understand how they actually work.
+    </p>
+
+    <p class="links-line">
+      <a href="https://github.com/GreenBlueFish" target="_blank">GitHub</a>
+      <a href="https://www.linkedin.com/in/rowan-leonard/" target="_blank">LinkedIn</a>
+      <a href="Resume_Rowan_Leonard.pdf" target="_blank">Resume</a>
+      <a href="mailto:rowan.leonard76@gmail.com">Email</a>
+    </p>
+
+    <!--
+    <section id="about">
       <h2>Background</h2>
-      <div class="about-text">
-        <p>
-          I'm an Electrical Engineering student at the University of Waterloo who loves to build things from first principles. That has led me into learning about neural networks, neuromorphic computing, and ML hardware design.
-        </p>
-        <p>
-          I’ve written two neural network libraries in C++ and used them to recreate architectures like RNNs, LSTMs, and map‑classification models so I could see how they behave at the lowest level. Lately, I’ve been diving into spiking neural networks (SNN's) and their hardware through textbooks, research papers, and hands on application. I have build a SNN accelerator from scratch and am working with a team to explore SNN's and neuromorphic hardware.
-        </p>
-        <p>
-          I’ve also designed two computers from scratch in a gate‑logic simulator, picked up VHDL and Verilog, and am apart Waterloo’s ASIC design team.
-        </p>
-        <p>
-          I follow curiosity wherever it leads, but machine learning—especially neural networks—keeps pulling me deeper.
-        </p>
-      </div>
-    </div>
-  </section>
-  -->
-
-  <!-- ── SKILLS ── -->
-  <section id="skills">
-    <div class="container">
-      <p class="section-label">Skills</p>
-      <h2>Programming Languages</h2>
-      <div class="skills-grid">
-        <!-- ADD or REMOVE skill tags here -->
-        <div class="skill-tag">C++</div>
-        <div class="skill-tag">Python</div>
-        <div class="skill-tag">VHDL</div>
-        <div class="skill-tag">Verilog</div>
-        <div class="skill-tag">RISC-V</div>
-        <div class="skill-tag">NASM</div>
-        <div class="skill-tag">Bash</div>
-        <div class="skill-tag">PowerShell</div>
-      </div>
-      <h2>Tools & Environments</h2>
-      <div class="skills-grid">
-        <!-- ADD or REMOVE skill tags here -->
-        <div class="skill-tag">Python Libraries (PyTorch, Cocotb, Brian)</div>
-        <div class="skill-tag">NGSpice</div>
-        <div class="skill-tag">Github, GitKraken</div>
-        <div class="skill-tag">VS Code/VS Community</div>
-        <div class="skill-tag">Logism</div>
-        <div class="skill-tag">AutoCAD 2D & 3D</div>
-        <div class="skill-tag">Code::Blocks IDE</div>
-        <div class="skill-tag">GHidra</div>
-        <div class="skill-tag">Cisco Packet Tracer</div>
-        <div class="skill-tag">Microsoft Office Tools</div>
-        <div class="skill-tag">LibreOffice Tools</div>
-        <div class="skill-tag">AGI32 Lighting Software</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── PROJECTS ── -->
-  <section id="projects">
-    <div class="container">
-      <p class="section-label">Projects</p>
-      <h2>Things I've built</h2>
-      <div class="projects-list">
-
-        <!-- PROJECT CARD — copy this block to add a new project -->
-        <div class="project-card">
-          <div class="project-header">
-            <span class="project-title">Neural Network Libraries (C++)</span>
-            <div class="project-tags">
-              <span class="tag">C++</span>
-              <span class="tag">ML</span>
-              <span class="tag">RNN</span>
-              <span class="tag">LSTM</span>
-              <span class="tag">from scratch</span>
-            </div>
-          </div>
-          <p class="project-desc">
-            Two fully custom neural network library built without ML frameworks. Supports
-            forward and backpropagation, multiple layer types, and was used as the foundation
-            for all my network experiments.
-          </p>
-          <a class="project-link" href="projects/nn-library.html">Read more →</a>
-        </div>
-        <!-- END PROJECT CARD -->
-
-        <div class="project-card">
-          <div class="project-header">
-            <span class="project-title">Computer Design</span>
-            <div class="project-tags">
-              <span class="tag">from scratch</span>
-            </div>
-          </div>
-          <p class="project-desc">
-            Custom computer architectures with their own custom ISAs built from gate‑logic.
-          </p>
-          <a class="project-link" href="projects/computer-design.html">Read more →</a>
-        </div>
-
-        <div class="project-card">
-          <div class="project-header">
-            <span class="project-title">SNN Accelerator</span>
-            <div class="project-tags">
-              <span class="tag">SNN</span>
-              <span class="tag">Verilog</span>
-              <span class="tag">Cocotb</span>
-              <span class="tag">from scratch</span>
-            </div>
-          </div>
-          <p class="project-desc">
-            Custom spiking neural network (SNN) hardware accelerator designed
-            to train and run SNN models.
-          </p>
-          <a class="project-link" href="projects/neuromorphic-research.html">Read more →</a>
-        </div>
-
-        <div class="project-card">
-          <div class="project-header">
-            <span class="project-title">My Time at UWASIC</span>
-            <div class="project-tags">
-              <span class="tag">Digital</span>
-              <span class="tag">Analog</span>
-              <span class="tag">ASIC</span>
-            </div>
-          </div>
-          <p class="project-desc">
-            A summary of the things I have done at the University of Waterloo's ASIC design team
-          </p>
-          <a class="project-link" href="projects/uwasic_experience.html">Read more →</a>
-        </div>
-
-        <div class="project-card">
-          <div class="project-header">
-            <span class="project-title">Laptops, Distros, and Networking</span>
-            <div class="project-tags">
-              <span class="tag">Linux</span>
-              <span class="tag">Bash</span>
-              <span class="tag">Networking</span>
-              <span class="tag">Cisco Packet Tracer</span>
-            </div>
-          </div>
-          <p class="project-desc">
-            I have a number of laptops and computers at home. For fun I install different Linux distros and play around with making networks.
-          </p>
-          <a class="project-link" href="projects/fun-with-distros.html">Read more →</a>
-        </div>
-
-        <div class="project-card">
-          <div class="project-header">
-            <span class="project-title">Experience with Microcontrollers</span>
-            <div class="project-tags">
-              <span class="tag">STM32 Nucleo</span>
-              <span class="tag">Raspberry Pi (4B, pico)</span>
-              <span class="tag">Arduino (Uno, Due)</span>
-              <span class="tag">ESP32 WROOM</span>
-            </div>
-          </div>
-          <p class="project-desc">
-            I have made many small microcontroller projects. Read more to find out about them.
-          </p>
-          <a class="project-link" href="projects/microcontroller_projects.html">Read more →</a>
-        </div>
-
-        <div class="project-card">
-          <div class="project-header">
-            <span class="project-title">Drone Design</span>
-            <div class="project-tags">
-              <span class="tag">C++</span>
-              <span class="tag">from scratch</span>
-            </div>
-          </div>
-          <p class="project-desc">
-            From-scratch hardware and software implementation of a drone (quadcopter).
-          </p>
-          <a class="project-link" href="projects/drone-design.html">Read more →</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── Courses ── -->
-  <section id="courses">
-    <div class="container">
-      <p class="section-label">Courses Taken</p>
-      <h2>First Year</h2>
-      <div class="skills-grid">
-        <!-- ADD or REMOVE skill tags here -->
-        <div class="skill-tag">ECE106 Electricity and Magnetism</div>
-        <div class="skill-tag">ECE150 Programming (C++)</div>
-        <div class="skill-tag">ECE124 Digital Circuits and Systems</div>
-        <div class="skill-tag">ECE140 Linear Circuits</div>
-        <div class="skill-tag">MATH115 Linear Algebra</div>
-        <div class="skill-tag">MATH117 Calculus 1</div>
-        <div class="skill-tag">MATH119 Calculus 2</div>
-        <div class="skill-tag">ECE108 Discrete Mathematics and Logic</div>
-      </div>
-      <h2>Second Year</h2>
-      <div class="skills-grid">
-        <!-- ADD or REMOVE skill tags here -->
-        <div class="skill-tag">ECE231 Semiconductor Physics and Devices</div>
-        <div class="skill-tag">ECE203 Probability Theory and Stats</div>
-        <div class="skill-tag">ECE204 Numerical Methods</div>
-        <div class="skill-tag">ECE222 Digital Computers</div>
-        <div class="skill-tag">ECE240 Electronic Circuits 1</div>
-        <div class="skill-tag">ECE250 Algorithms and Data Structures</div>
-        <div class="skill-tag">ECE205 Advanced Calculus 1</div>
-        <div class="skill-tag">ECE206 Advanced Calculus 2</div>
-        <div class="skill-tag">ECE207 Signals and Systems</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── CONTACT ── -->
-  <section id="contact">
-    <div class="container">
-      <p class="section-label">Contact</p>
-      <h2>Get in touch</h2>
-      <p class="contact-text">
-        I'm actively looking for co-op opportunities in neuromorphic computing, AI hardware,
-        and related fields. Happy to hear from researchers, companies, or anyone who wants
-        to talk about this stuff.
+      <p>
+        I'm an Electrical Engineering student at the University of Waterloo who loves to build things from first principles. That has led me into learning about neural networks, neuromorphic computing, and ML hardware design.
       </p>
-      <div class="hero-links">
-        <a href="mailto:rowan.leonard76@gmail.com">Email me</a>
-        <a class="btn btn-outline" href="https://www.linkedin.com/in/rowan-leonard/" target="_blank">LinkedIn ↗</a>
-        <a class="btn btn-outline" href="https://github.com/GreenBlueFish" target="_blank">GitHub ↗</a>
+      <p>
+        I've written two neural network libraries in C++ and used them to recreate architectures like RNNs, LSTMs, and map‑classification models so I could see how they behave at the lowest level. Lately, I've been diving into spiking neural networks (SNN's) and their hardware through textbooks, research papers, and hands on application. I have build a SNN accelerator from scratch and am working with a team to explore SNN's and neuromorphic hardware.
+      </p>
+      <p>
+        I've also designed two computers from scratch in a gate‑logic simulator, picked up VHDL and Verilog, and am apart Waterloo's ASIC design team.
+      </p>
+      <p>
+        I follow curiosity wherever it leads, but machine learning—especially neural networks—keeps pulling me deeper.
+      </p>
+    </section>
+    -->
+
+    <section id="skills">
+      <h2>Skills</h2>
+
+      <h3>Programming Languages</h3>
+      <p>
+        C++, Python, VHDL, Verilog, RISC-V, NASM, Bash, PowerShell
+      </p>
+
+      <h3>Tools &amp; Environments</h3>
+      <p>
+        Python Libraries (PyTorch, Cocotb, Brian), NGSpice, GitHub, GitKraken, VS Code / VS Community,
+        Logisim, AutoCAD 2D &amp; 3D, Code::Blocks IDE, Ghidra, Cisco Packet Tracer, Microsoft Office Tools,
+        LibreOffice Tools, AGI32 Lighting Software
+      </p>
+    </section>
+
+    <section id="projects">
+      <h2>Projects</h2>
+
+      <div class="project-entry">
+        <a class="project-title" href="projects/nn-library.html">Neural Network Libraries (C++)</a>
+        <p class="project-desc">
+          Two fully custom neural network libraries built without ML frameworks. Support forward and
+          backpropagation, multiple layer types, and were used as the foundation for all my network
+          experiments.
+        </p>
+        <p class="project-tags">C++ · ML · RNN · LSTM · from scratch</p>
       </div>
-    </div>
-  </section>
 
-  <!-- ── FOOTER ── -->
-  <footer>
-    <div class="container">
-      Built with HTML/CSS <a class="project-link" href="projects/Rons_projects.html">·</a> hosted on GitHub Pages
-    </div>
-  </footer>
+      <div class="project-entry">
+        <a class="project-title" href="projects/computer-design.html">Computer Design</a>
+        <p class="project-desc">
+          Custom computer architectures with their own custom ISAs built from gate-logic.
+        </p>
+        <p class="project-tags">from scratch</p>
+      </div>
 
+      <div class="project-entry">
+        <a class="project-title" href="projects/neuromorphic-research.html">SNN Accelerator</a>
+        <p class="project-desc">
+          Custom spiking neural network (SNN) hardware accelerator designed to train and run SNN models.
+        </p>
+        <p class="project-tags">SNN · Verilog · Cocotb · from scratch</p>
+      </div>
+
+      <div class="project-entry">
+        <a class="project-title" href="projects/uwasic_experience.html">My Time at UWASIC</a>
+        <p class="project-desc">
+          A summary of the things I have done at the University of Waterloo's ASIC design team.
+        </p>
+        <p class="project-tags">Digital · Analog · ASIC</p>
+      </div>
+
+      <div class="project-entry">
+        <a class="project-title" href="projects/fun-with-distros.html">Laptops, Distros, and Networking</a>
+        <p class="project-desc">
+          I have a number of laptops and computers at home. For fun I install different Linux distros
+          and play around with making networks.
+        </p>
+        <p class="project-tags">Linux · Bash · Networking · Cisco Packet Tracer</p>
+      </div>
+
+      <div class="project-entry">
+        <a class="project-title" href="projects/microcontroller_projects.html">Experience with Microcontrollers</a>
+        <p class="project-desc">
+          I have made many small microcontroller projects.
+        </p>
+        <p class="project-tags">STM32 Nucleo · Raspberry Pi (4B, pico) · Arduino (Uno, Due) · ESP32 WROOM</p>
+      </div>
+
+      <div class="project-entry">
+        <a class="project-title" href="projects/drone-design.html">Drone Design</a>
+        <p class="project-desc">
+          From-scratch hardware and software implementation of a drone (quadcopter).
+        </p>
+        <p class="project-tags">C++ · from scratch</p>
+      </div>
+    </section>
+
+    <section id="courses">
+      <h2>Courses Taken</h2>
+
+      <h3>First Year</h3>
+      <p>
+        ECE106 Electricity and Magnetism, ECE150 Programming (C++), ECE124 Digital Circuits and Systems,
+        ECE140 Linear Circuits, MATH115 Linear Algebra, MATH117 Calculus 1, MATH119 Calculus 2,
+        ECE108 Discrete Mathematics and Logic
+      </p>
+
+      <h3>Second Year</h3>
+      <p>
+        ECE231 Semiconductor Physics and Devices, ECE203 Probability Theory and Stats,
+        ECE204 Numerical Methods, ECE222 Digital Computers, ECE240 Electronic Circuits 1,
+        ECE250 Algorithms and Data Structures, ECE205 Advanced Calculus 1, ECE206 Advanced Calculus 2,
+        ECE207 Signals and Systems
+      </p>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>
+        I'm actively looking for co-op opportunities in neuromorphic computing, AI hardware, and related
+        fields. Happy to hear from researchers, companies, or anyone who wants to talk about this stuff.
+      </p>
+      <p class="links-line">
+        <a href="mailto:rowan.leonard76@gmail.com">Email me</a>
+        <a href="https://www.linkedin.com/in/rowan-leonard/" target="_blank">LinkedIn</a>
+        <a href="https://github.com/GreenBlueFish" target="_blank">GitHub</a>
+      </p>
+    </section>
+
+    <footer>
+      Built with HTML/CSS <a href="projects/Rons_projects.html" target="_blank" rel="noopener noreferrer">·</a> hosted on GitHub Pages
+    </footer>
+
+  </div>
 </body>
 </html>
