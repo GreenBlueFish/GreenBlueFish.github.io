@@ -139,3 +139,21 @@ footer {
   color: #777;
   font-size: 0.85rem;
 }
+
+/* ── Random photos ── */
+.photo-slot img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #ddd;
+}
+
+.photo-slot figure { margin: 0; }
+
+#photo-top {
+  margin: 0 0 1.5rem;
+}
+
+#photo-bottom {
+  margin: 2.2rem 0 0;
+}
