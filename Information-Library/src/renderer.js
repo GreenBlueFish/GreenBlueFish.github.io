@@ -32,6 +32,7 @@
 // subtopics shown within/beneath the card), 2.3 (breadcrumb from the ancestor
 // chain), 3.2 (standard page template), 3.3 (render blocks in order).
 
+import { installResizers } from "./resize.js";
 import { mountWidget } from "./widgets/registry.js";
 import { installHome } from "./home.js";
 import { appendRichText, texToMathML, TexError } from "./math.js";
@@ -273,7 +274,7 @@ function buildTree(nodes, ancestorSlugs, activePath) {
   const list = el("ul", "nav-tree");
 
   for (const node of nodes) {
-    if (!node || typeof node.slug !== "string") continue;
+    if (!node || typeof node.slug !== "string" || node.hidden) continue;
 
     const slugPath = ancestorSlugs.concat(node.slug);
     const item = el("li", "nav-tree__item");
@@ -456,7 +457,7 @@ export function sortByTitle(nodes) {
  * empty and the nav tree remains the browse affordance. (The boot wiring in
  * task 11 passes the tree through; see design.md Example Usage.)
  *
- * @param {(RouteResolution & { tree?: TopicNode, terms?: TermEntry[] })|null} resolution
+ * @param {(RouteResolution & { tree?: TopicNode, loadAllTerms?: () => Promise<TermEntry[]> })|null} resolution
  * @returns {HTMLElement} A `.home` container.
  */
 function renderHome(resolution) {
@@ -480,19 +481,52 @@ function renderHome(resolution) {
   termResults.appendChild(el("ul", "home-terms__list"));
   home.appendChild(termResults);
 
+  // Shelves (root nodes marked `"shelf": true`) each get a section of their
+  // own, in authored order, holding a card per topic on the shelf. Any other
+  // visible root node gets a card in a grid of its own after the shelves.
+  // Hidden nodes (`"hidden": true`, e.g. the Credits page) get no card.
+  const authored = tree && Array.isArray(tree.children) ? tree.children : [];
+  for (const shelf of authored) {
+    if (!shelf || !shelf.shelf || shelf.hidden || typeof shelf.slug !== "string") continue;
+    const section = el("section", "home-shelf");
+    section.setAttribute("aria-label", shelf.title ?? shelf.slug);
+    const heading = el("h2", "home-shelf__title");
+    const link = el("a", "home-shelf__link", shelf.title ?? shelf.slug);
+    link.setAttribute("href", hrefForPath([shelf.slug]));
+    heading.appendChild(link);
+    section.appendChild(heading);
+    const shelfGrid = el("ul", "home-grid");
+    for (const node of sortByTitle(shelf.children).filter((n) => n && !n.hidden)) {
+      const card = buildHomeCard(node, [shelf.slug, node.slug]);
+      if (card) shelfGrid.appendChild(card);
+    }
+    section.appendChild(shelfGrid);
+    home.appendChild(section);
+  }
+
   const grid = el("ul", "home-grid");
   for (const node of roots) {
+    if (!node || node.shelf || node.hidden) continue;
     const card = buildHomeCard(node, [node.slug]);
     if (card) grid.appendChild(card);
   }
-  home.appendChild(grid);
+  if (grid.childNodes.length > 0 || !authored.some((n) => n && n.shelf)) {
+    home.appendChild(grid);
+  }
 
   // Wire the home behavior (search filter + per-card expand/collapse) onto the
   // freshly built nodes before returning (home-topic-browse — Requirements 1.3,
   // 2.3, 2.4, 2.6, 2.7). Each render builds new nodes and attaches their own
   // listeners, so there is no listener accumulation across navigations.
-  const terms = resolution && Array.isArray(resolution.terms) ? resolution.terms : [];
-  installHome(home, tree, terms);
+  //
+  // The term search loads over EVERY Glossary_File lazily: the home resolution
+  // carries a `loadAllTerms` accessor (attached by main.js) that yields the
+  // full concatenated term set on first keystroke (Requirements 10.2, 10.3).
+  const loadAllTerms =
+    resolution && typeof resolution.loadAllTerms === "function"
+      ? resolution.loadAllTerms
+      : undefined;
+  installHome(home, tree, loadAllTerms);
 
   return home;
 }
@@ -636,6 +670,18 @@ function renderTopicPage(resolution, pageContent) {
     "";
   page.appendChild(el("h1", "page-title", title));
 
+  // A path step shows a page that lives in another topic: say where, so the
+  // reader can go to its home there (and the page arrows there).
+  const home = refHome(resolution.tree, resolution.refPath);
+  if (home) {
+    const note = el("p", "page-ref-note", "This page lives in ");
+    const link = el("a", "page-ref-note__link", home.label);
+    link.setAttribute("href", hrefForPath(resolution.refPath));
+    note.appendChild(link);
+    note.appendChild(document.createTextNode("."));
+    page.appendChild(note);
+  }
+
   if (pageContent && pageContent.intro) {
     page.appendChild(richEl("p", "page-intro", pageContent.intro));
   }
@@ -646,10 +692,34 @@ function renderTopicPage(resolution, pageContent) {
     renderBlock(block, page);
   }
 
+  // Size controls on every figure and simulation, remembered per page file.
+  installResizers(page, resolution.pageFile ?? (resolution.path ?? []).join("/"));
+
   const pager = buildPager(resolution.tree, resolution.path);
   if (pager) page.appendChild(pager);
 
   return page;
+}
+
+/**
+ * The label for a path step's home: the titles of the nodes above the page it
+ * shows, below the shelf ("Spiking Neural Networks › Neuron Models"), or null.
+ * @param {TopicNode|undefined} tree
+ * @param {string[]|undefined} refPath
+ * @returns {{ label: string }|null}
+ */
+function refHome(tree, refPath) {
+  if (!tree || !Array.isArray(refPath) || refPath.length === 0) return null;
+  const titles = [];
+  let siblings = Array.isArray(tree.children) ? tree.children : [];
+  for (const slug of refPath) {
+    const node = siblings.find((n) => n && n.slug === slug);
+    if (!node) return null;
+    if (!node.shelf) titles.push(node.title ?? node.slug);
+    siblings = Array.isArray(node.children) ? node.children : [];
+  }
+  titles.pop(); // the page itself is already the heading
+  return titles.length ? { label: titles.join(" › ") } : null;
 }
 
 /**
@@ -690,7 +760,7 @@ function pageOrder(tree) {
   const walk = (nodes, ancestors) => {
     if (!Array.isArray(nodes)) return;
     for (const node of nodes) {
-      if (!node || typeof node.slug !== "string") continue;
+      if (!node || typeof node.slug !== "string" || node.hidden) continue;
       const path = ancestors.concat(node.slug);
       order.push({ node, path });
       walk(node.children, path);

@@ -149,9 +149,44 @@ a:hover {
  * ==========================================================================*/
 
 .site-header {
+  position: relative;
   padding-block: var(--space-7) var(--space-5);
   border-bottom: var(--border-width) solid var(--color-border);
   margin-bottom: var(--space-6);
+}
+
+/* The light/dark switch, top right of the header (src/theme.js). */
+.theme-toggle {
+  position: absolute;
+  top: var(--space-5);
+  right: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-3);
+  font: inherit;
+  font-size: var(--font-size-small);
+  color: var(--color-text);
+  background-color: var(--color-surface);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+}
+
+@media (max-width: 40rem) {
+  .theme-toggle {
+    position: static;
+    margin-top: var(--space-3);
+  }
+}
+
+.theme-toggle:hover {
+  border-color: var(--color-accent);
+}
+
+.theme-toggle:focus-visible {
+  outline: var(--focus-ring-width, 2px) solid var(--focus-ring-color);
+  outline-offset: 2px;
 }
 
 .site-title {
@@ -462,6 +497,33 @@ a:hover {
   font-weight: var(--font-weight-medium);
 }
 
+/* --- Shelves -------------------------------------------------------------
+ * The home groups topic cards by shelf: a heading linking to the shelf page,
+ * then the shelf's own .home-grid. A shelf the filter empties is hidden. */
+
+.home-shelf + .home-shelf,
+.home-shelf + .home-grid {
+  margin-top: var(--space-6);
+}
+
+.home-shelf[hidden] {
+  display: none;
+}
+
+.home-shelf__title {
+  margin: 0 0 var(--space-4);
+  font-size: var(--font-size-h3);
+}
+
+.home-shelf__link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.home-shelf__link:hover {
+  color: var(--color-accent);
+}
+
 /* --- Topic card grid ----------------------------------------------------- */
 
 .home-grid {
@@ -620,6 +682,13 @@ a:hover {
 .page-title {
   font-size: var(--font-size-h1);
   margin-bottom: var(--space-3);
+}
+
+/* A path step's note naming the topic its page lives in. */
+.page-ref-note {
+  margin: calc(-1 * var(--space-2)) 0 var(--space-4);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-small);
 }
 
 .page-intro {
@@ -869,6 +938,118 @@ math.math--display,
   font-family: var(--font-code-family);
 }
 
+/* --- Size controls (src/resize.js) ----------------------------------------
+ * Each figure and simulation sits in a full-width .sizable: a toolbar (smaller,
+ * larger, fill the window, reset) at its top right, then the block. The block's
+ * width is --size (a percentage of the column, data-sized below 100%), set by
+ * the buttons or by dragging .size-handle at its bottom-right corner; a resized
+ * block is centred. data-expanded on the wrapper fills the window over the page.
+ */
+.size-controls {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-1);
+}
+
+.size-controls__button {
+  min-width: 1.9rem;
+  height: 1.7rem;
+  padding: 0 var(--space-2);
+  font: inherit;
+  font-size: var(--font-size-small);
+  line-height: 1;
+  color: var(--color-text-muted);
+  background-color: var(--color-surface);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.size-controls__button:hover:not(:disabled) {
+  color: var(--color-text);
+  border-color: var(--color-accent);
+}
+
+.size-controls__button:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: 1px;
+}
+
+.size-controls__button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+/* The block keeps its own card; the wrapper is full width, so the toolbar
+ * above stays at the top right whatever the block's size. */
+.sizable {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.sizable > .block {
+  position: relative;
+}
+
+.sizable > .block[data-sized] {
+  width: var(--size);
+  max-width: 100%;
+  margin-inline: auto;
+}
+
+/* The drag handle: the block's bottom-right corner. */
+.size-handle {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 1.1rem;
+  height: 1.1rem;
+  cursor: nwse-resize;
+  touch-action: none;
+  border-right: 3px solid var(--color-control-border);
+  border-bottom: 3px solid var(--color-control-border);
+  border-bottom-right-radius: var(--radius-md);
+  opacity: 0.7;
+}
+
+.size-handle:hover,
+.block[data-dragging] > .size-handle {
+  border-color: var(--color-accent);
+  opacity: 1;
+}
+
+.block[data-dragging] {
+  user-select: none;
+}
+
+.sizable[data-expanded="true"] {
+  position: fixed;
+  inset: var(--space-4);
+  z-index: 50;
+  overflow: auto;
+  padding: var(--space-4);
+  background-color: var(--color-surface);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: 0 0 0 100vmax var(--color-overlay);
+}
+
+.sizable[data-expanded="true"] > .block {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+}
+
+.sizable[data-expanded="true"] .size-handle {
+  display: none;
+}
+
+.sizable[data-expanded="true"] .figure__image {
+  max-height: calc(100vh - 12rem);
+  width: min(100%, calc((100vh - 12rem) * var(--ratio, 1000)));
+}
+
 /* --- Figures (.block--figure) ----------------------------------------------
  * An image with a caption. The image fills the wide measure on a surface card
  * so diagrams drawn on transparent backgrounds read the same everywhere.
@@ -883,11 +1064,15 @@ math.math--display,
 
 .figure__image {
   display: block;
-  width: 100%;
+  /* As wide as the column, but no wider than the height cap allows for this
+   * picture's shape (--ratio, set by src/resize.js), so a tall picture leaves
+   * no band of figure background beside it. */
+  width: min(100%, calc(var(--figure-max-height) * var(--ratio, 1000)));
+  margin-inline: auto;
   height: auto;
   max-height: var(--figure-max-height);
   object-fit: contain;
-  background-color: var(--color-surface);
+  background-color: var(--color-figure-bg);
   border: var(--border-width) solid var(--color-border);
   border-radius: var(--radius-md);
 }
@@ -1042,6 +1227,61 @@ math.math--display,
 .lookup-panel--empty .lookup-panel__definition {
   color: var(--color-text-muted);
   font-style: italic;
+}
+
+/* The Search_All button: the panel's last row, offering a search across every
+ * glossary not already in the scope chain (Requirement 11.8). Idle, it shares
+ * the button tokens with the match/cycle controls so it reads as a peer. */
+.lookup-panel__search-all {
+  min-height: var(--control-min-target);
+  margin-top: var(--space-3);
+  padding: var(--space-1) var(--space-3);
+  color: var(--color-text);
+  background-color: var(--color-control-bg);
+  border: var(--border-width) solid var(--color-control-border);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body-family);
+  font-size: var(--font-size-small);
+  cursor: pointer;
+}
+
+.lookup-panel__search-all:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+}
+
+/* Loading: disabled while the non-chain glossaries lazily load (mirrors the
+ * existing `.lookup-panel__match-button:disabled` rule). */
+.lookup-panel__search-all--loading {
+  opacity: 0.4;
+  cursor: default;
+}
+
+/* Done with no extra hits: "No other definitions found" as muted,
+ * non-interactive text rather than a button affordance. */
+.lookup-panel__search-all--done {
+  color: var(--color-text-muted);
+  background-color: transparent;
+  border-color: transparent;
+  cursor: default;
+}
+
+/* "Some topics couldn't be searched" note, set off by a top rule like
+ * `.lookup-panel__matches` (Requirement 8.9). */
+.lookup-panel__note {
+  margin-top: var(--space-3);
+  padding-top: var(--space-3);
+  border-top: var(--border-width) solid var(--color-border);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-small);
+}
+
+/* Per-definition "from <Topic>" source label, mirroring the muted `__acronym`
+ * token usage; shared by the lookup panel and the home term results. */
+.lookup-panel__source,
+.home-term__source {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-small);
 }
 
 /* ============================================================================
@@ -1419,7 +1659,7 @@ math.math--display,
  * ==========================================================================*/
 
 .site-footer {
-  margin-top: var(--space-8);
+  margin-top: var(--space-6);
   padding-block: var(--space-5);
   border-top: var(--border-width) solid var(--color-border);
   color: var(--color-text-muted);
