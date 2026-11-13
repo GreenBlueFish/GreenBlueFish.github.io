@@ -2,6 +2,49 @@
    style.css — barebones shared styles
    ============================================================ */
 
+/* ── Colours: light by default, dark when <html data-theme="dark">.
+   theme.js sets the attribute (the saved choice, else the system setting)
+   and adds the switch button. ── */
+:root {
+  color-scheme: light;
+  --bg: #fff;
+  --text: #111;
+  --text-2: #444;
+  --text-3: #6b6b6b;
+  --link: #0645ad;
+  --link-hover: #000;
+  --border: #ddd;
+  --code-bg: #f4f4f4;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #121417;
+  --text: #e4e6ea;
+  --text-2: #b9bec7;
+  --text-3: #9198a3;
+  --link: #8ab4f8;
+  --link-hover: #c6dafc;
+  --border: #33373e;
+  --code-bg: #1e2126;
+}
+
+.theme-toggle {
+  position: fixed;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 10;
+  font: inherit;
+  font-size: 0.85rem;
+  padding: 0.25rem 0.6rem;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  cursor: pointer;
+}
+.theme-toggle:hover { border-color: var(--link); }
+
 * { box-sizing: border-box; }
 
 html { -webkit-text-size-adjust: 100%; }
@@ -9,8 +52,8 @@ html { -webkit-text-size-adjust: 100%; }
 body {
   margin: 0;
   padding: 2.5rem 1.25rem 4rem;
-  background: #fff;
-  color: #111;
+  background: var(--bg);
+  color: var(--text);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
   font-size: 17px;
   line-height: 1.55;
@@ -21,9 +64,9 @@ body {
   margin: 0 auto;
 }
 
-a { color: #0645ad; text-decoration: underline; }
-a:visited { color: #0645ad; }
-a:hover { color: #000; }
+a { color: var(--link); text-decoration: underline; }
+a:visited { color: var(--link); }
+a:hover { color: var(--link-hover); }
 
 h1 {
   font-size: 1.7rem;
@@ -55,22 +98,22 @@ li { margin-bottom: 0.25rem; }
 
 hr {
   border: none;
-  border-top: 1px solid #ddd;
+  border-top: 1px solid var(--border);
   margin: 2rem 0;
 }
 
 .tagline {
-  color: #555;
+  color: var(--text-2);
   margin: 0 0 1rem;
 }
 
 .subtitle {
-  color: #444;
+  color: var(--text-2);
   margin-bottom: 0.6rem;
 }
 
 .meta {
-  color: #666;
+  color: var(--text-3);
   font-size: 0.92rem;
   margin-bottom: 1.2rem;
 }
@@ -83,23 +126,23 @@ section { margin-top: 2.2rem; }
 /* ── Projects list (index) ── */
 .project-entry { margin-bottom: 1.1rem; }
 .project-entry .project-title { font-weight: 600; }
-.project-entry .project-desc { color: #444; margin: 0.15rem 0 0; }
-.project-entry .project-tags { color: #777; font-size: 0.88rem; }
+.project-entry .project-desc { color: var(--text-2); margin: 0.15rem 0 0; }
+.project-entry .project-tags { color: var(--text-3); font-size: 0.88rem; }
 
 /* ── Project pages ── */
 .back-link { display: inline-block; margin-bottom: 1.5rem; }
 
-.page-tags { color: #777; font-size: 0.9rem; margin-bottom: 0.8rem; }
+.page-tags { color: var(--text-3); font-size: 0.9rem; margin-bottom: 0.8rem; }
 
 figure { margin: 1.1rem 0; }
 figure img {
   max-width: 100%;
   height: auto;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border);
   display: block;
 }
 figcaption {
-  color: #666;
+  color: var(--text-3);
   font-size: 0.85rem;
   margin-top: 0.3rem;
 }
@@ -109,18 +152,18 @@ video {
   height: auto;
   display: block;
   margin: 1.1rem 0;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border);
 }
 
 code {
   font-family: "SF Mono", Consolas, Menlo, monospace;
   font-size: 0.85em;
-  background: #f4f4f4;
+  background: var(--code-bg);
   padding: 0.1em 0.35em;
 }
 
 pre {
-  background: #f4f4f4;
+  background: var(--code-bg);
   padding: 1rem;
   overflow-x: auto;
   margin: 1rem 0;
@@ -128,15 +171,15 @@ pre {
 pre code { background: none; padding: 0; }
 
 .hidden-link {
-  color: #fff;
+  color: var(--bg);
   font-size: 0.75rem;
 }
 
 footer {
   margin-top: 3rem;
   padding-top: 1.2rem;
-  border-top: 1px solid #ddd;
-  color: #777;
+  border-top: 1px solid var(--border);
+  color: var(--text-3);
   font-size: 0.85rem;
 }
 
@@ -145,7 +188,7 @@ footer {
   display: block;
   max-width: 100%;
   height: auto;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border);
 }
 
 .photo-slot figure { margin: 0; }
