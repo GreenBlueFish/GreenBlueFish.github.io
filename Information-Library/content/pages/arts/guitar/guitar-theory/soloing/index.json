@@ -1,0 +1,304 @@
+{
+  "title": "Lesson 9: Soloing over Chords",
+  "intro": "Soloing means choosing notes that fit the chord of the moment. Start safe with the pentatonic box, then learn to land on the chord's own notes, and finally use bends to make the guitar sing.",
+  "blocks": [
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "In this lesson"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Improvise with the minor pentatonic over a blues.",
+        "Land on chord tones when the chord changes.",
+        "Play arpeggios and in-tune bends."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Before you start"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Lesson 6 (pentatonic box), Lesson 8 (12-bar blues), and a way to hear the chords: record yourself, use a backing track, or play the chord example below on repeat."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Pentatonic over a blues"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Step 1. Play the 12-bar blues in A (Lesson 8) on loop, or have a friend play it.",
+        "Step 2. Over it, play only notes from the A minor pentatonic box at fret 5. Short phrases, then rests: play two bars, rest two bars, like a conversation.",
+        "Step 3. End phrases on A (string 6 fret 5, string 4 fret 7, string 1 fret 5). Ending on the root sounds finished.",
+        "Step 4. The C in the box (string 3 fret 5 or string 6 fret 8) clashes with the C♯ in the A chord on purpose: that is the 'blue' sound. Try bending that C up slightly toward C♯."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Target the chord tones"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Step 1. A chord tone is a note of the chord underneath: root, third, fifth (and seventh). Landing on one when the chord changes makes your line follow the harmony.",
+        "Step 2. Over A7 the strongest note is C♯ (its third); over D7 it is C (its seventh) or F♯ (its third). When the blues moves from A7 to D7, play C♯ then move it down a semitone to C: one fret, and the chord change is in your melody.",
+        "Step 3. Step through the example: each chord is followed by its two guide tones (3rd and 7th); from A7 to D7 both fall a semitone, C♯–G to C–F♯."
+      ]
+    },
+    {
+      "type": "widget",
+      "widget": {
+        "type": "music-player",
+        "instrument": "guitar",
+        "title": "A7 → D7: the third of A7 falls to the seventh of D7",
+        "frets": 12,
+        "examples": [
+          {
+            "label": "Chords with the guide-tone line",
+            "play": "melody",
+            "notes": [
+              "x-0-2-0-2-0",
+              "3:6+2:8",
+              "x-x-0-2-1-2",
+              "3:5+2:7"
+            ],
+            "beats": [
+              2,
+              1,
+              2,
+              1
+            ]
+          }
+        ],
+        "params": [
+          {
+            "key": "tempo",
+            "label": "Tempo (beats per minute)",
+            "control": "range",
+            "min": 40,
+            "max": 200,
+            "step": 5,
+            "default": 80
+          },
+          {
+            "key": "timbre",
+            "label": "Sound",
+            "control": "select",
+            "options": [
+              "bright",
+              "soft",
+              "sine"
+            ],
+            "default": "bright"
+          }
+        ]
+      }
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Arpeggios"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Step 1. An arpeggio is a chord played one note at a time. Play Am7 in fifth position: string 6 frets 5, 8; string 5 fret 7; string 4 frets 5, 7; string 3 fret 5; string 2 frets 5, 8; string 1 fret 5 (A C E G A C E G A).",
+        "Step 2. Then Dm7 in the same position: string 5 frets 5, 8; string 4 fret 7; string 3 frets 5, 7; string 2 fret 6; string 1 frets 5, 8.",
+        "Step 3. Over Am7 to Dm7 chords, play the arpeggio of each chord as it comes: that is the clearest way to make a solo outline the harmony."
+      ]
+    },
+    {
+      "type": "widget",
+      "widget": {
+        "type": "music-player",
+        "instrument": "guitar",
+        "title": "Arpeggios in fifth position: Am7 and Dm7",
+        "frets": 9,
+        "examples": [
+          {
+            "label": "Am7",
+            "play": "melody",
+            "notes": [
+              "6:5",
+              "6:8",
+              "5:7",
+              "4:5",
+              "4:7",
+              "3:5",
+              "2:5",
+              "2:8",
+              "1:5"
+            ],
+            "beats": [
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              1
+            ]
+          },
+          {
+            "label": "Dm7",
+            "play": "melody",
+            "notes": [
+              "5:5",
+              "5:8",
+              "4:7",
+              "3:5",
+              "3:7",
+              "2:6",
+              "1:5",
+              "1:8"
+            ],
+            "beats": [
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              1
+            ]
+          }
+        ],
+        "params": [
+          {
+            "key": "tempo",
+            "label": "Tempo (beats per minute)",
+            "control": "range",
+            "min": 40,
+            "max": 200,
+            "step": 5,
+            "default": 80
+          },
+          {
+            "key": "timbre",
+            "label": "Sound",
+            "control": "select",
+            "options": [
+              "bright",
+              "soft",
+              "sine"
+            ],
+            "default": "bright"
+          }
+        ]
+      }
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Bend in tune"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Step 1. Play string 3 fret 9 (E): this is your target pitch.",
+        "Step 2. Now play string 3 fret 7 (D) with finger 3, supported by fingers 1 and 2 behind it, and push the string upward until it sounds like the E you just played. That is a whole-step bend.",
+        "Step 3. Check by alternating: fret 9, then the bend from fret 7. An out-of-tune bend is the most obvious wrong note on a guitar.",
+        "Step 4. Add vibrato at the top of the bend: small, regular releases and re-bends."
+      ]
+    },
+    {
+      "type": "widget",
+      "widget": {
+        "type": "music-player",
+        "instrument": "guitar",
+        "title": "Target pitch for a whole-step bend (string 3, fret 7 to the sound of fret 9)",
+        "frets": 12,
+        "examples": [
+          {
+            "label": "Target, start note, target",
+            "play": "melody",
+            "notes": [
+              "3:9",
+              "3:7",
+              "3:9"
+            ],
+            "beats": [
+              1.5,
+              1.5,
+              2
+            ]
+          }
+        ],
+        "params": [
+          {
+            "key": "tempo",
+            "label": "Tempo (beats per minute)",
+            "control": "range",
+            "min": 40,
+            "max": 200,
+            "step": 5,
+            "default": 80
+          },
+          {
+            "key": "timbre",
+            "label": "Sound",
+            "control": "select",
+            "options": [
+              "bright",
+              "soft",
+              "sine"
+            ],
+            "default": "bright"
+          }
+        ]
+      }
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Practice routine"
+    },
+    {
+      "type": "list",
+      "items": [
+        "4 min: pentatonic phrases over the A blues, two bars on, two bars off.",
+        "3 min: the A7 → D7 guide-tone move, C♯ to C.",
+        "3 min: Am7 and Dm7 arpeggios in fifth position.",
+        "3 min: whole-step bends on string 3 and string 2, checked against the target fret."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Check yourself"
+    },
+    {
+      "type": "problem",
+      "title": "Targets",
+      "text": "In a ii–V–I in C (Dm7–G7–Cmaj7), which notes make a smooth line starting on F?",
+      "solution": [
+        "F is the third of Dm7; it stays as the seventh of G7, then falls a semitone to E, the third of Cmaj7: F–F–E."
+      ],
+      "answer": "F – F – E"
+    },
+    {
+      "type": "problem",
+      "title": "Blues bend",
+      "text": "Over E7 in the E blues, which note of E minor pentatonic do players bend toward the major third?",
+      "solution": [
+        "E minor pentatonic is E G A B D. The minor third G is bent up toward G♯, the major third of E7."
+      ],
+      "answer": "G, bent toward G♯"
+    },
+    {
+      "type": "prose",
+      "text": "Sources: Goodrick, M. (1987). The Advancing Guitarist. Hal Leonard; Levine, M. (1995). The Jazz Theory Book. Sher Music; Koch, G. (2002). Hal Leonard Guitar Method: Blues Guitar. Hal Leonard."
+    }
+  ]
+}

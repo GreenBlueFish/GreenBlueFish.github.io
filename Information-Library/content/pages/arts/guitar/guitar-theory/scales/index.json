@@ -1,0 +1,307 @@
+{
+  "title": "Lesson 6: Scales",
+  "intro": "Scales are the raw material of melodies and solos (see Scales and Keys (#/arts/music-theory/scales-and-keys)). On the guitar a scale is a fingering pattern in one hand position that moves to any key. Start with the minor pentatonic box, the most used scale shape in rock and blues, then the major scale.",
+  "blocks": [
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "In this lesson"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Play the A minor pentatonic box and move it to other keys.",
+        "Play the G major scale in one position.",
+        "Hear how the same notes become a different mode over a different root."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Before you start"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Lesson 3 (note names), alternate picking from Lesson 2, and a metronome."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "The minor pentatonic box"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Step 1. Put finger 1 at fret 5 on string 6 (A, the root). The box covers frets 5 to 8: finger 1 plays fret 5, finger 3 fret 7, finger 4 fret 8.",
+        "Step 2. Play string 6 frets 5 and 8; string 5 frets 5 and 7; string 4 frets 5 and 7; string 3 frets 5 and 7; string 2 frets 5 and 8; string 1 frets 5 and 8. Two notes per string.",
+        "Step 3. Play it up and down with alternate picking, slowly, using Step ▶ to check each note. The roots (A) are on string 6 fret 5, string 4 fret 7 and string 1 fret 5: emphasise them.",
+        "Step 4. Add the 'blue note' (E♭, fret 6 on string 5) between frets 5 and 7 for the blues scale.",
+        "Step 5. Move the whole box so finger 1 is on another note of string 6: at fret 3 it is G minor pentatonic, at fret 8 C minor pentatonic."
+      ]
+    },
+    {
+      "type": "widget",
+      "widget": {
+        "type": "music-player",
+        "instrument": "guitar",
+        "title": "A minor pentatonic, box 1 (frets 5–8)",
+        "frets": 12,
+        "examples": [
+          {
+            "label": "Up",
+            "play": "melody",
+            "notes": [
+              "6:5",
+              "6:8",
+              "5:5",
+              "5:7",
+              "4:5",
+              "4:7",
+              "3:5",
+              "3:7",
+              "2:5",
+              "2:8",
+              "1:5",
+              "1:8"
+            ],
+            "beats": [
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.5
+            ]
+          },
+          {
+            "label": "Down",
+            "play": "melody",
+            "notes": [
+              "1:8",
+              "1:5",
+              "2:8",
+              "2:5",
+              "3:7",
+              "3:5",
+              "4:7",
+              "4:5",
+              "5:7",
+              "5:5",
+              "6:8",
+              "6:5"
+            ],
+            "beats": [
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.5
+            ]
+          },
+          {
+            "label": "A blues lick with the blue note",
+            "play": "melody",
+            "notes": [
+              "5:5",
+              "5:6",
+              "5:7",
+              "4:5",
+              "4:7",
+              "3:5"
+            ],
+            "beats": [
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              1,
+              1
+            ]
+          }
+        ],
+        "params": [
+          {
+            "key": "tempo",
+            "label": "Tempo (beats per minute)",
+            "control": "range",
+            "min": 40,
+            "max": 200,
+            "step": 5,
+            "default": 80
+          },
+          {
+            "key": "timbre",
+            "label": "Sound",
+            "control": "select",
+            "options": [
+              "bright",
+              "soft",
+              "sine"
+            ],
+            "default": "bright"
+          }
+        ]
+      }
+    },
+    {
+      "type": "figure",
+      "src": "assets/figures/guitar/pentatonic-boxes.svg",
+      "alt": "The neck from the nut to fret 17 with every note of A minor pentatonic as a labelled dot, the A's in red, and brackets marking boxes 1 to 5.",
+      "caption": "The whole neck of A minor pentatonic in five boxes. When box 1 is comfortable, learn box 2 (frets 7–10), which overlaps it."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "The major scale in one position"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Step 1. G major, second position: finger 2 on string 6 fret 3 (G, the root). The pattern covers frets 2 to 5.",
+        "Step 2. String 6: frets 2, 3, 5 (F♯ G A). String 5: 2, 3, 5 (B C D). String 4: 2, 4, 5 (E F♯ G). String 3: 2, 4, 5 (A B C). String 2: 3, 5 (D E). String 1: 2, 3, 5 (F♯ G A).",
+        "Step 3. Play from the root G on string 6 up to G on string 1 (fret 3), saying 'do re mi fa sol la ti do' twice. Use Step ▶ to check.",
+        "Step 4. Move the pattern up two frets: A major. Up five frets from G: C major."
+      ]
+    },
+    {
+      "type": "widget",
+      "widget": {
+        "type": "music-player",
+        "instrument": "guitar",
+        "title": "G major, second position, two octaves",
+        "frets": 7,
+        "examples": [
+          {
+            "label": "Up from G",
+            "play": "melody",
+            "notes": [
+              "6:3",
+              "6:5",
+              "5:2",
+              "5:3",
+              "5:5",
+              "4:2",
+              "4:4",
+              "4:5",
+              "3:2",
+              "3:4",
+              "3:5",
+              "2:3",
+              "2:5",
+              "1:2",
+              "1:3"
+            ],
+            "beats": [
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              1
+            ]
+          }
+        ],
+        "params": [
+          {
+            "key": "tempo",
+            "label": "Tempo (beats per minute)",
+            "control": "range",
+            "min": 40,
+            "max": 200,
+            "step": 5,
+            "default": 80
+          },
+          {
+            "key": "timbre",
+            "label": "Sound",
+            "control": "select",
+            "options": [
+              "bright",
+              "soft",
+              "sine"
+            ],
+            "default": "bright"
+          }
+        ]
+      }
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Hear the modes"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Step 1. Play the G major pattern again, but treat A as home: start and end on A (string 6 fret 5) and let the open A string ring underneath. The same notes now sound like A Dorian, minor with a bright sixth (see The Modes (#/arts/music-theory/scales-and-keys/modes)).",
+        "Step 2. Treat D as home (string 5 fret 5, open D string ringing): D Mixolydian, major with a flat seventh, the sound of a lot of rock.",
+        "Step 3. The fingering never changed; only the home note did. That is what a mode is."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Practice routine"
+    },
+    {
+      "type": "list",
+      "items": [
+        "3 min: A minor pentatonic box up and down, metronome 60, alternate picking.",
+        "3 min: the box at frets 3 (G) and 8 (C).",
+        "4 min: G major in second position, then A major two frets up.",
+        "3 min: improvise freely in the pentatonic box over a held open A string."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Check yourself"
+    },
+    {
+      "type": "problem",
+      "title": "Move the box",
+      "text": "Where is box 1 of E minor pentatonic, and of C minor pentatonic?",
+      "solution": [
+        "Box 1 starts on the root on string 6. E: open string 6 (or fret 12), so the open position or frets 12–15. C: string 6 fret 8, so frets 8–11."
+      ],
+      "answer": "E: open (or 12–15); C: frets 8–11"
+    },
+    {
+      "type": "problem",
+      "title": "Relative",
+      "text": "Which major pentatonic has exactly the same notes as A minor pentatonic?",
+      "solution": [
+        "C major pentatonic (C D E G A), the relative major; in box 1 its roots are on string 6 fret 8, string 3 fret 5 and string 1 fret 8."
+      ],
+      "answer": "C major pentatonic"
+    },
+    {
+      "type": "prose",
+      "text": "Sources: Goodrick, M. (1987). The Advancing Guitarist. Hal Leonard; Leavitt, W. G. (1966–1971). A Modern Method for Guitar, vols. 1–3. Berklee Press; Tagliarino, B. (2006). Guitar Fretboard Workbook. Hal Leonard; Levine, M. (1995). The Jazz Theory Book. Sher Music."
+    }
+  ]
+}

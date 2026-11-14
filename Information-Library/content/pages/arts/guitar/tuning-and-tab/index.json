@@ -1,0 +1,367 @@
+{
+  "title": "Lesson 1: Tuning, Tab and Chord Diagrams",
+  "intro": "Before playing anything, tune the guitar and learn to read the two ways guitar music is written down: tab and chord diagrams. Everything in the later lessons uses them.",
+  "blocks": [
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "In this lesson"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Tune all six strings to E A D G B E by ear or with a tuner.",
+        "Read tablature (tab).",
+        "Read a chord diagram and the six-character shape code (x32010)."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Before you start"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Your guitar, and a tuner (a clip-on tuner or a free phone app) or another instrument to tune to. You can also use the open-string sounds below."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Tune the guitar"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Step 1. Play the open low E string (string 6, the thickest). With a tuner, turn its peg until the tuner shows E in the centre. Without one, match it to the first note of the fretboard example below.",
+        "Step 2. Press string 6 at fret 5 with any finger: that note is A. Play it, then the open A string (string 5). They should sound identical. If the open string is lower, tighten its peg; if higher, loosen it. When they are close you will hear a slow 'wah-wah' beating; keep turning until it stops.",
+        "Step 3. Press string 5 at fret 5 (D) and tune the open D string (string 4) to it.",
+        "Step 4. Press string 4 at fret 5 (G) and tune the open G string (string 3) to it.",
+        "Step 5. Here is the one exception: press string 3 at fret 4 (B) and tune the open B string (string 2) to it. (G to B is four frets, not five, because it is a major third; every other pair is a fourth.)",
+        "Step 6. Press string 2 at fret 5 (E) and tune the open high E string (string 1). Check: the high E and the low E are the same note two octaves apart."
+      ]
+    },
+    {
+      "type": "widget",
+      "widget": {
+        "type": "music-player",
+        "instrument": "guitar",
+        "title": "Tuning pairs: each pair should sound identical",
+        "frets": 6,
+        "examples": [
+          {
+            "label": "String 6 fret 5 = open string 5 (A)",
+            "play": "melody",
+            "notes": [
+              "6:5",
+              "5:0",
+              "6:5+5:0"
+            ],
+            "beats": [
+              1.5,
+              1.5,
+              2
+            ]
+          },
+          {
+            "label": "String 5 fret 5 = open string 4 (D)",
+            "play": "melody",
+            "notes": [
+              "5:5",
+              "4:0",
+              "5:5+4:0"
+            ],
+            "beats": [
+              1.5,
+              1.5,
+              2
+            ]
+          },
+          {
+            "label": "String 4 fret 5 = open string 3 (G)",
+            "play": "melody",
+            "notes": [
+              "4:5",
+              "3:0",
+              "4:5+3:0"
+            ],
+            "beats": [
+              1.5,
+              1.5,
+              2
+            ]
+          },
+          {
+            "label": "String 3 fret 4 = open string 2 (B)",
+            "play": "melody",
+            "notes": [
+              "3:4",
+              "2:0",
+              "3:4+2:0"
+            ],
+            "beats": [
+              1.5,
+              1.5,
+              2
+            ]
+          },
+          {
+            "label": "String 2 fret 5 = open string 1 (E)",
+            "play": "melody",
+            "notes": [
+              "2:5",
+              "1:0",
+              "2:5+1:0"
+            ],
+            "beats": [
+              1.5,
+              1.5,
+              2
+            ]
+          }
+        ],
+        "params": [
+          {
+            "key": "tempo",
+            "label": "Tempo (beats per minute)",
+            "control": "range",
+            "min": 40,
+            "max": 200,
+            "step": 5,
+            "default": 80
+          },
+          {
+            "key": "timbre",
+            "label": "Sound",
+            "control": "select",
+            "options": [
+              "bright",
+              "soft",
+              "sine"
+            ],
+            "default": "bright"
+          }
+        ]
+      }
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Read tab"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Step 1. Look at the tab below. Each line is a string, with the high e at the top, as if looking down at the neck. A number is the fret to press on that string; 0 means play it open.",
+        "Step 2. Read from left to right like text. The example plays string 5 fret 3, string 4 fret 2, string 3 open, string 2 fret 1, string 1 open, then back down.",
+        "Step 3. Play it slowly, letting each note ring. You have just picked a C major chord one note at a time (an arpeggio).",
+        "Step 4. Numbers stacked vertically are played together. Common symbols: h = hammer-on, p = pull-off, / = slide up, b = bend, ~ = vibrato, x = muted note."
+      ]
+    },
+    {
+      "type": "code",
+      "lang": "text",
+      "source": "e|-----------0-----------|\nB|---------1---1---------|\nG|-------0-------0-------|\nD|-----2-----------2-----|\nA|---3---------------3---|\nE|-----------------------|\n"
+    },
+    {
+      "type": "widget",
+      "widget": {
+        "type": "music-player",
+        "instrument": "guitar",
+        "title": "The tab above, note by note",
+        "frets": 5,
+        "examples": [
+          {
+            "label": "C arpeggio up and down",
+            "play": "melody",
+            "notes": [
+              "5:3",
+              "4:2",
+              "3:0",
+              "2:1",
+              "1:0",
+              "2:1",
+              "3:0",
+              "4:2",
+              "5:3"
+            ],
+            "beats": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2
+            ]
+          }
+        ],
+        "params": [
+          {
+            "key": "tempo",
+            "label": "Tempo (beats per minute)",
+            "control": "range",
+            "min": 40,
+            "max": 200,
+            "step": 5,
+            "default": 80
+          },
+          {
+            "key": "timbre",
+            "label": "Sound",
+            "control": "select",
+            "options": [
+              "bright",
+              "soft",
+              "sine"
+            ],
+            "default": "bright"
+          }
+        ]
+      }
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Read a chord diagram"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Step 1. Look at the open chords diagram below. Each little grid is the neck standing upright: the six vertical lines are strings (low E on the left), the horizontal lines are frets, and the thick bar at the top is the nut.",
+        "Step 2. A dot means put a finger there. A circle above a string means play it open; a cross means do not play it. The red dots and circles are the root, the note the chord is named after.",
+        "Step 3. Play the C chord from the diagram: ring finger on string 5 fret 3, middle finger on string 4 fret 2, index finger on string 2 fret 1; strum strings 5 to 1.",
+        "Step 4. The six-character code for the same chord is x32010: one character per string from low E to high e, giving the fret (x = not played). Learn to read both.",
+        "Step 5. Step through the fretboard example below: each step is one of the eight open chords. Copy each shape on your guitar and strum it."
+      ]
+    },
+    {
+      "type": "figure",
+      "src": "assets/figures/guitar/open-chords.svg",
+      "alt": "Eight chord diagrams: C, G, D, A, E, Am, Em and Dm, each a grid of six vertical strings and five frets with dots for the fretted notes, circles for open strings and crosses for strings not played. Root notes are red, and the note on each string is written below.",
+      "caption": "The eight most common open chords. Strings run low E (left) to high e (right); the red dots and circles are the roots."
+    },
+    {
+      "type": "widget",
+      "widget": {
+        "type": "music-player",
+        "instrument": "guitar",
+        "title": "The eight open chords, one per step",
+        "frets": 5,
+        "examples": [
+          {
+            "label": "C G D A E Am Em Dm",
+            "play": "melody",
+            "notes": [
+              "x32010",
+              "320003",
+              "xx0232",
+              "x02220",
+              "022100",
+              "x02210",
+              "022000",
+              "xx0231"
+            ],
+            "beats": [
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3
+            ]
+          }
+        ],
+        "params": [
+          {
+            "key": "tempo",
+            "label": "Tempo (beats per minute)",
+            "control": "range",
+            "min": 40,
+            "max": 200,
+            "step": 5,
+            "default": 80
+          },
+          {
+            "key": "timbre",
+            "label": "Sound",
+            "control": "select",
+            "options": [
+              "bright",
+              "soft",
+              "sine"
+            ],
+            "default": "bright"
+          }
+        ]
+      }
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Alternate tunings and the capo"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Drop D: lower string 6 a whole step to D (D A D G B E). Power chords on the bottom three strings become one finger.",
+        "Open G (D G D G B D) and DADGAD (D A D G A D): the open strings make a chord or a drone; used for slide and folk.",
+        "A capo clamps across all strings at one fret and raises every chord shape by that many semitones: G shapes with a capo at fret 2 sound in A. It lets you keep easy open shapes in any key."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Practice routine"
+    },
+    {
+      "type": "list",
+      "items": [
+        "2 min: tune all six strings by the 5th-fret method, then check with the tuning pairs above.",
+        "5 min: play the tab example slowly, then try reading it without looking at the widget.",
+        "5 min: form each of the eight open chords from the diagram and strum it once; check every string rings clearly (no buzz, no muted strings)."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Check yourself"
+    },
+    {
+      "type": "problem",
+      "title": "Tuning",
+      "text": "To tune the B string, which string and fret do you match it to, and why is it different from the others?",
+      "solution": [
+        "Match it to the G string at fret 4. G to B is a major third (4 semitones); every other pair of neighbouring strings is a perfect fourth (5 semitones), so it uses fret 5."
+      ],
+      "answer": "G string, fret 4"
+    },
+    {
+      "type": "problem",
+      "title": "Capo",
+      "text": "A song uses G, C and D shapes with a capo at the 3rd fret. What key does it sound in?",
+      "solution": [
+        "Each shape sounds 3 semitones higher: G → B♭, C → E♭, D → F. The song is in B♭ major."
+      ],
+      "answer": "B♭ major"
+    },
+    {
+      "type": "problem",
+      "title": "Read the code",
+      "text": "Which strings do you play for xx0232, and which chord is it?",
+      "solution": [
+        "x x means strings 6 and 5 are not played; strum strings 4 to 1: D (open), A (fret 2), D (fret 3), F♯ (fret 2). It is D major."
+      ],
+      "answer": "Strings 4–1; D major"
+    },
+    {
+      "type": "prose",
+      "text": "Sources: Denyer, R. (1992). The Guitar Handbook, rev. ed. Knopf; Hal Leonard (2002). Hal Leonard Guitar Method, Complete Edition (Schmid & Koch). Hal Leonard; Goodrick, M. (1987). The Advancing Guitarist. Hal Leonard."
+    }
+  ]
+}

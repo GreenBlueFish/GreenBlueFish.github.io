@@ -47,6 +47,18 @@
     {
       "scope": "/brain/snn",
       "file": "content/terms/brain/snn.json"
+    },
+    {
+      "scope": "/arts/music-theory",
+      "file": "content/terms/arts/music-theory.json"
+    },
+    {
+      "scope": "/arts/guitar",
+      "file": "content/terms/arts/guitar.json"
+    },
+    {
+      "scope": "/arts/songwriting",
+      "file": "content/terms/arts/songwriting.json"
     }
   ]
 }
